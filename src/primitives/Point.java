@@ -1,7 +1,7 @@
 package primitives;
 
 public class Point {
-     final Double3 coordinates;
+     final protected Double3 xyz;
 
     @Override
     public boolean equals(Object o) {
@@ -10,49 +10,49 @@ public class Point {
 
         Point point = (Point) o;
 
-        return coordinates != null ? coordinates.equals(point.coordinates) : point.coordinates == null;
+        return xyz != null ? xyz.equals(point.xyz) : point.xyz == null;
     }
 
     @Override
     public int hashCode() {
-        return coordinates != null ? coordinates.hashCode() : 0;
+        return xyz != null ? xyz.hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "Point{" +
-                "coordinates=" + coordinates +
+                "xyz=" + xyz +
                 '}';
     }
 
     /*
-    public void setCoordinates(Double3 coordinates) {
-        this.coordinates = coordinates;
+    public void setCoordinates(Double3 xyz) {
+        this.xyz = xyz;
     }*/
 
     public Point(double x1, double x2, double x3){
-        coordinates = new Double3(x1,x2,x3);
+        xyz = new Double3(x1,x2,x3);
     }
 
-    public Point Substract(Point point2)
+    public Point subtract(Point point2)
     {
         Point newvector = null;
-        newvector.coordinates.subtract(point2.coordinates);
+        newvector.xyz.subtract(point2.xyz);
         return newvector;
     }
 
-    public Point Add(Point point2)
+    public Point add(Point point2)
     {
         Point newvector = null;
-        newvector.coordinates.add(point2.coordinates);
+        newvector.xyz.add(point2.xyz);
         return newvector;
     }
 
     public double DistanceSquared(Point point2)
     {
-       double x= (coordinates.d1-point2.coordinates.d1)*(coordinates.d1-point2.coordinates.d1);
-       double y=(coordinates.d2-point2.coordinates.d2)*(coordinates.d2-point2.coordinates.d2);
-       double z = (coordinates.d3-point2.coordinates.d3)*(coordinates.d3-point2.coordinates.d3);
+       double x= (xyz.d1-point2.xyz.d1)*(xyz.d1-point2.xyz.d1);
+       double y=(xyz.d2-point2.xyz.d2)*(xyz.d2-point2.xyz.d2);
+       double z = (xyz.d3-point2.xyz.d3)*(xyz.d3-point2.xyz.d3);
        return x+y+z;
     }
 

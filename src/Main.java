@@ -1,3 +1,4 @@
+import primitives.Point;
 import primitives.Vector;
 
 import static java.lang.System.out;
