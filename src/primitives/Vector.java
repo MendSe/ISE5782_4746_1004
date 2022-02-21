@@ -8,7 +8,6 @@ public class Vector extends Point{
 
     public Vector(double x1,double x2,double x3)
     {
-        System.out.printf("Je roucoule ");
         super(x1,x2,x3);
         if(isZero(length()))
             throw new IllegalArgumentException("ורטור אפס");
