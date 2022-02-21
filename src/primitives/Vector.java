@@ -1,5 +1,4 @@
 package primitives;
-import primitives.*;
 
 import static primitives.Util.isZero;
 
@@ -15,38 +14,56 @@ public class Vector extends Point{
     }
 
     public Vector add(Vector vector2){
-        Double3 help = coordinates.add(vector2.coordinates);
+        Double3 help = xyz.add(vector2.xyz);
         return new Vector(help.d1, help.d2, help.d3);
     }
 
     public Vector substract(Vector vector2)
     {
-        Double3 help = coordinates.subtract(vector2.coordinates);
+        Double3 help = xyz.subtract(vector2.xyz);
         return new Vector(help.d1, help.d2, help.d3);
     }
 
     public Vector Scale(double scalar)
     {
         //
-        Double3 help= coordinates.scale(scalar);
+        Double3 help= xyz.scale(scalar);
         return new Vector(help.d1, help.d2, help.d3);
     }
 
     public double dotProduct(Vector vector2)
     {
-        Double3 help = coordinates.product(vector2.coordinates);
+        Double3 help = xyz.product(vector2.xyz);
         return help.d1+ help.d2+ help.d3;
     }
 
     public Vector crossProduct(Vector vector2)
     {
+        double cx= xyz.d2*vector2.xyz.d3- xyz.d3*vector2.xyz.d2;
+        double cy = xyz.d3*vector2.xyz.d1- xyz.d1*vector2.xyz.d3;
+        double cz = xyz.d1*vector2.xyz.d2 - xyz.d2*vector2.xyz.d1;
+        return new Vector(cx,cy,cz);
+    }
 
-
-        return null;
+    public double lengthSquared()
+    {
+        return xyz.d1* xyz.d1+ xyz.d2* xyz.d2+ xyz.d3* xyz.d3;
     }
 
     public double length()
     {
-        return 0;
+        return Math.sqrt(lengthSquared());
+    }
+
+    public Vector normalize()
+    {
+        double helpx,helpy,helpz;
+        double taille = length();//taille = length in french
+
+        helpx= xyz.d1/taille;
+        helpy = xyz.d2/taille;
+        helpz = xyz.d3/taille;
+
+        return new Vector(helpx,helpy,helpy);
     }
 }
