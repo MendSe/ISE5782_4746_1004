@@ -34,18 +34,16 @@ public class Point {
         xyz = new Double3(x1,x2,x3);
     }
 
-    public Point subtract(Point point2)
+    public Vector subtract(Point p1)
     {
-        Point newvector = null;
-        newvector.xyz.subtract(point2.xyz);
-        return newvector;
+        Double3 help = xyz.subtract(p1.xyz);
+        return new Vector(help.d1, help.d2, help.d3);
     }
 
-    public Point add(Point point2)
+    public Point add(Vector vec)
     {
-        Point newvector = null;
-        newvector.xyz.add(point2.xyz);
-        return newvector;
+        Double3 help = xyz.add(vec.xyz);
+        return new Point(help.d1, help.d2, help.d3);
     }
 
     public double DistanceSquared(Point point2)

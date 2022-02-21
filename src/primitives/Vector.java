@@ -18,7 +18,7 @@ public class Vector extends Point{
         return new Vector(help.d1, help.d2, help.d3);
     }
 
-    public Vector substract(Vector vector2)
+    public Vector subtract(Vector vector2)
     {
         Double3 help = xyz.subtract(vector2.xyz);
         return new Vector(help.d1, help.d2, help.d3);
