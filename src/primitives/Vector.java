@@ -66,4 +66,16 @@ public class Vector extends Point{
 
         return new Vector(helpx,helpy,helpy);
     }
+
+    @Override
+    public String toString() {
+        return "Vector{}"+ super.toString();
+    }
+
+    @Override
+    public boolean equals(Object o){
+        return super.equals(o);
+    }
+
+
 }
