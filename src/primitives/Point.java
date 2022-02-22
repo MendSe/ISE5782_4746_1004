@@ -12,23 +12,11 @@ public class Point {
 
         return xyz != null ? xyz.equals(point.xyz) : point.xyz == null;
     }
-
-    @Override
-    public int hashCode() {
-        return xyz != null ? xyz.hashCode() : 0;
-    }
-
     @Override
     public String toString() {
-        return "Point{" +
-                "xyz=" + xyz +
-                '}';
+        return "Point:" +
+                 xyz ;
     }
-
-    /*
-    public void setCoordinates(Double3 xyz) {
-        this.xyz = xyz;
-    }*/
 
     public Point(double x1, double x2, double x3){
         xyz = new Double3(x1,x2,x3);

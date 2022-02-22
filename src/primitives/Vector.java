@@ -65,15 +65,13 @@ public class Vector extends Point{
         helpz = xyz.d3/length;
         return new Vector(helpx,helpy,helpz);
     }
-
-    @Override
-    public String toString() {
-        return "Vector{}"+ super.toString();
-    }
-
     @Override
     public boolean equals(Object o){
         return super.equals(o);
+    }
+    @Override
+    public String toString() {
+        return "Vector:"+ super.toString();
     }
 
 
