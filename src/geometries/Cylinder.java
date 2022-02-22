@@ -7,7 +7,7 @@ import primitives.Ray;
  * Cylinder class represents a 3D Tube from it inherited Tube class with a maximum height
  */
 public class Cylinder extends Tube{
-    private double height;
+    private final double height;
 /**
  * Cylinder constructor
  */

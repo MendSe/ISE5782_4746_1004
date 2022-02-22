@@ -5,8 +5,9 @@ import primitives.Vector;
 import primitives.Ray;
 
 public class Tube implements Geometry{
-    protected Ray axisRay;
-    protected double radius;
+
+    protected final Ray  axisRay;
+    protected final double radius;
 
     public Ray getAxisRay() {
         return axisRay;
