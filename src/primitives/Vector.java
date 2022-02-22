@@ -47,12 +47,12 @@ public class Vector extends Point{
 
     public double lengthSquared()
     {
-        return xyz.d1* xyz.d1+ xyz.d2* xyz.d2+ xyz.d3* xyz.d3;
+        return (xyz.d1* xyz.d1)+ (xyz.d2* xyz.d2)+ (xyz.d3* xyz.d3);
     }
 
     public double length()
     {
-        return Math.sqrt(lengthSquared());
+        return Math.sqrt(this.lengthSquared());
     }
 
     public Vector normalize()
@@ -63,8 +63,7 @@ public class Vector extends Point{
         helpx= xyz.d1/length;
         helpy = xyz.d2/length;
         helpz = xyz.d3/length;
-
-        return new Vector(helpx,helpy,helpy);
+        return new Vector(helpx,helpy,helpz);
     }
 
     @Override
