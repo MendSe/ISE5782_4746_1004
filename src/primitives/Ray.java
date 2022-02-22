@@ -1,6 +1,8 @@
 package primitives;
 
-
+/**
+ * This class helps us to simulates a radius/ray
+ * */
 public class Ray {
     private final Point p0;
     private final Vector dir;
