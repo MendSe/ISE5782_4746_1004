@@ -7,6 +7,6 @@ public class Ray {
 
     public Ray(Point p0,Vector v) {
         this.p0 = p0;
-        this.dir = v;
+        this.dir = v.normalize();
     }
 }
