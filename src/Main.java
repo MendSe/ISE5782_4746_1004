@@ -56,10 +56,11 @@ public final class Main {
         Vector v = new Vector(1, 2, 3);
         Vector u = v.normalize();
         if (!isZero(u.length() - 1))
-            out.println("ERROR: the normalized vector is not a unit vector");
+            out.println("ERROR: the normalized vector is not a unit vector");///Problem here
         try { // test that the vectors are co-lined
             v.crossProduct(u);
-            out.println("ERROR: the normalized vector is not parallel to the original one");
+            out.println("ERROR: the normalized vector is not parallel to the original one");///Problem here
+
         } catch (Exception e) {
         }
         if (v.dotProduct(u) < 0)
