@@ -9,7 +9,7 @@ public class Vector extends Point{
     {
         super(x1,x2,x3);
         if(isZero(length()))
-            throw new IllegalArgumentException("ורטור אפס");
+            throw new IllegalArgumentException("Vector 0");
 
     }
 
@@ -58,11 +58,11 @@ public class Vector extends Point{
     public Vector normalize()
     {
         double helpx,helpy,helpz;
-        double taille = length();//taille = length in french
+        double length = length();
 
-        helpx= xyz.d1/taille;
-        helpy = xyz.d2/taille;
-        helpz = xyz.d3/taille;
+        helpx= xyz.d1/length;
+        helpy = xyz.d2/length;
+        helpz = xyz.d3/length;
 
         return new Vector(helpx,helpy,helpy);
     }
