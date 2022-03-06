@@ -1,3 +1,7 @@
+/**
+ * @author Mendel SETTI 342681004
+ * @author Lior SERRAF 341094746
+ * */
 import primitives.*;
 import static java.lang.System.out;
 import static primitives.Util.*;
