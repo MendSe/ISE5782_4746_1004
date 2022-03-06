@@ -8,7 +8,6 @@ public class Vector extends Point{
     /**
      *This constructor initializes the values of the xyz variable by calling the constructor of the point class
      * It also checks if the user entered the 0 vector and in this case it will throw an exception
-     *
      */
     public Vector(double x1,double x2,double x3)
     {
