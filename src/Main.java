@@ -1,6 +1,4 @@
-import primitives.Point;
-import primitives.Vector;
-
+import primitives.*;
 import static java.lang.System.out;
 import static primitives.Util.*;
 
@@ -56,11 +54,10 @@ public final class Main {
         Vector v = new Vector(1, 2, 3);
         Vector u = v.normalize();
         if (!isZero(u.length() - 1))
-            out.println("ERROR: the normalized vector is not a unit vector");///Problem here
+            out.println("ERROR: the normalized vector is not a unit vector");
         try { // test that the vectors are co-lined
             v.crossProduct(u);
-            out.println("ERROR: the normalized vector is not parallel to the original one");///Problem here
-
+            out.println("ERROR: the normalized vector is not parallel to the original one");
         } catch (Exception e) {
         }
         if (v.dotProduct(u) < 0)
