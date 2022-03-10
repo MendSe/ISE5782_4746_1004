@@ -19,11 +19,8 @@ public class Ray {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Ray ray = (Ray) o;
-
-        if (p0 != null ? !p0.equals(ray.p0) : ray.p0 != null) return false;
-        return dir != null ? dir.equals(ray.dir) : ray.dir == null;
+        return p0.equals(ray.p0) && dir.equals(ray.dir);
     }
 
     @Override

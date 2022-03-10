@@ -23,8 +23,8 @@ class VectorTest {
 
     @Test
     void scale() {
-        assertEquals(new Vector(2,4,6),v1.Scale(2),"Wrong scaling");
-        assertThrows(IllegalArgumentException.class,()->v1.Scale(0),"We cannot scale by 0");
+        assertEquals(new Vector(2,4,6),v1.scale(2),"Wrong scaling");
+        assertThrows(IllegalArgumentException.class,()->v1.scale(0),"We cannot scale by 0");
     }
 
     @Test

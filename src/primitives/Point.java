@@ -1,7 +1,7 @@
 package primitives;
 
 public class Point {
-     final protected Double3 xyz;
+    final protected Double3 xyz;
 
     @Override
     public boolean equals(Object o) {
@@ -12,60 +12,64 @@ public class Point {
 
         return xyz != null ? xyz.equals(point.xyz) : point.xyz == null;
     }
+
     @Override
     public String toString() {
         return "Point:" +
-                 xyz ;
+                xyz;
     }
 
     /**
-     * Constructor of the class which initializes the xyz variable of the class
-     * */
-    public Point(double x1, double x2, double x3){
-        xyz = new Double3(x1,x2,x3);
+     * Constructor which initializes the Point object with the values of the coordinates
+     *
+     * @param x coordinate value
+     * @param y coordinate value
+     * @param z coordinate value
+     */
+    public Point(double x, double y, double z) {
+        xyz = new Double3(x, y, z);
+    }
+
+    /**
+     * Constructor which initializes the Point object with set of 3 values of the coordinates
+     *
+     * @param xyz values triad
+     */
+    protected Point(Double3 xyz) {
+        this.xyz = xyz;
     }
 
     /**
      * This function returns a vector that's result of the subtraction of the point2 and xyz
-     * */
-    public Vector subtract(Point p1)
-    {
-        Double3 help = xyz.subtract(p1.xyz);
-        return new Vector(help.d1, help.d2, help.d3);
+     */
+    public Vector subtract(Point p1) {
+        return new Vector(xyz.subtract(p1.xyz));
     }
 
     /**
      * This function add a vector to the point to return a point
-     * */
-    public Point add(Vector vec)
-    {
+     */
+    public Point add(Vector vec) {
         Double3 help = xyz.add(vec.xyz);
         return new Point(help.d1, help.d2, help.d3);
     }
 
     /**
      * This function returns the squared distance between 2 points
-     * */
-    public double DistanceSquared(Point point2)
-    {
-       double x= (xyz.d1-point2.xyz.d1)*(xyz.d1-point2.xyz.d1);
-       double y=(xyz.d2-point2.xyz.d2)*(xyz.d2-point2.xyz.d2);
-       double z = (xyz.d3-point2.xyz.d3)*(xyz.d3-point2.xyz.d3);
-       return x+y+z;
+     */
+    public double DistanceSquared(Point point2) {
+        double x = (xyz.d1 - point2.xyz.d1) * (xyz.d1 - point2.xyz.d1);
+        double y = (xyz.d2 - point2.xyz.d2) * (xyz.d2 - point2.xyz.d2);
+        double z = (xyz.d3 - point2.xyz.d3) * (xyz.d3 - point2.xyz.d3);
+        return x + y + z;
     }
 
     /**
      * This function returns the distance between 2 points by computing the square root of the squared distance
-     * */
-    public double Distance(Point point2)
-    {
+     */
+    public double Distance(Point point2) {
         return Math.sqrt(DistanceSquared(point2));
     }
-
-
-
-
-
 
 
 }
