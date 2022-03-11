@@ -36,6 +36,7 @@ public class Point {
      * @param xyz values triad
      */
     protected Point(Double3 xyz) {
+
         this.xyz = xyz;
     }
 
@@ -43,6 +44,7 @@ public class Point {
      * This function returns a vector that's result of the subtraction of the point2 and xyz
      */
     public Vector subtract(Point p1) {
+
         return new Vector(xyz.subtract(p1.xyz));
     }
 

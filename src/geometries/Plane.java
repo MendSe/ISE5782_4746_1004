@@ -1,8 +1,6 @@
 package geometries;
 
-import primitives.Point;
-import primitives.Vector;
-
+import primitives.*;
 /**
  * Plane class represents a plane created with 3 points or a point and a vector
  */
@@ -19,6 +17,7 @@ public class Plane implements Geometry {
 
     /**
      * getter for normal vector
+     *
      * @return the normal
      */
     public Vector getNormal() {

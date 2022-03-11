@@ -1,7 +1,6 @@
 package geometries;
 
-import primitives.Point;
-import primitives.Vector;
+import primitives.*;
 
 /**
  * Sphere class which creates a Sphere from a center point and a radius
@@ -12,6 +11,8 @@ public class Sphere implements Geometry {
 
     /**
      * getter for the center point of the sphere
+     *
+     * @return The center of the sphere
      */
     public Point getCenter() {
         return center;
@@ -19,6 +20,8 @@ public class Sphere implements Geometry {
 
     /**
      * getter for radius of the sphere
+     *
+     * @return The radius of the sphere
      */
     public double getRadius() {
         return radius;
@@ -26,13 +29,18 @@ public class Sphere implements Geometry {
 
     /**
      * Sphere constructor
+     *
+     * @param center Point object that initializes the center of the sphere
+     * @param radius value of the radius of our sphere
      */
     Sphere(Point center, double radius) {
         this.center = center;
         this.radius = radius;
     }
 
+    @Override
     public Vector getNormal(Point point) {
+
         return null;
     }
 

@@ -1,8 +1,6 @@
 package geometries;
 
-import primitives.Point;
-import primitives.Vector;
-import primitives.Ray;
+import primitives.*;
 
 /**
  * Tube class which create an infinite tube from a ray and a radius
@@ -14,6 +12,8 @@ public class Tube implements Geometry {
 
     /**
      * getter for axisRay of the Tube
+     *
+     * @return The axisRay of the tube
      */
     public Ray getAxisRay() {
         return axisRay;
@@ -21,6 +21,8 @@ public class Tube implements Geometry {
 
     /**
      * getter for radius of the Tube
+     *
+     * @return the radius of the tube
      */
     public double getRadius() {
         return radius;
@@ -28,13 +30,18 @@ public class Tube implements Geometry {
 
     /**
      * Tube constructor
+     *
+     * @param axisRay Object to initialize the axisRay field
+     * @param radius value of the radius of the tube
      */
     Tube(Ray axisRay, double radius) {
         this.axisRay = axisRay;
         this.radius = radius;
     }
 
+    @Override
     public Vector getNormal(Point point) {
+
         return null;
     }
 
