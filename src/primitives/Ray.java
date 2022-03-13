@@ -8,10 +8,28 @@ public class Ray {
     private final Vector dir;
 
     /**
+     * getter for Point p0
+     *
+     * @return point p0
+     */
+    public Point getP0() {
+        return p0;
+    }
+
+    /**
+     * getter for Vector dir
+     *
+     * @return vector dir
+     */
+    public Vector getDir() {
+        return dir;
+    }
+
+    /**
      * Constructor of the ray class that initializes the fields p0 and dir
      *
      * @param p0 point parameter
-     * @param v vector parameters that used as a radius
+     * @param v  vector parameters that used as a radius
      */
     public Ray(Point p0, Vector v) {
         this.p0 = p0;
