@@ -1,6 +1,7 @@
 package geometries;
 
 import primitives.*;
+
 import static primitives.Util.*;
 
 /**
@@ -33,7 +34,7 @@ public class Tube implements Geometry {
      * Tube constructor
      *
      * @param axisRay Object to initialize the axisRay field
-     * @param radius value of the radius of the tube
+     * @param radius  value of the radius of the tube
      */
     Tube(Ray axisRay, double radius) {
         this.axisRay = axisRay;
@@ -43,13 +44,17 @@ public class Tube implements Geometry {
     @Override
     public Vector getNormal(Point point) {
 
-       Point p0 =this.axisRay.getP0();
-       Vector dir=this.axisRay.getDir();
-       Vector p0ToPoint=point.subtract(p0);
-       double scale=alignZero(dir.dotProduct(p0ToPoint));
-       if(isZero(scale))return p0ToPoint.normalize();
-       Point p1 =p0.add(dir.scale(scale));
-       return (point.subtract(p1)).normalize();
+        Point p0 = this.axisRay.getP0();
+        Vector dir = this.axisRay.getDir();
+
+        Vector p0ToPoint = point.subtract(p0);
+        double scale = alignZero(dir.dotProduct(p0ToPoint));
+
+        if (isZero(scale))
+            return p0ToPoint.normalize();
+
+        Point p1 = p0.add(dir.scale(scale));
+        return (point.subtract(p1)).normalize();
     }
 
     @Override
