@@ -10,6 +10,8 @@ public class Plane implements Geometry {
 
     /**
      * getter for Point q0
+     *
+     * @return point q0
      */
     public Point getQ0() {
         return q0;
@@ -26,16 +28,23 @@ public class Plane implements Geometry {
 
     /**
      * Plane constructor with 3 points
+     *
+     * @param p1
+     * @param p2
+     * @param p3
      */
-    public Plane(Point d1, Point d2, Point d3) {
-        this.q0 = d3;
-        Vector vec1 = d1.subtract(d2);
-        Vector vec2 = d1.subtract(d3);
+    public Plane(Point p1, Point p2, Point p3) {
+        this.q0 = p3;
+        Vector vec1 = p1.subtract(p2);
+        Vector vec2 = p1.subtract(p3);
         this.normal = vec1.crossProduct(vec2);
     }
 
     /**
      * Plane constructor with a point and a vector
+     *
+     * @param point
+     * @param vec
      */
     public Plane(Point point, Vector vec) {
         this.q0 = point;

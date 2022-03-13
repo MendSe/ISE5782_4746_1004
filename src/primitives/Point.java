@@ -1,5 +1,8 @@
 package primitives;
 
+/**
+ * Point class represents a point with 3 coordinates
+ */
 public class Point {
     final protected Double3 xyz;
 
@@ -42,6 +45,9 @@ public class Point {
 
     /**
      * This function returns a vector that's result of the subtraction of the point2 and xyz
+     *
+     * @param p1
+     * @return Vector
      */
     public Vector subtract(Point p1) {
 
@@ -50,6 +56,9 @@ public class Point {
 
     /**
      * This function add a vector to the point to return a point
+     *
+     * @param vec
+     * @return Point
      */
     public Point add(Vector vec) {
         Double3 help = xyz.add(vec.xyz);
@@ -58,6 +67,9 @@ public class Point {
 
     /**
      * This function returns the squared distance between 2 points
+     *
+     * @param point2
+     * @return double
      */
     public double DistanceSquared(Point point2) {
         double x = (xyz.d1 - point2.xyz.d1) * (xyz.d1 - point2.xyz.d1);
@@ -68,6 +80,9 @@ public class Point {
 
     /**
      * This function returns the distance between 2 points by computing the square root of the squared distance
+     *
+     * @param point2
+     * @return double
      */
     public double Distance(Point point2) {
         return Math.sqrt(DistanceSquared(point2));
