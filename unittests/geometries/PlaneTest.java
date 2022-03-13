@@ -23,7 +23,7 @@ class PlaneTest {
         //  Plane constructor with 3 points on the same line
         assertThrows(IllegalArgumentException.class, //
                 () -> new Plane(new Point(1, 1, 2), new Point(2, 2, 4), new Point(4, 4, 8)),
-                "Constructed a plane with 3 points in the same line");
+                "Constructed a plane with 3 points on the same line");
     }
     @Test
     public void testGetNormal() {
