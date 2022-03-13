@@ -11,12 +11,12 @@ public class Triangle extends Polygon {
     /**
      * Triangle constructor
      *
-     * @param d1 coordinate value
-     * @param d2 coordinate value
-     * @param d3 coordinate value
+     * @param p1 coordinate value
+     * @param p2 coordinate value
+     * @param p3 coordinate value
      */
-    Triangle(Point d1, Point d2, Point d3) {
-        super(d1, d2, d3);
+    Triangle(Point p1, Point p2, Point p3) {
+        super(p1, p2, p3);
     }
 
     @Override

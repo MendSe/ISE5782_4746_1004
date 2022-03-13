@@ -29,9 +29,9 @@ public class Plane implements Geometry {
     /**
      * Plane constructor with 3 points
      *
-     * @param p1
-     * @param p2
-     * @param p3
+     * @param p1 point coord value
+     * @param p2 point coord value
+     * @param p3 point coord value
      */
     public Plane(Point p1, Point p2, Point p3) {
         this.q0 = p3;
@@ -43,8 +43,8 @@ public class Plane implements Geometry {
     /**
      * Plane constructor with a point and a vector
      *
-     * @param point
-     * @param vec
+     * @param point point coord value
+     * @param vec vector value
      */
     public Plane(Point point, Vector vec) {
         this.q0 = point;

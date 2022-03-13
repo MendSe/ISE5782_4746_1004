@@ -46,7 +46,7 @@ public class Point {
     /**
      * This function returns a vector that's result of the subtraction of the point2 and xyz
      *
-     * @param p1
+     * @param p1 point value
      * @return Vector
      */
     public Vector subtract(Point p1) {
@@ -57,7 +57,7 @@ public class Point {
     /**
      * This function add a vector to the point to return a point
      *
-     * @param vec
+     * @param vec vector value
      * @return Point
      */
     public Point add(Vector vec) {
@@ -68,7 +68,7 @@ public class Point {
     /**
      * This function returns the squared distance between 2 points
      *
-     * @param point2
+     * @param point2 point coord value
      * @return double
      */
     public double DistanceSquared(Point point2) {
@@ -81,7 +81,7 @@ public class Point {
     /**
      * This function returns the distance between 2 points by computing the square root of the squared distance
      *
-     * @param point2
+     * @param point2 point coord value
      * @return double
      */
     public double Distance(Point point2) {
