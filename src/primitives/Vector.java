@@ -21,7 +21,7 @@ public class Vector extends Point {
     /**
      * @param coords This variable contains the values of the coordinates x,y and z
      */
-    protected Vector(Double3 coords) {
+    Vector(Double3 coords) {
         super(coords);
         if (xyz.equals(Double3.ZERO))
             throw new IllegalArgumentException("Vector 0");
@@ -57,9 +57,7 @@ public class Vector extends Point {
      * @return result of the multiplication of our vector by this scalar
      */
     public Vector scale(double scalar) {
-
-        Double3 help = xyz.scale(scalar);
-        return new Vector(help.d1, help.d2, help.d3);
+        return new Vector(xyz.scale(scalar));
     }
 
     /**

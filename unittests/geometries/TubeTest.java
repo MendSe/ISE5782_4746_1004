@@ -6,7 +6,9 @@ import primitives.Ray;
 import primitives.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Class test for Tube
+ */
 class TubeTest {
 
     @Test

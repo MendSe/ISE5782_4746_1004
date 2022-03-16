@@ -4,10 +4,10 @@ import primitives.*;
 
 public interface Geometry extends Intersectable{
     /**
-     * Function of interface Geometry that return the normal of the used object
+     * Function of that cqlculqtes the normal of the used object at a point on the object
      *
-     * @param p point coord value
-     * @return normal
+     * @param p point on the object
+     * @return the normal
      */
     public Vector getNormal(Point p);
 }

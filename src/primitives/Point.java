@@ -39,7 +39,6 @@ public class Point {
      * @param xyz values triad
      */
     protected Point(Double3 xyz) {
-
         this.xyz = xyz;
     }
 
@@ -50,7 +49,6 @@ public class Point {
      * @return Vector
      */
     public Vector subtract(Point p1) {
-
         return new Vector(xyz.subtract(p1.xyz));
     }
 
@@ -61,8 +59,7 @@ public class Point {
      * @return Point
      */
     public Point add(Vector vec) {
-        Double3 help = xyz.add(vec.xyz);
-        return new Point(help.d1, help.d2, help.d3);
+        return new Point(xyz.add(vec.xyz));
     }
 
     /**
@@ -72,10 +69,10 @@ public class Point {
      * @return double
      */
     public double DistanceSquared(Point point2) {
-        double x = (xyz.d1 - point2.xyz.d1) * (xyz.d1 - point2.xyz.d1);
-        double y = (xyz.d2 - point2.xyz.d2) * (xyz.d2 - point2.xyz.d2);
-        double z = (xyz.d3 - point2.xyz.d3) * (xyz.d3 - point2.xyz.d3);
-        return x + y + z;
+        double dx = xyz.d1 - point2.xyz.d1;
+        double dy = xyz.d2 - point2.xyz.d2;
+        double dz = xyz.d3 - point2.xyz.d3;
+        return dx * dx + dy * dy + dz * dz;
     }
 
     /**
