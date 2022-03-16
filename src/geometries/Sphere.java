@@ -2,6 +2,8 @@ package geometries;
 
 import primitives.*;
 
+import java.util.List;
+
 /**
  * Sphere class which creates a Sphere from a center point and a radius
  */
@@ -38,6 +40,10 @@ public class Sphere implements Geometry {
         this.radius = radius;
     }
 
+    @Override
+    public List<Point> findIntsersections(Ray ray){
+        return null;
+    }
     @Override
     public Vector getNormal(Point point) {
 

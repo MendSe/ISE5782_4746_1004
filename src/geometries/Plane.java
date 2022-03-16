@@ -1,6 +1,9 @@
 package geometries;
 
 import primitives.*;
+
+import java.util.List;
+
 /**
  * Plane class represents a plane created with 3 points or a point and a vector
  */
@@ -62,5 +65,10 @@ public class Plane implements Geometry {
                 "q0=" + q0 +
                 ", normal=" + normal +
                 '}';
+    }
+
+    @Override
+    public List<Point> findIntsersections(Ray ray){
+        return null;
     }
 }

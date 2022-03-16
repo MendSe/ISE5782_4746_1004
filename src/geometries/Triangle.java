@@ -20,6 +20,10 @@ public class Triangle extends Polygon {
     }
 
     @Override
+    public List<Point> findIntsersections(Ray ray){
+        return null;
+    }
+    @Override
     public String toString() {
         return "Triangle: " + super.toString();
     }

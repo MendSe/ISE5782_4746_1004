@@ -2,7 +2,7 @@ package geometries;
 
 import primitives.*;
 
-public interface Geometry {
+public interface Geometry extends Intersectable{
     /**
      * Function of interface Geometry that return the normal of the used object
      *

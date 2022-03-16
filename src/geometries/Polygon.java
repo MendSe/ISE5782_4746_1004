@@ -83,6 +83,10 @@ public class Polygon implements Geometry {
 		}
 		size = vertices.length;
 	}
+	@Override
+	public List<Point> findIntsersections(Ray ray){
+		return null;
+	}
 
 	@Override
 	public Vector getNormal(Point point) {
