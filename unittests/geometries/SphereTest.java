@@ -62,10 +62,8 @@ class SphereTest {
 
         // **** Group: Ray's line is tangent to the sphere
         //BVA:03 Ray tangent to sphere
-        result=sp.findIntsersections(new Ray(new Point(0,-2,0),new Vector(4,0,0)));
-        p1=new Point(2,-2,0);
-        assertEquals(1,result.size(),"Wrong number of points");
-        assertEquals(result,List.of(p1), "Bad intersection when the Ray is tangent to the sphere");
+
+        assertNull(sp.findIntsersections(new Ray(new Point(0,-2,0),new Vector(4,0,0))), "Bad intersection when the Ray is tangent to the sphere");
 
         //BVA:04 P0 on Sphere Ray tangent to sphere
         assertNull(sp.findIntsersections(new Ray(new Point(2,-2,0),new Vector(4,0,0))), "Bad intersection when P0 on the sphere and the Ray is tangent to it");
