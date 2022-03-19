@@ -20,9 +20,32 @@ public class Triangle extends Polygon {
     }
 
     @Override
-    public List<Point> findIntsersections(Ray ray){
+    public List<Point> findIntsersections(Ray ray) {
+        Point p0 = ray.getP0();
+        Vector vd = ray.getDir();
+
+        List<Point> list = plane.findIntsersections(ray);
+        if (list == null)
+            return null;
+
+        Vector v1 = vertices.get(0).subtract(p0);
+        Vector v2 = vertices.get(1).subtract(p0);
+        Vector v3 = vertices.get(2).subtract(p0);
+
+        Vector n1 = v1.crossProduct(v2).normalize();
+        Vector n2 = v2.crossProduct(v3).normalize();
+        Vector n3 = v3.crossProduct(v1).normalize();
+
+        double num1 = vd.dotProduct(n1);
+        double num2 = vd.dotProduct(n2);
+        double num3 = vd.dotProduct(n3);
+
+        if ((num1 > 0 && num2 > 0 && num3 > 0) || (num1 < 0 && num2 < 0 && num3 < 0))
+            return list;
+
         return null;
     }
+
     @Override
     public String toString() {
         return "Triangle: " + super.toString();

@@ -69,6 +69,18 @@ public class Plane implements Geometry {
 
     @Override
     public List<Point> findIntsersections(Ray ray){
-        return null;
+        Point p0 = ray.getP0();
+        Vector vd = ray.getDir();
+        if (q0.equals(p0)) {
+            return List.of(q0);
+        }
+//the ray lying on the plane
+        double nv = normal.dotProduct(vd);
+        if (nv == 0) {
+            return null;
+        }
+        double t = normal.dotProduct(q0.subtract(p0));
+        t /= nv;
+        return List.of(ray.getPoint(t));
     }
 }

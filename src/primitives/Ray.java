@@ -36,6 +36,7 @@ public class Ray {
         this.dir = v.normalize();
     }
 
+
     public Point getPoint(double t){
         return this.p0.add(this.dir.scale(t));
     }
