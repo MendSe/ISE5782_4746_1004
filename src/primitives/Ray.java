@@ -36,6 +36,11 @@ public class Ray {
         this.dir = v.normalize();
     }
 
+    /**
+     * Function that creates a point from a ray multiplicated by a value t
+     * @param t to multiply the vector of the ray
+     * @return point
+     */
     public Point getPoint(double t){
         return this.p0.add(this.dir.scale(t));
     }

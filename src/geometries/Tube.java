@@ -2,6 +2,8 @@ package geometries;
 
 import primitives.*;
 
+import java.util.List;
+
 import static primitives.Util.*;
 
 /**
@@ -42,6 +44,11 @@ public class Tube implements Geometry {
     }
 
     @Override
+    public List<Point> findIntsersections(Ray ray){
+        return null;
+    }
+
+    @Override
     public Vector getNormal(Point point) {
 
         Point p0 = this.axisRay.getP0();
@@ -53,7 +60,7 @@ public class Tube implements Geometry {
         if (isZero(scale))
             return p0ToPoint.normalize();
 
-        Point p1 = p0.add(dir.scale(scale));
+        Point p1 = this.axisRay.getPoint(scale);//p0.add(dir.scale(scale));
         return (point.subtract(p1)).normalize();
     }
 

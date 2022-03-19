@@ -6,6 +6,13 @@ package primitives;
 public class Point {
     final protected Double3 xyz;
 
+    /**
+     * getter of coord x
+     * @return coord x
+     */
+    public double getX(){
+        return this.xyz.d1;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
