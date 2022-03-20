@@ -28,24 +28,32 @@ class TriangleTest {
         Ray ray;
 
         // ==================Equivalence Partition Tests=================
-        //TC01:Vertex
+        //TC01:Point outside the triangle whose ray intersect with a side
+        ray = new Ray(new Point(1,1,0),new Vector(-1,-1,0));
+        assertEquals(List.of(new Point(0.5,0.5,0)),pln.findIntsersections(ray),
+                "Bad Intersection");
+        assertNull(trg.findIntsersections(ray),"Don't Intersect");
 
 
-        //TC03: Inside triangle
+        //TC02: Inside triangle
         ray = new Ray (new Point (1,1,1),new Vector(-1,-1,-1));
         assertEquals(List.of(new Point(1d/3,1d/3,1d/3)),trg.findIntsersections(ray),"Bad Intersection");
 
+        //TC03: Point outside the triangle whose ray intersect with a vertex
+        ray = new Ray(new Point(0,0,2),new Vector(-1,-1,0));
+        assertEquals(List.of(new Point(-0.5,-0.5,2)),pln.findIntsersections(ray),
+                "Wrong intersection");
+
+
         // ===============Boundary Tests Value============
-        //TC04: In vertex
-        ray = new Ray(new Point(1,1,0),new Vector(-1,-1,0));
-        assertEquals(List.of(new Point(0.5,0.5,0)),trg.findIntsersections(ray),
+        //TC04: Point on the continuation of a side that intersect with a vertex
+        ray = new Ray(new Point (2,0,0),new Vector(-1,-1,0));
+        assertEquals(List.of(new Point(1.5,-0.5,0)),pln.findIntsersections(ray),
                 "Bad Intersection");
+        assertNull(trg.findIntsersections(ray),"Don't Intersect");
 
-        //TC05: Edge
-        ray = new Ray(new Point (2,0,0),new Vector(-1,0,0));
-        assertEquals(List.of(new Point(1,0,0)),trg.findIntsersections(ray),
-                "Bad Intersection");
-
+        //We can write 2 others BVA but these test must includes points that are on a side/vertex which goes against the
+        //instruction of the exercise.
 
     }
 }

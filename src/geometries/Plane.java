@@ -4,6 +4,8 @@ import primitives.*;
 
 import java.util.List;
 
+import static primitives.Util.*;
+
 /**
  * Plane class represents a plane created with 3 points or a point and a vector
  */
@@ -67,20 +69,27 @@ public class Plane implements Geometry {
                 '}';
     }
 
+
     @Override
     public List<Point> findIntsersections(Ray ray) {
         Point p0 = ray.getP0();
-        Vector vd = ray.getDir();
+
         if (q0.equals(p0)) {
-            return List.of(q0);
-        }
-//the ray lying on the plane
-        double nv = normal.dotProduct(vd);
-        if (nv == 0) {
             return null;
         }
-        double t = normal.dotProduct(q0.subtract(p0));
-        t /= nv;
-        return List.of(ray.getPoint(t));
+
+        double nv = normal.dotProduct(ray.getDir());//checks if the ray is parallel to the plane
+        if (isZero(nv)) {
+            return null;
+        }
+
+        double rspln = normal.dotProduct(q0.subtract(p0));//Checks if the ray starts on the plane
+        if (isZero(rspln))
+            return null;
+
+        double t = alignZero(rspln / nv);
+        if (t > 0)
+            return List.of(ray.getPoint(t));
+        else return null;
     }
 }

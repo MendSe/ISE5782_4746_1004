@@ -35,4 +35,53 @@ class PlaneTest {
         double sqrt3 = Math.sqrt(1d / 3);
         assertEquals(new Vector(sqrt3, sqrt3, sqrt3), pl.getNormal(new Point(0, 0, 1)), "Bad normal to plane");
     }
+
+    @Test
+    public void testfindIntersection()
+    {
+        Ray ray;
+        Plane pln = new Plane (new Point(1,0,0),new Vector(1,1,1));
+
+        // ============ Equivalence Partitions Tests ==============
+        //TC01: Intersection with the plane
+        ray  = new Ray(new Point(0,1,1), new Vector(0,0,-1));
+        assertEquals(new Point(0,1,0),pln.findIntsersections(ray).get(0),
+                "Bad Intersection");
+
+        //TC02: No intersection between the ray and the plane
+        ray = new Ray(new Point(1,0,0), new Vector(1,1,1));
+        assertNull(pln.findIntsersections(ray),"Wrong intersection");
+
+        // =============== Boundary Values Tests ==================
+        //TC03: Ray is parallel to plane
+        ray = new Ray(new Point(1,1,1),new Vector(-1,1,0));
+        assertNull(pln.findIntsersections(ray),"Wrong intersection");
+
+        //TC04: Ray is in the plane
+        ray = new Ray(new Point(0,0,0),new Vector(-1,1,0));
+        assertNull(pln.findIntsersections(ray),
+                "Ray isn't supposed to be in the plane");
+
+        //Group: Ray is orthogonal to the plane
+        //TC05: Ray is before the plane
+        ray = new Ray(new Point(.5,0,0),new Vector(1,1,1));
+        assertEquals(new Point(2d/3,0.5d/3,0.5d/3),pln.findIntsersections(ray).get(0),
+                "Bad intersection");
+
+        //TC06: Ray is before the plane
+        ray = new Ray(new Point(1d/3,1d/3,1d/3),new Vector(1,1,1));
+        assertNull(pln.findIntsersections(ray),"Ray inside the plan");
+
+        //TC07: Ray is after the plane
+        ray = new Ray(new Point(2,0,0),new Vector(2,2,2));
+        assertNull(pln.findIntsersections(ray),"The ray is after the plane");
+
+        //TC08: Ray is the plane but isn't parallel nor orthogonal
+        ray = new Ray(new Point(1,-1,1),new Vector(2,3,4));
+        assertNull(pln.findIntsersections(ray),"Not orthogonal/parallel");
+
+        //TC09: Ray starts on the same point as the plane but isn't parallel nor orthogonal
+        assertNull(pln.findIntsersections(new Ray(new Point(1,0,0),new Vector(2,3,4))),
+                "Same origin but not parallel nor orthogonal");
+    }
 }
