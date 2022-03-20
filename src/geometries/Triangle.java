@@ -24,8 +24,7 @@ public class Triangle extends Polygon {
         Point p0 = ray.getP0();
         Vector vd = ray.getDir();
 
-        List<Point> list = plane.findIntsersections(ray);
-        if (list == null)
+        if (plane.findIntsersections(ray) == null)
             return null;
 
         Vector v1 = vertices.get(0).subtract(p0);
@@ -41,7 +40,7 @@ public class Triangle extends Polygon {
         double num3 = vd.dotProduct(n3);
 
         if ((num1 > 0 && num2 > 0 && num3 > 0) || (num1 < 0 && num2 < 0 && num3 < 0))
-            return list;
+            return plane.findIntsersections(ray);
 
         return null;
     }

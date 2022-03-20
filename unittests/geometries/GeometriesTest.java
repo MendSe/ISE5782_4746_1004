@@ -34,7 +34,7 @@ public class GeometriesTest {
         assertEquals(1,result.size(),"Wrong number of intersections");
 
         //TC:05 all objects intersected
-        result=collection.findIntsersections(new Ray(new Point(0,2,0),new Vector(5,0,0)));
+        result=collection.findIntsersections(new Ray(new Point(0,2.5,0),new Vector(5,0,0)));
         assertEquals(4,result.size(),"Wrong number of intersections");
     }
 }
