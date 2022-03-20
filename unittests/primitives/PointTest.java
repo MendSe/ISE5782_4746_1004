@@ -37,7 +37,7 @@ class PointTest {
     void distanceSquared() {
         // ============ Equivalence Partitions Tests ==============
         //Simple test
-        assertEquals(5d,new Point(1,2,3).DistanceSquared(new Point(1,1,1)),"DistanceSquared wrong result");
+        assertEquals(5d,new Point(1,2,3).distanceSquared(new Point(1,1,1)),"DistanceSquared wrong result");
 
     }
 
@@ -45,6 +45,6 @@ class PointTest {
     void distance() {
         // ============ Equivalence Partitions Tests ==============
         //Simple test
-        assertEquals(3d,new Point(1,3,4).Distance(new Point(0,1,2)),"Distance wrong result");
+        assertEquals(3d,new Point(1,3,4).distance(new Point(0,1,2)),"Distance wrong result");
     }
 }

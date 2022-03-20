@@ -44,13 +44,12 @@ public class Tube implements Geometry {
     }
 
     @Override
-    public List<Point> findIntsersections(Ray ray){
+    public List<Point> findIntsersections(Ray ray) {
         return null;
     }
 
     @Override
     public Vector getNormal(Point point) {
-
         Point p0 = this.axisRay.getP0();
         Vector dir = this.axisRay.getDir();
 

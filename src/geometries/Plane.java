@@ -47,7 +47,7 @@ public class Plane implements Geometry {
      * Plane constructor with a point and a vector
      *
      * @param point point coord value
-     * @param vec vector value
+     * @param vec   vector value
      */
     public Plane(Point point, Vector vec) {
         this.q0 = point;
@@ -68,7 +68,7 @@ public class Plane implements Geometry {
     }
 
     @Override
-    public List<Point> findIntsersections(Ray ray){
+    public List<Point> findIntsersections(Ray ray) {
         Point p0 = ray.getP0();
         Vector vd = ray.getDir();
         if (q0.equals(p0)) {
