@@ -52,8 +52,13 @@ class TriangleTest {
                 "Bad Intersection");
         assertNull(trg.findIntsersections(ray),"Don't Intersect");
 
-        //We can write 2 others BVA but these test must includes points that are on a side/vertex which goes against the
-        //instruction of the exercise.
+        //TC05: Ray starts on a side
+        assertNull(trg.findIntsersections(new Ray(new Point(0.5,0.5,0),new Vector(1,1,1))),
+                "Ray starts on a side");
+
+        //TC06: Ray starts on a vertex
+        assertNull(trg.findIntsersections(new Ray(new Point(1,0,0),new Vector(2,3,4))),
+                "Ray starts on a vertex");
 
     }
 }
