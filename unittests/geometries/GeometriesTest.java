@@ -17,14 +17,10 @@ public class GeometriesTest {
         Geometries collection = new Geometries(sp, tg, pln);
         Geometries emptycoll =new Geometries();
 
-
         // ============ Equivalence Partitions Tests ==============
         //TC:01 Normal tests
         List<Point> result=collection.findIntsersections(new Ray(new Point(2,2,0),new Vector(5,-5,0)));
         assertEquals(2,result.size(),"Wrong number of intersections");
-
-
-
 
         // =============== Boundary Values Tests ==================
         //TC:02 Empty collection
@@ -40,9 +36,5 @@ public class GeometriesTest {
         //TC:05 all objects intersected
         result=collection.findIntsersections(new Ray(new Point(0,2,0),new Vector(5,0,0)));
         assertEquals(4,result.size(),"Wrong number of intersections");
-
-
-
-
     }
 }
