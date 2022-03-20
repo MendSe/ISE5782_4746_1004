@@ -19,7 +19,7 @@ public class Geometries implements Intersectable {
     }
 
     /**
-     * Constructor pppppppppppppppppppp
+     * Constructor which receives a list of geometric objects and create an LinkdList of Intersectable interface with it
      * @param geometries geometric object
      */
     public Geometries(Intersectable... geometries){
