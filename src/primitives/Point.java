@@ -10,11 +10,13 @@ public class Point {
 
     /**
      * getter of coord x
+     *
      * @return coord x
      */
-    public double getX(){
+    public double getX() {
         return this.xyz.d1;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -34,7 +34,6 @@ public class Vector extends Point {
      * @return result of add
      */
     public Vector add(Vector vector2) {
-
         return new Vector(xyz.add(vector2.xyz));
     }
 
@@ -46,7 +45,6 @@ public class Vector extends Point {
      * @return a new vector that result of the subtraction of our vector and the second vector
      */
     public Vector subtract(Vector vector2) {
-
         return new Vector(xyz.subtract(vector2.xyz));
     }
 
@@ -89,7 +87,6 @@ public class Vector extends Point {
      * @return The length squared of our vector
      */
     public double lengthSquared() {
-
         return dotProduct(this);
     }
 
@@ -99,7 +96,6 @@ public class Vector extends Point {
      * @return The length of our vector
      */
     public double length() {
-
         return Math.sqrt(this.lengthSquared());
     }
 
@@ -109,7 +105,6 @@ public class Vector extends Point {
      * @return A new vector that's the normalized version of our vector
      */
     public Vector normalize() {
-
         return new Vector(xyz.reduce(length()));
     }
 
