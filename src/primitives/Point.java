@@ -23,8 +23,7 @@ public class Point {
         if (o == null || getClass() != o.getClass()) return false;
 
         Point point = (Point) o;
-
-        return Objects.equals(xyz, point.xyz);
+        return xyz.equals(point.xyz);
     }
 
     @Override

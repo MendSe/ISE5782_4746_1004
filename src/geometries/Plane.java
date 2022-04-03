@@ -72,9 +72,10 @@ public class Plane implements Geometry {
 
     @Override
     public List<Point> findIntsersections(Ray ray) {
-        Point p0 = ray.getP0();
-
-        if (q0.equals(p0)) {
+        Vector u;
+        try {
+            u = q0.subtract(ray.getP0());
+        } catch (IllegalArgumentException ignore) {
             return null;
         }
 
@@ -83,13 +84,8 @@ public class Plane implements Geometry {
             return null;
         }
 
-        double rspln = normal.dotProduct(q0.subtract(p0));//Checks if the ray starts on the plane
-        if (isZero(rspln))
-            return null;
-
-        double t = alignZero(rspln / nv);
-        if (t > 0)
-            return List.of(ray.getPoint(t));
-        else return null;
+        //Checks if the ray starts on the plane
+        double t = alignZero(normal.dotProduct(u) / nv);
+        return t > 0 ? List.of(ray.getPoint(t)) : null;
     }
 }

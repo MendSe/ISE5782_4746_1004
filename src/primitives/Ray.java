@@ -1,5 +1,7 @@
 package primitives;
 
+import static primitives.Util.*;
+
 /**
  * This class helps us to simulates a radius/ray
  */
@@ -43,7 +45,7 @@ public class Ray {
      * @return point
      */
     public Point getPoint(double t) {
-        return this.p0.add(this.dir.scale(t));
+        return isZero(t) ? p0 : this.p0.add(this.dir.scale(t));
     }
 
     @Override

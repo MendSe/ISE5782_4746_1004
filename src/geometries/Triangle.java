@@ -4,6 +4,8 @@ import primitives.*;
 
 import java.util.List;
 
+import static primitives.Util.alignZero;
+
 /**
  * Triangle class which inherits from Polygon class and creates a 2D triangle in a 3D space
  */
@@ -21,12 +23,11 @@ public class Triangle extends Polygon {
 
     @Override
     public List<Point> findIntsersections(Ray ray) {
-        Point p0 = ray.getP0();
-        Vector vd = ray.getDir();
-
-        if (plane.findIntsersections(ray) == null)
+        var intersections = plane.findIntsersections(ray);
+        if (intersections == null)
             return null;
 
+        Point p0 = ray.getP0();
         Vector v1 = vertices.get(0).subtract(p0);
         Vector v2 = vertices.get(1).subtract(p0);
         Vector v3 = vertices.get(2).subtract(p0);
@@ -35,14 +36,15 @@ public class Triangle extends Polygon {
         Vector n2 = v2.crossProduct(v3).normalize();
         Vector n3 = v3.crossProduct(v1).normalize();
 
-        double num1 = vd.dotProduct(n1);
-        double num2 = vd.dotProduct(n2);
-        double num3 = vd.dotProduct(n3);
+        Vector vd = ray.getDir();
+        double num1 = alignZero(vd.dotProduct(n1));
+        if (num1 == 0) return null;
+        double num2 = alignZero(vd.dotProduct(n2));
+        if (num1 * num2 <= 0) return null;
+        double num3 = alignZero(vd.dotProduct(n3));
+        if (num1 * num3 <= 0) return null;
 
-        if ((num1 > 0 && num2 > 0 && num3 > 0) || (num1 < 0 && num2 < 0 && num3 < 0))
-            return plane.findIntsersections(ray);
-
-        return null;
+        return intersections;
     }
 
     @Override

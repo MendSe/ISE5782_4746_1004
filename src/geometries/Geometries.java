@@ -12,38 +12,38 @@ import java.util.List;
  */
 public class Geometries implements Intersectable {
 
-    private final List<Intersectable> intersectableList;
+    private final List<Intersectable> intersectableList = new LinkedList<>();
 
     /**
      * Default constructor
      */
-    public Geometries(){
-        this.intersectableList =new LinkedList<>();
+    public Geometries() {
     }
 
     /**
      * Constructor which receives a intersectableList of geometric objects and create an LinkdList of Intersectable interface with it
+     *
      * @param geometries geometric object
      */
-    public Geometries(Intersectable... geometries){
-        intersectableList =new LinkedList<>(Arrays.asList(geometries));
+    public Geometries(Intersectable... geometries) {
+        add(geometries);
     }
 
     /**
      * Function to add an object to the intersectableList
+     *
      * @param geometries geometric object
      */
-    public void add(Intersectable... geometries){
-        this.intersectableList.addAll(Arrays.asList(geometries));
+    public void add(Intersectable... geometries) {
+        this.intersectableList.addAll(List.of(geometries));
     }
 
     @Override
     public List<Point> findIntsersections(Ray ray) {
-        List<Point> intersections=null;
-        for (Intersectable item: intersectableList
-             ) {
-            List<Point> current=item.findIntsersections(ray);
-            if (current!=null) {
+        List<Point> intersections = null;
+        for (Intersectable item : intersectableList) {
+            List<Point> current = item.findIntsersections(ray);
+            if (current != null) {
                 if (intersections == null) {
                     intersections = new LinkedList<>();
                 }
