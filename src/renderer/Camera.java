@@ -23,8 +23,15 @@ public class Camera {
     public Camera setVPSize(double width, double height) {
         _width = width;
         _height = height;
-
         return this;
     }
 
+    public Camera setVPDistance(double distance) {
+        _distance = distance;
+        return this;
+    }
+
+    public Ray constructRay(int nX, int nY, int j, int i){
+        return null;
+    }
 }
