@@ -38,7 +38,7 @@ public class Sphere implements Geometry {
      * @param center Point object that initializes the center of the sphere
      * @param radius value of the radius of our sphere
      */
-    Sphere(Point center, double radius) {
+    public Sphere(Point center, double radius) {
         this.center = center;
         this.radius = radius;
         this.radius2 = radius * radius;
