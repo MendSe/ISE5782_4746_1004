@@ -9,6 +9,7 @@ import static primitives.Util.isZero;
  */
 public class Camera {
     private Point p0;
+
     private Vector vto;
     private Vector vup;
     private Vector vright;
@@ -20,7 +21,7 @@ public class Camera {
     /**
      * Constructor that initializes the parameters of a camera object
      *
-     * @param p origin point of the camera
+     * @param p  origin point of the camera
      * @param to direction vector
      * @param up direction vector
      */
@@ -37,7 +38,7 @@ public class Camera {
     /**
      * Function that set the size of the View Plane
      *
-     * @param width width value of the View Plane
+     * @param width  width value of the View Plane
      * @param height height value of the View Plane
      * @return the camera object itself
      */
@@ -63,8 +64,8 @@ public class Camera {
      *
      * @param nX number of pixel in the x-axis
      * @param nY number of pixels in the y-axis
-     * @param j the index of the pixel in the x-axis
-     * @param i the index of the pixel in the y-axis
+     * @param j  the index of the pixel in the x-axis
+     * @param i  the index of the pixel in the y-axis
      * @return a ray from the camera going through the center of the pixel
      */
     public Ray constructRay(int nX, int nY, int j, int i) {
