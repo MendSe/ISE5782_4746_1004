@@ -12,9 +12,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Class for integration test of Camera
+ */
 public class CameraRayIntersectionTest {
     Camera camera=new Camera(new Point(1,1.5,0),new Vector(1,0,0),new Vector(0,1,0));
 
+    /**
+     * Help function to count the number of intersections between camera's Rays and objects from intersectable
+     * @param camera    camera p0 and vTo vUp
+     * @param o         objects from intersectable
+     * @param expect    expected number of points
+     */
     private void countIntersections(Camera camera, Intersectable o,int expect){
         camera.setVPSize(3,3);
         camera.setVPDistance(1);
@@ -37,7 +46,7 @@ public class CameraRayIntersectionTest {
         assertEquals(expect,number,"Bad number of intersection points");
     }
     /**
-     *
+     * Test for function constructRay with spheres
      */
     @Test
     public void cameraSphereIntersections() {
@@ -57,7 +66,9 @@ public class CameraRayIntersectionTest {
         //TC05: Sphere not in the camera's view
         countIntersections(camera,new Sphere(new Point(-1,-1.5,0),1),0);
     }
-
+    /**
+     * Test for function constructRay with planes
+     */
     @Test
     public void cameraPlaneIntersections(){
         //TC01: Normal plane in front of camera
@@ -69,6 +80,9 @@ public class CameraRayIntersectionTest {
         //TC03:Plane not in the camera's view
         countIntersections(camera,new Plane(new Point(-3,0,0),new Vector(1,0,0)),0);
     }
+    /**
+     * Test for function constructRay with triangles
+     */
     @Test
     public void cameraTriangleIntersections() {
 
