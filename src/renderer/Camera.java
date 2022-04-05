@@ -19,7 +19,7 @@ public class Camera {
     private double _width;
 
     /**
-     * Constructor that initializes the parameters of a camera object
+     * Constructor that initializes the parameters of the camera object
      *
      * @param p  origin point of the camera
      * @param to direction vector
