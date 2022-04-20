@@ -4,16 +4,29 @@ import primitives.*;
 
 import static primitives.Util.isZero;
 
+/**
+ * Camera object to create rays through pixels
+ */
 public class Camera {
     private Point p0;
-    private Vector vto, vup, vright;
+
+    private Vector vto;
+    private Vector vup;
+    private Vector vright;
 
     private double _distance;
     private double _height;
     private double _width;
 
+    /**
+     * Constructor that initializes the parameters of the camera object
+     *
+     * @param p  origin point of the camera
+     * @param to direction vector
+     * @param up direction vector
+     */
     Camera(Point p, Vector to, Vector up) {
-        if (to.dotProduct(up) != 0)
+        if (to.dotProduct(up) != 0)//checks if the vectors are perpendicular
             throw new IllegalArgumentException("The vector are not perpendicular");
 
         p0 = p;
@@ -22,17 +35,39 @@ public class Camera {
         vright = vto.crossProduct(vup).normalize();
     }
 
+    /**
+     * Function that set the size of the View Plane
+     *
+     * @param width  width value of the View Plane
+     * @param height height value of the View Plane
+     * @return the camera object itself
+     */
     public Camera setVPSize(double width, double height) {
         _width = width;
         _height = height;
         return this;
     }
 
+    /**
+     * Function that set the distance between the camera and the View Plane
+     *
+     * @param distance the distance between the camera and the View Plane
+     * @return the camera object itself
+     */
     public Camera setVPDistance(double distance) {
         _distance = distance;
         return this;
     }
 
+    /**
+     * Construct a ray through a pixel on the view plane
+     *
+     * @param nX number of pixel in the x-axis
+     * @param nY number of pixels in the y-axis
+     * @param j  the index of the pixel in the x-axis
+     * @param i  the index of the pixel in the y-axis
+     * @return a ray from the camera going through the center of the pixel
+     */
     public Ray constructRay(int nX, int nY, int j, int i) {
         Point pC = p0.add(vto.scale(_distance));
         double rY = _height / nY;
@@ -42,20 +77,20 @@ public class Camera {
         double xJ = (j - (nX - 1) / 2d) * rX;
 
         Point pIJ = pC;
-        if(isZero(xJ)&& isZero(yI))
+        if (isZero(xJ) && isZero(yI))
             return new Ray(p0, pIJ.subtract(p0));
-        if(isZero(xJ)) {
+        if (isZero(xJ)) {
             pIJ = pIJ.add(vup.scale(yI));
-            return new Ray (p0,pIJ.subtract(p0));
+            return new Ray(p0, pIJ.subtract(p0));
         }
-        if(isZero(yI)){
+        if (isZero(yI)) {
             pIJ = pIJ.add(vright.scale(xJ));
-            return new Ray(p0,pIJ.subtract(p0));
+            return new Ray(p0, pIJ.subtract(p0));
         }
 
         pIJ = pIJ.add(vup.scale(yI).add(vright.scale(xJ)));
         Vector vIJ = pIJ.subtract(p0);
 
-        return new Ray(p0,vIJ);
+        return new Ray(p0, vIJ);
     }
 }
