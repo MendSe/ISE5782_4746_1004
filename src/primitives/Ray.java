@@ -67,6 +67,8 @@ public class Ray {
     }
 
     public Point findClosestPoint(List<Point> lp) {
+        if(lp == null)
+            return null;
         double mindist = 100000000;
         Point help = null;
         for (Point p : lp) {
