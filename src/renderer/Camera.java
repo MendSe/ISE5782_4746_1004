@@ -120,14 +120,32 @@ public class Camera {
             if (imw == null) throw new MissingResourceException("Missing ressource", ImageWriter.class.getName(), "");
             if (rtb == null) throw new MissingResourceException("Missing ressource", RayTracerBase.class.getName(), "");
 
+            int nX = imw.getNx();
+            int nY = imw.getNy();
+            for (int i=0;i<nY;i++)
+                for(int j=0;j<nX;j++)
+                {
+                    Ray ray = this.constructRay(nX,nY,j,i);
+                    Color pixelColor = rtb.traceRay(ray);
+                    imw.writePixel(j,i,pixelColor);
+                }
         } catch (MissingResourceException e) {
-            e.printStackTrace();
+            throw new UnsupportedOperationException(e.getClassName());
         }
+    }
 
-        throw new UnsupportedOperationException("Yes");
+    void printGrid(int interval, Color color) {
+        int nX = imw.getNx();
+        int nY = imw.getNy();
+        for (int i = 0; i < nY; i++)
+            for (int j = 0; j < nX; j++)
+                if (i % interval == 0 || j % interval == 0)
+                    imw.writePixel(j, i, color);
     }
     public void writeToImage(){
         if (imw==null)throw new MissingResourceException("Missing ressource",Point.class.getName(),"");
         imw.writeToImage();
     }
+
+
 }
