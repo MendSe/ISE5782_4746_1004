@@ -5,6 +5,9 @@ import geometries.Intersectable;
 import lighting.AmbientLight;
 import primitives.Color;
 import primitives.Double3;
+import primitives.Point;
+
+import java.util.MissingResourceException;
 
 public class Scene {
 
@@ -49,7 +52,7 @@ public class Scene {
 
         public Scene build() {
             if (scene.name == null || scene.geometries == null)
-                throw new IllegalArgumentException("No name or no objects in the scene");
+                throw new MissingResourceException("No name or no objects in the scene", Scene.class.getName(),"");
             return scene;
         }
     } // class Builder

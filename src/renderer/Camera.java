@@ -64,6 +64,16 @@ public class Camera {
         return this;
     }
 
+    public Camera setImageWriter(ImageWriter imageWriter) {
+        imw = imageWriter;
+        return this;
+    }
+
+    public Camera setRayTracer(RayTracerBase rayTracer) {
+        rtb = rayTracer;
+        return this;
+    }
+
     /**
      * Construct a ray through a pixel on the view plane
      *
@@ -99,22 +109,25 @@ public class Camera {
         return new Ray(p0, vIJ);
     }
 
-    public void renderImage()
-    {
-        try{
-            if(p0 == null) throw new MissingResourceException("Missing ressource",Point.class.getName(),"");
+    public void renderImage() {
+        try {
+            if (p0 == null) throw new MissingResourceException("Missing ressource", Point.class.getName(), "");
 
-            if(vto == null) throw new MissingResourceException("Missing ressource",Vector.class.getName(),"");
-            if(vup == null) throw new MissingResourceException("Missing ressource",Vector.class.getName(),"");
-            if(vright == null) throw new MissingResourceException("Missing ressource",Vector.class.getName(),"");
+            if (vto == null) throw new MissingResourceException("Missing ressource", Vector.class.getName(), "");
+            if (vup == null) throw new MissingResourceException("Missing ressource", Vector.class.getName(), "");
+            if (vright == null) throw new MissingResourceException("Missing ressource", Vector.class.getName(), "");
 
-            if(imw==null) throw new MissingResourceException("Missing ressource",ImageWriter.class.getName(),"");
-            if(rtb == null) throw new MissingResourceException("Missing ressource",RayTracerBase.class.getName(),"");
+            if (imw == null) throw new MissingResourceException("Missing ressource", ImageWriter.class.getName(), "");
+            if (rtb == null) throw new MissingResourceException("Missing ressource", RayTracerBase.class.getName(), "");
 
         } catch (MissingResourceException e) {
             e.printStackTrace();
         }
 
         throw new UnsupportedOperationException("Yes");
+    }
+    public void writeToImage(){
+        if (imw==null)throw new MissingResourceException("Missing ressource",Point.class.getName(),"");
+        imw.writeToImage();
     }
 }
