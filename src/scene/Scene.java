@@ -13,10 +13,11 @@ public class Scene {
     public AmbientLight ambientLight = new AmbientLight();
     public Geometries geometries = new Geometries();
 
-    Scene(String string) {
+    public Scene(String string) {
         this.name = string;
         geometries = new Geometries();
     }
+
 
     public static class Builder {
         private Scene scene = null;
@@ -25,7 +26,7 @@ public class Scene {
             scene = new Scene(name);
         }
 
-        public static Builder reset(String name) {
+        public Builder reset(String name) {
             scene = new Scene(name);
             return this;
         }
@@ -35,8 +36,8 @@ public class Scene {
             return this;
         }
 
-        public Builder setAmbient(Color color, Double3 ka) {
-            scene.ambientLight = new AmbientLight(color, ka);
+        public Builder setAmbientLight(AmbientLight ambientLight) {
+            scene.ambientLight = ambientLight;
             return this;
         }
 
