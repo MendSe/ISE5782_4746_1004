@@ -2,6 +2,8 @@ package renderer;
 
 import primitives.*;
 
+import java.util.MissingResourceException;
+
 import static primitives.Util.isZero;
 
 /**
@@ -17,6 +19,9 @@ public class Camera {
     private double _distance;
     private double _height;
     private double _width;
+
+    private ImageWriter imw;
+    private RayTracerBase rtb;
 
     /**
      * Constructor that initializes the parameters of the camera object
@@ -92,5 +97,24 @@ public class Camera {
         Vector vIJ = pIJ.subtract(p0);
 
         return new Ray(p0, vIJ);
+    }
+
+    public void renderImage()
+    {
+        try{
+            if(p0 == null) throw new MissingResourceException("Missing ressource",Point.class.getName(),"");
+
+            if(vto == null) throw new MissingResourceException("Missing ressource",Vector.class.getName(),"");
+            if(vup == null) throw new MissingResourceException("Missing ressource",Vector.class.getName(),"");
+            if(vright == null) throw new MissingResourceException("Missing ressource",Vector.class.getName(),"");
+
+            if(imw==null) throw new MissingResourceException("Missing ressource",ImageWriter.class.getName(),"");
+            if(rtb == null) throw new MissingResourceException("Missing ressource",RayTracerBase.class.getName(),"");
+
+        } catch (MissingResourceException e) {
+            e.printStackTrace();
+        }
+
+        throw new UnsupportedOperationException("Yes");
     }
 }
