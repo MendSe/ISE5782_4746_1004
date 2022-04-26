@@ -64,11 +64,24 @@ public class Camera {
         return this;
     }
 
+    /**
+     * This function sets the image writer of the camera to the given image writer.
+     *
+     * @param imageWriter The image writer that will be used to write the image to a file.
+     * @return The camera itself.
+     */
     public Camera setImageWriter(ImageWriter imageWriter) {
         imw = imageWriter;
         return this;
     }
 
+
+    /**
+     * This function sets the ray tracer to be used by the camera.
+     *
+     * @param rayTracer The ray tracer to use.
+     * @return The camera object itself.
+     */
     public Camera setRayTracer(RayTracerBase rayTracer) {
         rtb = rayTracer;
         return this;
