@@ -109,16 +109,21 @@ public class Camera {
         return new Ray(p0, vIJ);
     }
 
+    /**
+     * This function helps us to render the image.
+     * It first checks if there are not any missing resource then for each pixel it calls the castRay function to have a color
+     *
+     */
     public void renderImage() {
         try {
-            if (p0 == null) throw new MissingResourceException("Missing ressource", Point.class.getName(), "");
+            if (p0 == null) throw new MissingResourceException("Missing resource", Point.class.getName(), "");
 
-            if (vto == null) throw new MissingResourceException("Missing ressource", Vector.class.getName(), "");
-            if (vup == null) throw new MissingResourceException("Missing ressource", Vector.class.getName(), "");
-            if (vright == null) throw new MissingResourceException("Missing ressource", Vector.class.getName(), "");
+            if (vto == null) throw new MissingResourceException("Missing resource", Vector.class.getName(), "");
+            if (vup == null) throw new MissingResourceException("Missing resource", Vector.class.getName(), "");
+            if (vright == null) throw new MissingResourceException("Missing resource", Vector.class.getName(), "");
 
-            if (imw == null) throw new MissingResourceException("Missing ressource", ImageWriter.class.getName(), "");
-            if (rtb == null) throw new MissingResourceException("Missing ressource", RayTracerBase.class.getName(), "");
+            if (imw == null) throw new MissingResourceException("Missing resource", ImageWriter.class.getName(), "");
+            if (rtb == null) throw new MissingResourceException("Missing resource", RayTracerBase.class.getName(), "");
 
             int nX = imw.getNx();
             int nY = imw.getNy();
@@ -133,13 +138,27 @@ public class Camera {
         }
     }
 
+    /**
+     * This function helps us to create a color for a coordinates in the image
+     * @param j coordinate in the j axis
+     * @param i coordinate in the i axis
+     * @return the color of the ray
+     */
     private Color castRay(int j,int i)
     {
         Ray ray = this.constructRay(imw.getNx(),imw.getNy(),j,i);
         return rtb.traceRay(ray);
     }
 
+    /**
+     * This function helps us to prints a grid
+     *
+     * @param interval the interval between grid line
+     * @param color the color of the grid line
+     */
     void printGrid(int interval, Color color) {
+        if(this.imw == null)
+            throw new MissingResourceException("Missing resource",imw.getClass().getName()," ");
         int nX = imw.getNx();
         int nY = imw.getNy();
         for (int i = 0; i < nY; i++)
@@ -148,6 +167,9 @@ public class Camera {
                     imw.writePixel(j, i, color);
     }
 
+    /**
+     * Write the current image to the image file
+     */
     public void writeToImage(){
         if (imw==null)throw new MissingResourceException("Missing ressource",Point.class.getName(),"");
         imw.writeToImage();

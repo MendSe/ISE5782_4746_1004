@@ -8,6 +8,9 @@ import primitives.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class test for the Ray class
+ */
 class RayTest {
 
     @Test
