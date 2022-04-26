@@ -7,6 +7,9 @@ import primitives.Color;
 import primitives.Double3;
 import primitives.Point;
 
+
+
+
 import java.util.MissingResourceException;
 
 /**
@@ -28,6 +31,7 @@ public class Scene {
         this.name = name;
         geometries = new Geometries();
     }
+
 
     /**
      * class Builder from Builder design pattern responsable of initializing a scene
