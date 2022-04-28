@@ -21,22 +21,22 @@ public class GeometriesTest {
 
         // ============ Equivalence Partitions Tests ==============
         //TC:01 Normal tests
-        List<Point> result = collection.findIntsersections(new Ray(new Point(2, 2, 0), new Vector(5, -5, 0)));
+        List<Point> result = collection.findIntersections(new Ray(new Point(2, 2, 0), new Vector(5, -5, 0)));
         assertEquals(2, result.size(), "Wrong number of intersections");
 
         // =============== Boundary Values Tests ==================
         //TC:02 Empty collection
-        assertNull(emptycoll.findIntsersections(new Ray(new Point(0, 2, 0), new Vector(5, 0, 0))), "Bad number of intersections when empty collection");
+        assertNull(emptycoll.findIntersections(new Ray(new Point(0, 2, 0), new Vector(5, 0, 0))), "Bad number of intersections when empty collection");
 
         //TC:03 No intersections
-        assertNull(emptycoll.findIntsersections(new Ray(new Point(0, 2, 0), new Vector(-5, 0, 0))), "Bad number of intersections when No intersections");
+        assertNull(emptycoll.findIntersections(new Ray(new Point(0, 2, 0), new Vector(-5, 0, 0))), "Bad number of intersections when No intersections");
 
         //TC:04 only one object intersected
-        result = collection.findIntsersections(new Ray(new Point(-1, -1, 0), new Vector(5, 0, 0)));
+        result = collection.findIntersections(new Ray(new Point(-1, -1, 0), new Vector(5, 0, 0)));
         assertEquals(1, result.size(), "Wrong number of intersections");
 
         //TC:05 all objects intersected
-        result = collection.findIntsersections(new Ray(new Point(0, 2.5, 0), new Vector(5, 0, 0)));
+        result = collection.findIntersections(new Ray(new Point(0, 2.5, 0), new Vector(5, 0, 0)));
         assertEquals(4, result.size(), "Wrong number of intersections");
     }
 }

@@ -5,8 +5,6 @@ import geometries.*;
 import org.junit.jupiter.api.Test;
 import primitives.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class CameraRayIntersectionTest {
         List<Point> intersections = null;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                List<Point> inter = o.findIntsersections(camera.constructRay(3, 3, j, i));
+                List<Point> inter = o.findIntersections(camera.constructRay(3, 3, j, i));
                 if (inter != null) {
                     if (intersections == null) {
                         intersections = new LinkedList<>();
