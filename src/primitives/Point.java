@@ -1,7 +1,5 @@
 package primitives;
 
-import java.util.Objects;
-
 /**
  * Point class represents a point with 3 coordinates
  */
@@ -9,9 +7,9 @@ public class Point {
     final protected Double3 xyz;
 
     /**
-     * getter of coord x
+     * getter of coordinate x
      *
-     * @return coord x
+     * @return coordinate x value
      */
     public double getX() {
         return this.xyz.d1;
@@ -20,9 +18,7 @@ public class Point {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Point point = (Point) o;
+        if (o == null || !(o instanceof Point point)) return false;
         return xyz.equals(point.xyz);
     }
 
@@ -94,6 +90,5 @@ public class Point {
     public double distance(Point point2) {
         return Math.sqrt(distanceSquared(point2));
     }
-
 
 }

@@ -1,19 +1,13 @@
 package scene;
 
 import geometries.Geometries;
-import geometries.Intersectable;
 import lighting.AmbientLight;
-import primitives.Color;
-import primitives.Double3;
-import primitives.Point;
-
-
-
+import primitives.*;
 
 import java.util.MissingResourceException;
 
 /**
- * Scene class responsable of the background, the ambientlight and the geometries of the environment
+ * Scene class responsible for the background, the ambient light and the geometries of the environment
  */
 public class Scene {
 
@@ -29,15 +23,14 @@ public class Scene {
      */
     public Scene(String name) {
         this.name = name;
-        geometries = new Geometries();
     }
 
 
     /**
-     * class Builder from Builder design pattern responsable of initializing a scene
+     * class Builder from Builder design pattern responsible for initializing a scene
      */
     public static class Builder {
-        private Scene scene = null;
+        private final Scene scene;
 
         /**
          * constructor which uses the constructor of Scene to initialize the scene
@@ -60,7 +53,7 @@ public class Scene {
         }
 
         /**
-         * setter for ambientlight
+         * setter for ambient light
          *
          * @param ambientLight AmbientLight
          * @return the scene builder

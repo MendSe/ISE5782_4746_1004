@@ -3,25 +3,17 @@ package geometries;
 import primitives.Point;
 import primitives.Ray;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Class geometries to compile geometrical objects in a intersectableList
  */
-public class Geometries implements Intersectable {
-
+public class Geometries extends Intersectable {
     private final List<Intersectable> intersectableList = new LinkedList<>();
 
     /**
-     * Default constructor
-     */
-    public Geometries() {
-    }
-
-    /**
-     * Constructor which receives a intersectableList of geometric objects and create an LinkdList of Intersectable interface with it
+     * Constructor which receives a intersectableList of geometric objects and create an LinkedList of Intersectable interface with it
      *
      * @param geometries geometric object
      */
@@ -35,7 +27,7 @@ public class Geometries implements Intersectable {
      * @param geometries geometric object
      */
     public void add(Intersectable... geometries) {
-        this.intersectableList.addAll(List.of(geometries));
+        if (geometries.length != 0) this.intersectableList.addAll(List.of(geometries));
     }
 
     @Override
@@ -44,12 +36,29 @@ public class Geometries implements Intersectable {
         for (Intersectable item : intersectableList) {
             List<Point> current = item.findIntsersections(ray);
             if (current != null) {
-                if (intersections == null) {
-                    intersections = new LinkedList<>();
-                }
-                intersections.addAll(current);
+                if (intersections == null)
+                    intersections = new LinkedList<>(current);
+                else
+                    intersections.addAll(current);
             }
         }
         return intersections;
     }
+
+    @Override
+    protected List<GeoPoint> findGeoIntersectionHelper(Ray ray)
+    {
+        List<GeoPoint> intersections = null;
+        for(Intersectable item : intersectableList){
+            List<GeoPoint> current = item.findGeoIntersections(ray);
+            if(current != null){
+                if(intersections == null)
+                    intersections = new LinkedList<>(current);
+                else intersections.addAll(current);
+            }
+        }
+
+        return intersections;
+    }
+
 }

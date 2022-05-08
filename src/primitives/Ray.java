@@ -3,6 +3,7 @@ package primitives;
 import java.util.List;
 
 import static primitives.Util.*;
+import geometries.Intersectable.GeoPoint;
 
 /**
  * This class helps us to simulates a radius/ray
@@ -53,8 +54,7 @@ public class Ray {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ray ray = (Ray) o;
+        if (o == null || !(o instanceof Ray ray)) return false;
         return p0.equals(ray.p0) && dir.equals(ray.dir);
     }
 
@@ -79,4 +79,22 @@ public class Ray {
         }
         return help;
     }
+
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> geoPoints)
+    {
+        if(geoPoints == null) return null;
+
+        GeoPoint closest =  null;
+        double closestDistSqu = Double.MAX_VALUE;
+
+        for(GeoPoint geo : geoPoints) {
+            double distanceSqu = geo.point.distanceSquared(p0);
+            if(distanceSqu<closestDistSqu){
+                closestDistSqu = distanceSqu;
+                closest = geo;
+            }
+        }
+        return closest;
+    }
+
 }

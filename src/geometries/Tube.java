@@ -9,7 +9,7 @@ import static primitives.Util.*;
 /**
  * Tube class which create an infinite tube from a ray and a radius
  */
-public class Tube implements Geometry {
+public class Tube extends Geometry {
 
     protected final Ray axisRay;
     protected final double radius;
@@ -45,6 +45,11 @@ public class Tube implements Geometry {
 
     @Override
     public List<Point> findIntsersections(Ray ray) {
+        return null;
+    }
+
+    @Override
+    protected List<GeoPoint> findGeoIntersectionHelper(Ray ray) {
         return null;
     }
 

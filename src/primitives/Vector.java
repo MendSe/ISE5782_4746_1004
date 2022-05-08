@@ -108,15 +108,10 @@ public class Vector extends Point {
         return new Vector(xyz.reduce(length()));
     }
 
-    /**
-     * This function keeps the DRY concept by using the equal of the father class
-     */
     @Override
     public boolean equals(Object o) {
         if(this == o) return true;
-        if(o== null || getClass() != o.getClass()) return false;
-        Vector vec = (Vector) o;
-
+        if(o== null || !(o instanceof Vector)) return false;
         return super.equals(o);
     }
 
@@ -124,6 +119,5 @@ public class Vector extends Point {
     public String toString() {
         return "Vector:" + super.toString();
     }
-
 
 }

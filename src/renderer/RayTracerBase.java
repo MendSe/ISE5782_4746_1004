@@ -7,7 +7,7 @@ import primitives.*;
  */
 public abstract class RayTracerBase {
 
-    protected Scene scene;
+    protected final Scene scene;
 
     /**
      * Constructor of the class

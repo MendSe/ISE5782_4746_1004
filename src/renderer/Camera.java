@@ -12,13 +12,13 @@ import static primitives.Util.isZero;
 public class Camera {
     private Point p0;
 
-    private Vector vto;
-    private Vector vup;
-    private Vector vright;
+    private Vector vTo;
+    private Vector vUp;
+    private Vector vRight;
 
-    private double _distance;
-    private double _height;
-    private double _width;
+    private double distance;
+    private double height;
+    private double width;
 
     private ImageWriter imw;
     private RayTracerBase rtb;
@@ -29,15 +29,16 @@ public class Camera {
      * @param p  origin point of the camera
      * @param to direction vector
      * @param up direction vector
+     * @throws IllegalArgumentException if the "to" and "up" vectors are not perpendicular
      */
     Camera(Point p, Vector to, Vector up) {
-        if (to.dotProduct(up) != 0)//checks if the vectors are perpendicular
+        if (!isZero(to.dotProduct(up))) //checks if the vectors are perpendicular
             throw new IllegalArgumentException("The vector are not perpendicular");
 
         p0 = p;
-        vto = to.normalize();
-        vup = up.normalize();
-        vright = vto.crossProduct(vup).normalize();
+        vTo = to.normalize();
+        vUp = up.normalize();
+        vRight = vTo.crossProduct(vUp).normalize();
     }
 
     /**
@@ -48,8 +49,8 @@ public class Camera {
      * @return the camera object itself
      */
     public Camera setVPSize(double width, double height) {
-        _width = width;
-        _height = height;
+        this.width = width;
+        this.height = height;
         return this;
     }
 
@@ -60,7 +61,7 @@ public class Camera {
      * @return the camera object itself
      */
     public Camera setVPDistance(double distance) {
-        _distance = distance;
+        this.distance = distance;
         return this;
     }
 
@@ -97,69 +98,45 @@ public class Camera {
      * @return a ray from the camera going through the center of the pixel
      */
     public Ray constructRay(int nX, int nY, int j, int i) {
-        Point pC = p0.add(vto.scale(_distance));
-        double rY = _height / nY;
-        double rX = _width / nX;
+        Point pC = p0.add(vTo.scale(distance));
+        double rY = height / nY;
+        double rX = width / nX;
 
         double yI = -(i - (nY - 1) / 2d) * rY;
         double xJ = (j - (nX - 1) / 2d) * rX;
 
         Point pIJ = pC;
-        if (isZero(xJ) && isZero(yI))
-            return new Ray(p0, pIJ.subtract(p0));
-        if (isZero(xJ)) {
-            pIJ = pIJ.add(vup.scale(yI));
-            return new Ray(p0, pIJ.subtract(p0));
-        }
-        if (isZero(yI)) {
-            pIJ = pIJ.add(vright.scale(xJ));
-            return new Ray(p0, pIJ.subtract(p0));
-        }
-
-        pIJ = pIJ.add(vup.scale(yI).add(vright.scale(xJ)));
-        Vector vIJ = pIJ.subtract(p0);
-
-        return new Ray(p0, vIJ);
+        if (!isZero(xJ)) pIJ = pIJ.add(vRight.scale(xJ));
+        if (!isZero(yI)) pIJ = pIJ.add(vUp.scale(yI));
+        return new Ray(p0, pIJ.subtract(p0));
     }
 
     /**
      * This function helps us to render the image.
      * It first checks if there are not any missing resource then for each pixel it calls the castRay function to have a color
-     *
      */
     public void renderImage() {
-        try {
-            if (p0 == null) throw new MissingResourceException("Missing resource", Point.class.getName(), "");
+        if (imw == null) throw new MissingResourceException("Missing resource", ImageWriter.class.getName(), "");
+        if (rtb == null) throw new MissingResourceException("Missing resource", RayTracerBase.class.getName(), "");
 
-            if (vto == null) throw new MissingResourceException("Missing resource", Vector.class.getName(), "");
-            if (vup == null) throw new MissingResourceException("Missing resource", Vector.class.getName(), "");
-            if (vright == null) throw new MissingResourceException("Missing resource", Vector.class.getName(), "");
-
-            if (imw == null) throw new MissingResourceException("Missing resource", ImageWriter.class.getName(), "");
-            if (rtb == null) throw new MissingResourceException("Missing resource", RayTracerBase.class.getName(), "");
-
-            int nX = imw.getNx();
-            int nY = imw.getNy();
-            for (int i=0;i<nY;i++)
-                for(int j=0;j<nX;j++)
-                {
-                    Color pixelColor = this.castRay(j,i);
-                    imw.writePixel(j,i,pixelColor);
-                }
-        } catch (MissingResourceException e) {
-            throw new UnsupportedOperationException(e.getClassName());
-        }
+        int nX = imw.getNx();
+        int nY = imw.getNy();
+        for (int i = 0; i < nY; i++)
+            for (int j = 0; j < nX; j++) {
+                Color pixelColor = this.castRay(j, i);
+                imw.writePixel(j, i, pixelColor);
+            }
     }
 
     /**
      * This function helps us to create a color for a coordinates in the image
+     *
      * @param j coordinate in the j axis
      * @param i coordinate in the i axis
      * @return the color of the ray
      */
-    private Color castRay(int j,int i)
-    {
-        Ray ray = this.constructRay(imw.getNx(),imw.getNy(),j,i);
+    private Color castRay(int j, int i) {
+        Ray ray = this.constructRay(imw.getNx(), imw.getNy(), j, i);
         return rtb.traceRay(ray);
     }
 
@@ -167,11 +144,11 @@ public class Camera {
      * This function helps us to prints a grid
      *
      * @param interval the interval between grid line
-     * @param color the color of the grid line
+     * @param color    the color of the grid line
      */
     void printGrid(int interval, Color color) {
-        if(this.imw == null)
-            throw new MissingResourceException("Missing resource",imw.getClass().getName()," ");
+        if (this.imw == null)
+            throw new MissingResourceException("Missing resource", "ImageWriter", " ");
         int nX = imw.getNx();
         int nY = imw.getNy();
         for (int i = 0; i < nY; i++)
@@ -183,11 +160,10 @@ public class Camera {
     /**
      * Write the current image to the image file
      */
-    public void writeToImage(){
-        if (imw==null)throw new MissingResourceException("Missing ressource",Point.class.getName(),"");
+    public void writeToImage() {
+        if (imw == null) throw new MissingResourceException("Missing ressource", Point.class.getName(), "");
         imw.writeToImage();
     }
-
 
 
 }
