@@ -65,10 +65,26 @@ public class Sphere extends Geometry {
         double t1 = alignZero(tm -th);
         return t1 <= 0 ? List.of(ray.getPoint(t2)) : List.of(ray.getPoint(t1), ray.getPoint(t2));
     }
-
     @Override
     protected List<GeoPoint> findGeoIntersectionHelper(Ray ray) {
+        Vector u;
+        try { //when P0 and the center are the same point
+            u = this.center.subtract(ray.getP0());
+        } catch (IllegalArgumentException ex) {
+            return  List.of(new GeoPoint(this, ray.getPoint(this.radius)));
+        }
 
+        double tm = u.dotProduct(ray.getDir());
+        double d2 = u.lengthSquared() - tm * tm;
+        double th2 = radius2 - d2;
+        if (alignZero(th2) <= 0) return null;
+
+        double th = Math.sqrt(th2);
+        double t2 = alignZero(tm + th);// double t2 = alignZero(tm + th2);
+        if (t2 <= 0) return null;
+
+        double t1 = alignZero(tm -th);
+        return t1 <= 0 ? List.of(new GeoPoint(this, ray.getPoint(t2))) : List.of(new GeoPoint(this, ray.getPoint(t1)),new GeoPoint(this, ray.getPoint(t2)));
     }
 
     @Override

@@ -64,7 +64,7 @@ public class RenderTests {
 		Scene scene = new Scene("XML Test scene");
 		// enter XML file name and parse from XML file into scene object
 		// ...
-		scene=xmlParse();
+		scene=scene.xmlParse();
 		Camera camera = new Camera(new Point(0,0,0), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
 				.setVPDistance(100) //
 				.setVPSize(500, 500)
