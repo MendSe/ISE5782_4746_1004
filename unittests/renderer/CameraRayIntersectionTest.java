@@ -26,12 +26,16 @@ public class CameraRayIntersectionTest {
         camera.setVPSize(3, 3);
         camera.setVPDistance(1);
         int number = 0;
+        List<Point> intersections = null;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 List<Point> inter = o.findIntsersections(camera.constructRay(3, 3, j, i));
                 if (inter != null)
                     number += inter.size();
             }
+        }
+        if (intersections != null) {
+            number = intersections.size();
         }
         assertEquals(expect, number, "Bad number of intersection points");
     }

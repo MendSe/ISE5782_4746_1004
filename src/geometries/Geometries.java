@@ -31,10 +31,10 @@ public class Geometries extends Intersectable {
     }
 
     @Override
-    public List<Point> findIntsersections(Ray ray) {
+    public List<Point> findIntersections(Ray ray) {
         List<Point> intersections = null;
         for (Intersectable item : intersectableList) {
-            List<Point> current = item.findIntsersections(ray);
+            List<Point> current = item.findIntersections(ray);
             if (current != null) {
                 if (intersections == null)
                     intersections = new LinkedList<>(current);

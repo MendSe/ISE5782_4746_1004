@@ -30,7 +30,7 @@ class SphereTest {
         //TC01: Ray intersect sphere in 2 points
         Point p1 = new Point(0.267949192431122, -1, 0);
         Point p2 = new Point(3.732050807568877, -1, 0);
-        List<Point> result = sp.findIntsersections(new Ray(new Point(0, -1, 0), new Vector(4, 0, 0)));
+        List<Point> result = sp.findIntersections(new Ray(new Point(0, -1, 0), new Vector(4, 0, 0)));
         assertEquals(2, result.size(), "Wrong number of points");
         if (result.get(0).getX() > result.get(1).getX())
             result = List.of(result.get(1), result.get(0));
@@ -38,24 +38,24 @@ class SphereTest {
 
         //TC02: Ray in Sphere
         p1 = new Point(3.732050807568877, -1, 0);
-        result = sp.findIntsersections(new Ray(new Point(1, -1, 0), new Vector(3, 0, 0)));
+        result = sp.findIntersections(new Ray(new Point(1, -1, 0), new Vector(3, 0, 0)));
         assertEquals(1, result.size(), "Wrong number of points");
         assertEquals(List.of(p1), result, "Bad intersections when ray is in the sphere and intersects the Sphere");
 
         //TC03: Ray, only tail intersect
-        assertNull(sp.findIntsersections(new Ray(new Point(4, -1, 0), new Vector(3, 0, 0))), "Bad intersections when ray doesn't intersect the sphere but his tail would intersect it ");
+        assertNull(sp.findIntersections(new Ray(new Point(4, -1, 0), new Vector(3, 0, 0))), "Bad intersections when ray doesn't intersect the sphere but his tail would intersect it ");
 
         //TC04: Ray and tail no intersections
-        assertNull(sp.findIntsersections(new Ray(new Point(0, -3, 0), new Vector(3, 0, 0))), "Bad intersections when nor ray nor his tail intersects the sphere ");
+        assertNull(sp.findIntersections(new Ray(new Point(0, -3, 0), new Vector(3, 0, 0))), "Bad intersections when nor ray nor his tail intersects the sphere ");
 
 
         // =============== Boundary Values Tests ==================
         // **** Group: Ray's line crosses the sphere (but not the center)
         //TC05: P0 on the Sphere and Ray out of it
-        assertNull(sp.findIntsersections(new Ray(new Point(0, 0, 0), new Vector(-1, -1, 0))), "Bad intersections when P0 on the Sphere and ray out of it ");
+        assertNull(sp.findIntersections(new Ray(new Point(0, 0, 0), new Vector(-1, -1, 0))), "Bad intersections when P0 on the Sphere and ray out of it ");
 
         //TC06: P0 on the Sphere and Ray intersect the sphere in
-        result = sp.findIntsersections(new Ray(new Point(0.267949192431122, -1, 0), new Vector(4, 0, 0)));
+        result = sp.findIntersections(new Ray(new Point(0.267949192431122, -1, 0), new Vector(4, 0, 0)));
         p1 = new Point(3.732050807568877, -1, 0);
         assertEquals(1, result.size(), "Wrong number of points");
         assertEquals(result, List.of(p1), "Bad intersections when P0 is on the sphere and Ray intersects the Sphere ");
@@ -63,35 +63,35 @@ class SphereTest {
         // **** Group: Ray's line is tangent to the sphere
         //TC07: Ray tangent to sphere
 
-        assertNull(sp.findIntsersections(new Ray(new Point(0, -2, 0), new Vector(4, 0, 0))), "Bad intersection when the Ray is tangent to the sphere");
+        assertNull(sp.findIntersections(new Ray(new Point(0, -2, 0), new Vector(4, 0, 0))), "Bad intersection when the Ray is tangent to the sphere");
 
         //TC08: P0 on Sphere Ray tangent to sphere
-        assertNull(sp.findIntsersections(new Ray(new Point(2, -2, 0), new Vector(4, 0, 0))), "Bad intersection when P0 on the sphere and the Ray is tangent to it");
+        assertNull(sp.findIntersections(new Ray(new Point(2, -2, 0), new Vector(4, 0, 0))), "Bad intersection when P0 on the sphere and the Ray is tangent to it");
 
         //TC09: tail tangent to the sphere
-        assertNull(sp.findIntsersections(new Ray(new Point(3, -2, 0), new Vector(4, 0, 0))), "Bad intersection when tail of the Ray is tangent to the sphere");
+        assertNull(sp.findIntersections(new Ray(new Point(3, -2, 0), new Vector(4, 0, 0))), "Bad intersection when tail of the Ray is tangent to the sphere");
 
         // **** Group: Ray's line goes through the center
         //TC10: P0 on the sphere and the tail intersect with the center
-        assertNull(sp.findIntsersections(new Ray(new Point(0, 0, 0), new Vector(-4, 0, 0))), "Bad intersection when P0 is on the sphere and the tail intersect the center");
+        assertNull(sp.findIntersections(new Ray(new Point(0, 0, 0), new Vector(-4, 0, 0))), "Bad intersection when P0 is on the sphere and the tail intersect the center");
 
         //TC11: P0 and the center are the same point
-        result = sp.findIntsersections(new Ray(new Point(2, 0, 0), new Vector(4, 0, 0)));
+        result = sp.findIntersections(new Ray(new Point(2, 0, 0), new Vector(4, 0, 0)));
         p1 = new Point(4, 0, 0);
         assertEquals(1, result.size(), "Wrong number of points");
         assertEquals(result, List.of(p1), "Bad intersection when P0 and the center are the same point");
 
         //TC12: Ray starts after the sphere and his tail intersect the center
-        assertNull(sp.findIntsersections(new Ray(new Point(5, 0, 0), new Vector(1, 0, 0))), "Bad intersection when the ray starts after the sphere and his tail intersect the center");
+        assertNull(sp.findIntersections(new Ray(new Point(5, 0, 0), new Vector(1, 0, 0))), "Bad intersection when the ray starts after the sphere and his tail intersect the center");
 
         //TC13: P0 on the sphere and ray goes through the center
-        result = sp.findIntsersections(new Ray(new Point(0, 0, 0), new Vector(5, 0, 0)));
+        result = sp.findIntersections(new Ray(new Point(0, 0, 0), new Vector(5, 0, 0)));
         p1 = new Point(4, 0, 0);
         assertEquals(1, result.size(), "Wrong number of points");
         assertEquals(result, List.of(p1), "Bad intersection when P0 is on the sphere and the ray goes through the center");
 
         //TC14: Ray start in the sphere and his tail intersect the center
-        result = sp.findIntsersections(new Ray(new Point(3, 0, 0), new Vector(4, 0, 0)));
+        result = sp.findIntersections(new Ray(new Point(3, 0, 0), new Vector(4, 0, 0)));
         p1 = new Point(4, 0, 0);
         assertEquals(1, result.size(), "Wrong number of points");
         assertEquals(result, List.of(p1), "Bad intersection when P0 is on the sphere and the ray goes through the center");
@@ -99,7 +99,7 @@ class SphereTest {
         //TC15: Ray start before the sphere and intersect it passing through the center
         p1 = new Point(0, 0, 0);
         p2 = new Point(4, 0, 0);
-        result = sp.findIntsersections(new Ray(new Point(-1, 0, 0), new Vector(6, 0, 0)));
+        result = sp.findIntersections(new Ray(new Point(-1, 0, 0), new Vector(6, 0, 0)));
         assertEquals(2, result.size(), "Wrong number of points");
         if (result.get(0).getX() > result.get(1).getX())
             result = List.of(result.get(1), result.get(0));
@@ -107,6 +107,6 @@ class SphereTest {
 
         // **** Group: Special cases
         //TC16: Ray outside the sphere and perpendicular to it center
-        assertNull(sp.findIntsersections(new Ray(new Point(2, -5, 0), new Vector(1, 0, 0))), "Bad intersection when the ray starts outside the sphere and perpendicular to his center");
+        assertNull(sp.findIntersections(new Ray(new Point(2, -5, 0), new Vector(1, 0, 0))), "Bad intersection when the ray starts outside the sphere and perpendicular to his center");
     }
 }

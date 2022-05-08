@@ -45,7 +45,7 @@ public class Sphere extends Geometry {
     }
 
     @Override
-    public List<Point> findIntsersections(Ray ray) {
+    public List<Point> findIntersections(Ray ray) {
         Vector u;
         try { //when P0 and the center are the same point
             u = this.center.subtract(ray.getP0());
@@ -59,7 +59,7 @@ public class Sphere extends Geometry {
         if (alignZero(th2) <= 0) return null;
 
         double th = Math.sqrt(th2);
-        double t2 = alignZero(tm + th2);
+        double t2 = alignZero(tm + th);// double t2 = alignZero(tm + th2);
         if (t2 <= 0) return null;
 
         double t1 = alignZero(tm -th);
