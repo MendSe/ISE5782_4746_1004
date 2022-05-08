@@ -30,7 +30,7 @@ public class Geometries extends Intersectable {
         if (geometries.length != 0) this.intersectableList.addAll(List.of(geometries));
     }
 
-    @Override
+   @Override
     public List<Point> findIntersections(Ray ray) {
         List<Point> intersections = null;
         for (Intersectable item : intersectableList) {

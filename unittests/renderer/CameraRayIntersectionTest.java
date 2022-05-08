@@ -29,7 +29,7 @@ public class CameraRayIntersectionTest {
         List<Point> intersections = null;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                List<Point> inter = o.findIntsersections(camera.constructRay(3, 3, j, i));
+                List<Point> inter = o.findIntersections(camera.constructRay(3, 3, j, i));
                 if (inter != null)
                     number += inter.size();
             }

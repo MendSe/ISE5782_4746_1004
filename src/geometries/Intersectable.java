@@ -47,7 +47,7 @@ public abstract class Intersectable {
      * @param ray the ray which intersect the object
      * @return list of intersection points
      */
-    public abstract List<Point> findIntsersections(Ray ray);
+    public abstract List<Point> findIntersections(Ray ray);
 
     public List<GeoPoint> findGeoIntersections(Ray ray)
     {
