@@ -13,6 +13,10 @@ import org.xml.sax.SAXException;
 import primitives.Color;
 import primitives.Double3;
 import primitives.Point;
+import lighting.*;
+
+import java.util.LinkedList;
+import java.util.List;
 
 
 import javax.xml.parsers.DocumentBuilder;
@@ -31,6 +35,7 @@ public class Scene {
     public Color background = Color.BLACK;
     public AmbientLight ambientLight = new AmbientLight();
     public Geometries geometries = new Geometries();
+    public List<LightSource> lights = new LinkedList<LightSource>();
 
     /**
      * constructor
@@ -79,6 +84,16 @@ public class Scene {
             return this;
         }
 
+        /**
+         * setter for lights
+         *
+         * @param lights
+         * @return the scene builder
+         */
+        public Builder setLights(List<LightSource> lights) {
+            scene.lights = lights;
+            return this;
+        }
         /**
          * build and return the scene
          *
