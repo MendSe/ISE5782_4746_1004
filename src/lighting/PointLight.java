@@ -3,9 +3,19 @@ import primitives.*;
 
 public class PointLight extends Light implements LightSource{
     private Point position;
-    private double kC;
-    private double kL;
-    private double kQ;
+    private double kC = 1d;
+    private double kL = 0d;
+    private double kQ = 0d;
+
+    public PointLight(Color intensity, Point position) {
+        super(intensity);
+        this.position = position;
+    }
+
+    @Override
+    public Vector getL(Point p) {
+        return p.subtract(this.position).normalize();
+    }
 
     @Override
     public Color getIntensity(Point p) {
