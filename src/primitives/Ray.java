@@ -66,19 +66,11 @@ public class Ray {
                 '}';
     }
 
-    public Point findClosestPoint(List<Point> lp) {
-        if(lp == null)
-            return null;
-        double mindist = 100000000;
-        Point help = null;
-        for (Point p : lp) {
-            if (mindist > p.distance(p0)) {
-                mindist = p.distance(p0);
-                help = p;
-            }
-        }
-        return help;
+    public Point findClosestPoint(List<Point> points) {
+        return points == null || points.isEmpty() ? null
+                : findClosestGeoPoint(points.stream().map(p -> new GeoPoint(null, p)).toList()).point;
     }
+
 
     public GeoPoint findClosestGeoPoint(List<GeoPoint> geoPoints)
     {

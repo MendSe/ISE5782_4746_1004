@@ -71,25 +71,6 @@ public class Plane extends Geometry {
 
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        Vector u;
-        try {
-            u = q0.subtract(ray.getP0());
-        } catch (IllegalArgumentException ignore) {
-            return null;
-        }
-
-        double nv = normal.dotProduct(ray.getDir());//checks if the ray is parallel to the plane
-        if (isZero(nv)) {
-            return null;
-        }
-
-        //Checks if the ray starts on the plane
-        double t = alignZero(normal.dotProduct(u) / nv);
-        return t > 0 ? List.of(ray.getPoint(t)) : null;
-    }
-
-    @Override
     protected List<GeoPoint> findGeoIntersectionHelper(Ray ray) {
         Vector u;
         try {

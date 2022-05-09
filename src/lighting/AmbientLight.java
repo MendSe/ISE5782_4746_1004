@@ -6,8 +6,7 @@ import primitives.Double3;
 /**
  * AmbientLight class responsible for the intensity of the light
  */
-public class AmbientLight {
-    final private Color intensity;
+public class AmbientLight extends Light {
 
     /**
      * Constructs ambient light with initial intensity and attenuation factor
@@ -16,22 +15,13 @@ public class AmbientLight {
      * @param kA attenuation factor
      */
     public AmbientLight(Color iA, Double3 kA) {
-        intensity = iA.scale(kA);
+        super(iA.scale(kA));
     }
 
     /**
      * Constructs ambient light for complete darkness
      */
     public AmbientLight() {
-        intensity = Color.BLACK;
-    }
-
-    /**
-     * getter for intensity
-     *
-     * @return intensity
-     */
-    public Color getIntensity() {
-        return intensity;
+        super(Color.BLACK);
     }
 }

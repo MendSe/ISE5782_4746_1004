@@ -3,6 +3,7 @@ package geometries;
 import primitives.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Interface that implements the function findIntersection for intersections between rays and geometric objects
@@ -47,7 +48,12 @@ public abstract class Intersectable {
      * @param ray the ray which intersect the object
      * @return list of intersection points
      */
-    public abstract List<Point> findIntersections(Ray ray);
+    public List<Point> findIntersections(Ray ray) {
+        var geoList = findGeoIntersections(ray);
+        return geoList == null ? null
+                : geoList.stream().map(gp -> gp.point).collect(Collectors.toList());
+    }
+
 
     public List<GeoPoint> findGeoIntersections(Ray ray)
     {

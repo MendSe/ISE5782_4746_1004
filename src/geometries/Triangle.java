@@ -22,32 +22,6 @@ public class Triangle extends Polygon {
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        var intersections = plane.findIntersections(ray);
-        if (intersections == null)
-            return null;
-
-        Point p0 = ray.getP0();
-        Vector v1 = vertices.get(0).subtract(p0);
-        Vector v2 = vertices.get(1).subtract(p0);
-        Vector v3 = vertices.get(2).subtract(p0);
-
-        Vector n1 = v1.crossProduct(v2).normalize();
-        Vector n2 = v2.crossProduct(v3).normalize();
-        Vector n3 = v3.crossProduct(v1).normalize();
-
-        Vector vd = ray.getDir();
-        double num1 = alignZero(vd.dotProduct(n1));
-        if (num1 == 0) return null;
-        double num2 = alignZero(vd.dotProduct(n2));
-        if (num1 * num2 <= 0) return null;
-        double num3 = alignZero(vd.dotProduct(n3));
-        if (num1 * num3 <= 0) return null;
-
-        return intersections;
-    }
-
-    @Override
     protected List<GeoPoint> findGeoIntersectionHelper(Ray ray) {
         var intersections = plane.findGeoIntersectionHelper(ray);
         if(intersections == null) return null;
@@ -69,6 +43,7 @@ public class Triangle extends Polygon {
         double num3 = alignZero(vd.dotProduct(n3));
         if (num1 * num3 <= 0) return null;
 
+        intersections.get(0).geometry = this;//
         return intersections;
     }
 
