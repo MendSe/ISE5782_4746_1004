@@ -5,9 +5,10 @@ import primitives.*;
 /**
  * Interface for the different geometry forms that implements function getNormal
  */
-public abstract class Geometry extends Intersectable{
+public abstract class Geometry extends Intersectable {
 
     protected Color emission = Color.BLACK;
+    private Material material = new Material();
 
     /**
      * Function of that calculates the normal of the used object at a point on the object
@@ -22,17 +23,23 @@ public abstract class Geometry extends Intersectable{
      *
      * @return The color of the light emitted by the object.
      */
-    public Color getEmission()
-    {
+    public Color getEmission() {
         return emission;
     }
 
-    public Geometry setEmission(Color Emission)
-    {
+    public Geometry setEmission(Color Emission) {
         emission = Emission;
         return this;
     }
 
+    public Material getMaterial() {
+        return this.material;
+    }
+
+    public Geometry setMaterial(Material material) {
+        this.material = material;
+        return this;
+    }
 
 
 }
