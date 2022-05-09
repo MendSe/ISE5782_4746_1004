@@ -23,17 +23,17 @@ public class PointLight extends Light implements LightSource{
         return this.getIntensity().reduce(this.kC + this.kL * d + this.kQ * d * d);
     }
 
-    public PointLight setkC(double c) {
+    public PointLight setKc(double c) {
         kC = c;
         return this;
     }
 
-    public PointLight setkL(double L) {
+    public PointLight setKl(double L) {
         kL = L;
         return this;
     }
 
-    public PointLight setkQ(double Q) {
+    public PointLight setKq(double Q) {
         kQ = Q;
         return this;
     }
