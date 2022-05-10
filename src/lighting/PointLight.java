@@ -1,12 +1,21 @@
 package lighting;
 import primitives.*;
 
+/**
+ * Light with a position.
+ */
 public class PointLight extends Light implements LightSource{
     private Point position;
     private double kC = 1d;
     private double kL = 0d;
     private double kQ = 0d;
 
+    /**
+     * Constructs a pointlight with an intensity and a position
+     *
+     * @param intensity intensity of the pointlight
+     * @param position position of the pointlight
+     */
     public PointLight(Color intensity, Point position) {
         super(intensity);
         this.position = position;
@@ -23,18 +32,36 @@ public class PointLight extends Light implements LightSource{
         return this.getIntensity().reduce(this.kC + this.kL * d + this.kQ * d * d);
     }
 
+    /**
+     * This function helps us to set the new value of the kC field
+     *
+     * @param c new value of kC
+     * @return the current point light
+     */
     public PointLight setKc(double c) {
-        kC = c;
+        this.kC = c;
         return this;
     }
 
+    /**
+     * This function helps us to set the new value of the kL field
+     *
+     * @param L new value of kL
+     * @return the current point light
+     */
     public PointLight setKl(double L) {
-        kL = L;
+        this.kL = L;
         return this;
     }
 
+    /**
+     * This function helps us to set the new value of the kQ field
+     *
+     * @param Q new value of kQ
+     * @return the current point light
+     */
     public PointLight setKq(double Q) {
-        kQ = Q;
+        this.kQ = Q;
         return this;
     }
 }

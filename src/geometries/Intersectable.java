@@ -6,17 +6,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Interface that implements the function findIntersection for intersections between rays and geometric objects
+ * Abstract class that contains the function findIntersection for intersections between rays and geometric objects as well as
+ * the GeoPoint class
  */
 public abstract class Intersectable {
 
     /**
-     * > A GeoPoint is a Geometry that is a Point
+     * A pair of point and its geometry
      */
     public static class GeoPoint{
         public Geometry geometry;
         public Point point;
 
+        /**
+         * Constructor of the GeoPoint class
+         *
+         * @param geometry the geometry used
+         * @param point a point in the geometry used
+         */
         public GeoPoint(Geometry geometry,Point point) {
             this.geometry = geometry;
             this.point = point;
@@ -55,10 +62,22 @@ public abstract class Intersectable {
     }
 
 
+    /**
+     * > This function returns a list of all the points where the ray intersects the surface of the sphere
+     *
+     * @param ray The ray to intersect with the object
+     * @return A list of GeoPoints.
+     */
     public List<GeoPoint> findGeoIntersections(Ray ray)
     {
         return findGeoIntersectionHelper(ray);
     }
 
+    /**
+     * This function is here to help the findGeoIntersections function to find the list of GeoPoint intersections
+     *
+     * @param ray The ray to intersect with the object
+     * @return A list of GeoPoints.
+     */
     protected abstract List<GeoPoint> findGeoIntersectionHelper(Ray ray);
 }

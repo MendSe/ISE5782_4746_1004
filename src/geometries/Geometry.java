@@ -3,7 +3,7 @@ package geometries;
 import primitives.*;
 
 /**
- * Interface for the different geometry forms that implements function getNormal
+ * Abstract class for the different geometry forms that implements function getNormal
  */
 public abstract class Geometry extends Intersectable {
 
@@ -27,15 +27,33 @@ public abstract class Geometry extends Intersectable {
         return emission;
     }
 
+    /**
+     * This function sets the emission of the geometry to the given color.
+     *
+     * @param Emission The color of the light emitted by the object.
+     * @return The Geometry object itself.
+     */
     public Geometry setEmission(Color Emission) {
         emission = Emission;
         return this;
+
     }
 
+    /**
+     * This function helps us to get the material of the geometry
+     *
+     * @return the material used in the geometry
+     */
     public Material getMaterial() {
         return this.material;
     }
 
+    /**
+     * This function sets the material of the geometry and returns the geometry.
+     *
+     * @param material The material to use for the geometry.
+     * @return The Geometry object itself.
+     */
     public Geometry setMaterial(Material material) {
         this.material = material;
         return this;
