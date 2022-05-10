@@ -4,41 +4,48 @@ import lighting.LightSource;
 import scene.Scene;
 import primitives.*;
 import geometries.Intersectable.GeoPoint;
+
 import java.util.List;
 
 import static primitives.Util.alignZero;
 
 /**
- * Thus class inherits from the RayTracerBase class and helps us to create a color from a base point
+ * This class inherits from the RayTracerBase class and helps us to create a color from a base point
  */
-public class RayTracerBasic extends RayTracerBase{
+public class RayTracerBasic extends RayTracerBase {
 
     /**
      * Constructor of the class that calls the constructor of the father
+     *
      * @param sce scene params
      */
-    public RayTracerBasic(Scene sce)
-    {
+    public RayTracerBasic(Scene sce) {
         super(sce);
     }
 
     @Override
-    public Color traceRay(Ray ray)
-    {
+    public Color traceRay(Ray ray) {
         List<GeoPoint> inters = scene.geometries.findGeoIntersections(ray);
-        return inters == null ? scene.background : calcColor(ray.findClosestGeoPoint(inters),ray);
+        return inters == null ? scene.background : calcColor(ray.findClosestGeoPoint(inters), ray);
     }
 
     /**
      * This function returns a color from a given point
+     *
      * @param p point
      * @return the color of the ambient light of the scene
      */
-    private Color calcColor(GeoPoint p,Ray ray)
-    {
-        return scene.ambientLight.getIntensity().add(p.geometry.getEmission(),calcLocalEffects(p,ray));
+    private Color calcColor(GeoPoint p, Ray ray) {
+        return scene.ambientLight.getIntensity().add(p.geometry.getEmission(), calcLocalEffects(p, ray));
     }
 
+    /**
+     * It calculates the color of a point on a geometry, by calculating the color of the light sources that affect it
+     *
+     * @param geoPoint The point on the geometry that the ray intersects with.
+     * @param ray      the ray that intersects the geometry
+     * @return The color of the point.
+     */
     private Color calcLocalEffects(GeoPoint geoPoint, Ray ray) {
         Vector v = ray.getDir();
         Vector n = geoPoint.geometry.getNormal(geoPoint.point);
@@ -46,7 +53,7 @@ public class RayTracerBasic extends RayTracerBase{
         if (nv == 0) return Color.BLACK;
         Material material = geoPoint.geometry.getMaterial();
         Color color = Color.BLACK;
-        for (LightSource lightSource: scene.lights) {
+        for (LightSource lightSource : scene.lights) {
             Vector l = lightSource.getL(geoPoint.point);
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl) == sing(nv)
@@ -58,6 +65,15 @@ public class RayTracerBasic extends RayTracerBase{
         return color;
     }
 
+    /**
+     * "Calculate the diffusive component of the light intensity at a point on a surface."
+     *
+     * @param kD        The diffuse coefficient of the material.
+     * @param l         the vector from the point on the surface to the light source
+     * @param n         the normal vector of the surface
+     * @param intensity the color of the light source
+     * @return The color of the diffuse reflection.
+     */
     private Color calcDiffusive(Double3 kD, Vector l, Vector n, Color intensity) {
         return intensity.scale(kD.scale(Math.abs(l.dotProduct(n))));
     }
@@ -66,12 +82,12 @@ public class RayTracerBasic extends RayTracerBase{
      * The specular component is the product of the intensity of the light source and the specular coefficient of the
      * material, raised to the power of the shininess of the material
      *
-     * @param kS The specular coefficient.
-     * @param l the vector from the point to the light source
-     * @param n normal vector
-     * @param v the vector from the point to the camera
+     * @param kS         The specular coefficient.
+     * @param l          the vector from the point to the light source
+     * @param n          normal vector
+     * @param v          the vector from the point to the camera
      * @param nShininess The shininess of the material.
-     * @param intensity the color of the light source
+     * @param intensity  the color of the light source
      * @return The color of the point on the surface of the sphere.
      */
     private Color calcSpecular(Double3 kS, Vector l, Vector n, Vector v, int nShininess, Color intensity) {

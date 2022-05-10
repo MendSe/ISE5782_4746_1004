@@ -3,6 +3,7 @@ package primitives;
 import java.util.List;
 
 import static primitives.Util.*;
+
 import geometries.Intersectable.GeoPoint;
 
 /**
@@ -66,22 +67,33 @@ public class Ray {
                 '}';
     }
 
+    /**
+     * If the list of points is null or empty, return null, otherwise return the closest point in the list.
+     *
+     * @param points A list of points to find the closest point to.
+     * @return A point
+     */
     public Point findClosestPoint(List<Point> points) {
         return points == null || points.isEmpty() ? null
                 : findClosestGeoPoint(points.stream().map(p -> new GeoPoint(null, p)).toList()).point;
     }
 
 
-    public GeoPoint findClosestGeoPoint(List<GeoPoint> geoPoints)
-    {
-        if(geoPoints == null) return null;
+    /**
+     * Find the closest GeoPoint to the current GeoPoint
+     *
+     * @param geoPoints A list of GeoPoints to search through.
+     * @return The closest GeoPoint to the point p0.
+     */
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> geoPoints) {
+        if (geoPoints == null) return null;
 
-        GeoPoint closest =  null;
+        GeoPoint closest = null;
         double closestDistSqu = Double.MAX_VALUE;
 
-        for(GeoPoint geo : geoPoints) {
+        for (GeoPoint geo : geoPoints) {
             double distanceSqu = geo.point.distanceSquared(p0);
-            if(distanceSqu<closestDistSqu){
+            if (distanceSqu < closestDistSqu) {
                 closestDistSqu = distanceSqu;
                 closest = geo;
             }
