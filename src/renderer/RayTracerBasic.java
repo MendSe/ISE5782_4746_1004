@@ -36,7 +36,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @return the color of the ambient light of the scene
      */
     private Color calcColor(GeoPoint p, Ray ray) {
-        return scene.ambientLight.getIntensity().add(p.geometry.getEmission(), calcLocalEffects(p, ray));
+        return scene.ambientLight.getIntensity().add(calcLocalEffects(p, ray));
     }
 
     /**
@@ -49,10 +49,10 @@ public class RayTracerBasic extends RayTracerBase {
     private Color calcLocalEffects(GeoPoint geoPoint, Ray ray) {
         Vector v = ray.getDir();
         Vector n = geoPoint.geometry.getNormal(geoPoint.point);
+        Color color = geoPoint.geometry.getEmission();
         double nv = alignZero(n.dotProduct(v));
-        if (nv == 0) return Color.BLACK;
+        if (nv == 0) return color;
         Material material = geoPoint.geometry.getMaterial();
-        Color color = Color.BLACK;
         for (LightSource lightSource : scene.lights) {
             Vector l = lightSource.getL(geoPoint.point);
             double nl = alignZero(n.dotProduct(l));
@@ -92,7 +92,8 @@ public class RayTracerBasic extends RayTracerBase {
      */
     private Color calcSpecular(Double3 kS, Vector l, Vector n, Vector v, int nShininess, Color intensity) {
         Vector r = l.subtract(n.scale(2 * (l.dotProduct(n))));
-        return intensity.scale(kS.scale(Math.pow(Math.max(v.scale(-1).dotProduct(r), 0), nShininess)));
+        double vr = alignZero(v.dotProduct(r));
+        return vr >= 0 ? Color.BLACK : intensity.scale(kS.scale(Math.pow(-vr, nShininess)));
     }
 
 }

@@ -1,13 +1,12 @@
 package lighting;
 
-import com.sun.jdi.connect.Transport;
 import primitives.*;
 
 /**
  * Spotlight at a position.
  */
 public class SpotLight extends PointLight {
-    private Vector direction;
+    private final Vector direction;
     private int narrowBeam = 1;
 
 
@@ -34,17 +33,11 @@ public class SpotLight extends PointLight {
         return this;
     }
 
-
     @Override
     public Color getIntensity(Point p) {
         double dl = Util.alignZero(getL(p).dotProduct(this.direction));
         if (dl <= 0) return Color.BLACK;
         if(this.narrowBeam != 1)  dl = Math.pow(dl, this.narrowBeam);
         return super.getIntensity(p).scale(dl);
-    }
-
-    @Override
-    public Vector getL(Point p) {
-        return super.getL(p);
     }
 }

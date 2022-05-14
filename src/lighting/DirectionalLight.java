@@ -5,7 +5,7 @@ import primitives.*;
  * A directional light is a light source that has a direction but no position
  */
 public class DirectionalLight extends Light implements LightSource {
-    private Vector direction;
+    private final Vector direction;
 
     /**
      * The constructor of the class. It is called when we create a new object of the class.
@@ -20,7 +20,7 @@ public class DirectionalLight extends Light implements LightSource {
 
     @Override
     public Color getIntensity(Point p) {
-        return this.getIntensity();
+        return intensity;
     }
 
     @Override

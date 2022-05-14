@@ -3,7 +3,6 @@ package geometries;
 import primitives.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Abstract class that contains the function findIntersection for intersections between rays and geometric objects as well as
@@ -33,9 +32,8 @@ public abstract class Intersectable {
         public boolean equals(Object o)
         {
             if(this == o) return true;
-            if(!(o instanceof GeoPoint)) return false;
-            GeoPoint geop = (GeoPoint) o;
-            return geometry.equals(geop.geometry) && point.equals(geop.point);
+            if(!(o instanceof GeoPoint geoPoint)) return false;
+            return geometry == geoPoint.geometry && point.equals(geoPoint.point);
         }
 
         @Override
@@ -45,10 +43,7 @@ public abstract class Intersectable {
                     ", point=" + point +
                     '}';
         }
-
-
     }
-
 
     /**
      * function to calculate the intersection points between a ray and the geometric object
@@ -58,9 +53,8 @@ public abstract class Intersectable {
     public List<Point> findIntersections(Ray ray) {
         var geoList = findGeoIntersections(ray);
         return geoList == null ? null
-                : geoList.stream().map(gp -> gp.point).collect(Collectors.toList());
+                : geoList.stream().map(gp -> gp.point).toList();
     }
-
 
     /**
      * > This function returns a list of all the points where the ray intersects the surface of the sphere

@@ -1,7 +1,6 @@
 package geometries;
 
-import primitives.Point;
-import primitives.Ray;
+import primitives.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +38,8 @@ public class Geometries extends Intersectable {
             if(current != null){
                 if(intersections == null)
                     intersections = new LinkedList<>(current);
-                else intersections.addAll(current);
+                else
+                    intersections.addAll(current);
             }
         }
 

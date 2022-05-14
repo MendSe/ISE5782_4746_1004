@@ -89,7 +89,7 @@ public class Ray {
         if (geoPoints == null) return null;
 
         GeoPoint closest = null;
-        double closestDistSqu = Double.MAX_VALUE;
+        double closestDistSqu = Double.POSITIVE_INFINITY;
 
         for (GeoPoint geo : geoPoints) {
             double distanceSqu = geo.point.distanceSquared(p0);

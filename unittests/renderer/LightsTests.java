@@ -179,7 +179,6 @@ public class LightsTests {
      camera1.writeToImage(); //
      }
 
-
       //Produce a picture of a two triangles lighted by a narrow spot light
 
      @Test public void trianglesSpotSharp() {
