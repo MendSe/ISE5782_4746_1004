@@ -1,5 +1,6 @@
 package renderer;
 
+import geometries.Triangle;
 import lighting.LightSource;
 import scene.Scene;
 import primitives.*;
@@ -13,6 +14,8 @@ import static primitives.Util.alignZero;
  * This class inherits from the RayTracerBase class and helps us to create a color from a base point
  */
 public class RayTracerBasic extends RayTracerBase {
+
+    private static final double DELTA = 0.1;
 
     /**
      * Constructor of the class that calls the constructor of the father
@@ -57,9 +60,11 @@ public class RayTracerBasic extends RayTracerBase {
             Vector l = lightSource.getL(geoPoint.point);
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl) == sing(nv)
-                Color intensity = lightSource.getIntensity(geoPoint.point);
-                color = color.add(calcDiffusive(material.kD, l, n, intensity),
-                        calcSpecular(material.kS, l, n, v, material.nShininess, intensity));
+                if (unshaded(lightSource,geoPoint, l, n, nv)) {
+                    Color intensity = lightSource.getIntensity(geoPoint.point);
+                    color = color.add(calcDiffusive(material.kD, l, n, intensity),
+                            calcSpecular(material.kS, l, n, v, material.nShininess, intensity));
+                }
             }
         }
         return color;
@@ -94,6 +99,15 @@ public class RayTracerBasic extends RayTracerBase {
         Vector r = l.subtract(n.scale(2 * (l.dotProduct(n))));
         double vr = alignZero(v.dotProduct(r));
         return vr >= 0 ? Color.BLACK : intensity.scale(kS.scale(Math.pow(-vr, nShininess)));
+    }
+
+    private boolean unshaded(LightSource light, GeoPoint gp, Vector l, Vector n, double nv) {
+        Vector lightDirection = l.scale(-1);
+        Vector epsVector = n.scale(nv < 0 ? DELTA : -DELTA);
+        Ray lightRay = new Ray(gp.point.add(epsVector), lightDirection);
+
+        List<GeoPoint> intersections = this.scene.geometries.findGeoIntersections(lightRay,light.getDistance(gp.point));
+        return intersections == null;
     }
 
 }

@@ -64,8 +64,15 @@ public abstract class Intersectable {
      */
     public List<GeoPoint> findGeoIntersections(Ray ray)
     {
-        return findGeoIntersectionHelper(ray);
+        return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
     }
+
+    public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+        return findGeoIntersectionsHelper(ray, maxDistance);
+    }
+
+    protected abstract List<GeoPoint>
+    findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
     /**
      * This function is here to help the findGeoIntersections function to find the list of GeoPoint intersections
@@ -73,5 +80,6 @@ public abstract class Intersectable {
      * @param ray The ray to intersect with the object
      * @return A list of GeoPoints.
      */
-    protected abstract List<GeoPoint> findGeoIntersectionHelper(Ray ray);
+
+
 }

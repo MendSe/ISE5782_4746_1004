@@ -24,4 +24,6 @@ public class AmbientLight extends Light {
     public AmbientLight() {
         super(Color.BLACK);
     }
+
+
 }

@@ -44,7 +44,7 @@ public class Tube extends Geometry {
     }
 
     @Override
-    protected List<GeoPoint> findGeoIntersectionHelper(Ray ray) {
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray,double maxDistance) {
         return null;
     }
 
