@@ -5,9 +5,9 @@ package primitives;
  */
 public class Material {
 
-    public Double3 kD = Double3.ZERO;
-    public Double3 kS = Double3.ZERO;
-    public int nShininess = 0;
+    public Double3 kD = Double3.ZERO; //diffuse reflection coefficient
+    public Double3 kS = Double3.ZERO; // specular reflection coefficient
+    public int nShininess = 0; // shininess coefficient of the material
 
     /**
      * Set the diffuse color of the material to the given color.

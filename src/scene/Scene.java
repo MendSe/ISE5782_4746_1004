@@ -26,11 +26,11 @@ import java.util.MissingResourceException;
  */
 public class Scene {
 
-    public String name;
-    public Color background = Color.BLACK;
-    public AmbientLight ambientLight = new AmbientLight();
-    public Geometries geometries = new Geometries();
-    public List<LightSource> lights = new LinkedList<>();
+    public String name;//Name of the scene
+    public Color background = Color.BLACK;// Color of the background of the scene
+    public AmbientLight ambientLight = new AmbientLight(); //Ambient light of the scene
+    public Geometries geometries = new Geometries(); //Geometric figure depicted in the scene
+    public List<LightSource> lights = new LinkedList<>();//List of the light source in the scene
 
     /**
      * constructor
@@ -42,6 +42,16 @@ public class Scene {
     }
 
 
+    /**
+     * Sets the ambient light of the scene.
+     *
+     * @param ambientLight The ambient light of the scene.
+     * @return The Scene object itself.
+     */
+    public Scene setAmbientLight(AmbientLight ambientLight) {
+        this.ambientLight = ambientLight;
+        return this;
+    }
     /**
      * class Builder from Builder design pattern responsible for initializing a scene
      */
@@ -79,11 +89,12 @@ public class Scene {
             return this;
         }
 
+
         /**
-         * setter for lights
+         * This function sets the lights of the scene to the given list of lights.
          *
-         * @param lights
-         * @return the scene builder
+         * @param lights A list of light sources.
+         * @return The Builder object itself.
          */
         public Builder setLights(List<LightSource> lights) {
             scene.lights = lights;

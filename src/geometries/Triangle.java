@@ -23,7 +23,7 @@ public class Triangle extends Polygon {
 
     @Override
     protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray,double maxDistance) {
-        var intersections = plane.findGeoIntersectionsHelper(ray,maxDistance);
+        var intersections = this.plane.findGeoIntersectionsHelper(ray,maxDistance);
         if(intersections == null) return null;
 
         Point p0 = ray.getP0();

@@ -101,6 +101,17 @@ public class RayTracerBasic extends RayTracerBase {
         return vr >= 0 ? Color.BLACK : intensity.scale(kS.scale(Math.pow(-vr, nShininess)));
     }
 
+    /**
+     * If the ray from the point to the light source intersects any geometry, then the point is shaded, otherwise it's
+     * unshaded
+     *
+     * @param light The light source
+     * @param gp The point on the geometry that we're shading.
+     * @param l The vector from the light source to the point on the geometry.
+     * @param n the normal vector to the surface at the intersection point
+     * @param nv the dot product of the normal vector and the vector from the light source to the point.
+     * @return true if the point is unshaded, and false if it is shaded.
+     */
     private boolean unshaded(LightSource light, GeoPoint gp, Vector l, Vector n, double nv) {
         Vector lightDirection = l.scale(-1);
         Vector epsVector = n.scale(nv < 0 ? DELTA : -DELTA);

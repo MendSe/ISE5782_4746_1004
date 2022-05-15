@@ -67,19 +67,29 @@ public abstract class Intersectable {
         return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
     }
 
+    /**
+     * "Finds the intersections of a ray with the Earth's surface, up to a maximum distance."
+     *
+     * The function is declared as `public final` and `static`. The `final` keyword means that the function cannot be
+     * overridden by a subclass. The `static` keyword means that the function is a class method, not an instance method
+     *
+     * @param ray The ray to intersect with the GeoJsonFeature.
+     * @param maxDistance The maximum distance from the ray origin to the intersection point.
+     * @return A list of GeoPoints.
+     */
     public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         return findGeoIntersectionsHelper(ray, maxDistance);
     }
 
-    protected abstract List<GeoPoint>
-    findGeoIntersectionsHelper(Ray ray, double maxDistance);
-
     /**
-     * This function is here to help the findGeoIntersections function to find the list of GeoPoint intersections
+     * Find the intersection points of the given ray with this GeoShape, up to the given maximum distance
      *
-     * @param ray The ray to intersect with the object
+     * @param ray The ray to intersect with the object.
+     * @param maxDistance The maximum distance from the ray origin to the intersection point.
      * @return A list of GeoPoints.
      */
+    protected abstract List<GeoPoint>
+    findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
 
 }
