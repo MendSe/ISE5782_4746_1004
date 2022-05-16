@@ -17,8 +17,8 @@ public class Material {
      * @param kT The transparency of the material.
      * @return The material object itself.
      */
-    public Material setkT(Double3 kT){
-        this.kT = kT;
+    public Material setKt(double kT){
+        this.kT = new Double3(kT);
         return this;
     }
 
@@ -28,8 +28,8 @@ public class Material {
      * @param kR The reflection coefficient of the material.
      * @return The material object itself.
      */
-    public Material setkR(Double3 kR){
-        this.kR = kR;
+    public Material setKr(double kR){
+        this.kR = new Double3(kR);
         return this;
     }
 
