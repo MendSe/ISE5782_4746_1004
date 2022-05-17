@@ -36,21 +36,48 @@ public class RayTracerBasic extends RayTracerBase {
         return gp != null ? calcColor(gp, ray) : scene.getBackgroundColor(j,i);
     }
 
+    /**
+     * Calculates the color of the intersected object
+     * on the intersection point with a given ray.
+     * Starts the recursion call to calculate the reflection
+     * and the refraction with starting level of
+     * {@code MAX_CALC_COLOR_LEVEL} and starting k
+     * of {@code INITIAL_K}.
+     *
+     * @param gp  the intersection point with geometry
+     * @param ray the ray that caused the intersection
+     * @return the color on the intersection point
+     */
     private Color calcColor(GeoPoint gp, Ray ray) {
         return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K).add(scene.ambientLight.getIntensity());
     }
 
     /**
-     * This function returns a color from a given point
+     * Calculates the color of the intersected object
+     * on the intersection point with a given ray.
+     * This is recursive function that calculates also
+     * the reflection and refraction.
      *
-     * @param p point
-     * @return the color of the ambient light of the scene
+     * @param p  the intersection point with geometry
+     * @param ray the ray that caused the intersection
+     * @param MCCL the recursion level
+     * @param iK the ratio og the current ray's color to the color of the previous ray
+     * @return the color on the intersection point
      */
     private Color calcColor(GeoPoint p, Ray ray, int MCCL, Double3 iK) {
         Color color = p.geometry.getEmission().add(calcLocalEffects(p, ray, iK));
         return 1 == MCCL ? color : color.add(calcGlobalEffects(p, ray, MCCL, iK));
     }
 
+    /**
+     * It calculates the color of the point by calculating the color of the reflected and refracted rays
+     *
+     * @param gp The point on the geometry that the ray intersected with.
+     * @param ray the ray that hit the geometry
+     * @param level the recursion level.
+     * @param k the color of the light that is reflected from the current point.
+     * @return The color of the point.
+     */
     private Color calcGlobalEffects(GeoPoint gp, Ray ray, int level, Double3 k) {
         Color color = Color.BLACK;
         Vector normal = gp.geometry.getNormal(gp.point);
@@ -159,23 +186,56 @@ public class RayTracerBasic extends RayTracerBase {
             }
         }
 
-        return true;//intersections == null
+        return true;
     }
 
+    /**
+     *  Construct a reflected ray from a point, a normal vector, and an incoming ray
+     *
+     * @param n The normal vector of the surface at the point of intersection.
+     * @param point The point of intersection
+     * @param inRay The ray that hit the object
+     * @return A ray that is reflected off the surface of the object.
+     */
     private Ray constructReflectedRay(Vector n, Point point, Vector inRay) {
         return new Ray(point, inRay.subtract(n.scale(2 * inRay.dotProduct(n))), n);
     }
 
+    /**
+     * Construct a refracted ray from the intersection point, the incoming ray, and the normal vector.
+     *
+     * @param n the normal vector of the surface
+     * @param point The point of intersection between the ray and the object.
+     * @param inRay the ray that hit the object
+     * @return A new ray with the same origin as the point of intersection, the same direction as the incoming ray, and the
+     * same normal as the normal of the surface.
+     */
     private Ray constructRefractedRay(Vector n, Point point, Vector inRay) {
         return new Ray(point, inRay, n);
     }
 
 
+    /**
+     * It finds the closest intersection point of a ray with the scene's geometries
+     *
+     * @param ray The ray that we want to find the closest intersection to.
+     * @return The closest intersection point to the camera.
+     */
     private GeoPoint findClosestIntersection(Ray ray) {
         List<GeoPoint> intersections = scene.geometries.findGeoIntersections(ray);
         return ray.findClosestGeoPoint(intersections);
     }
 
+    /**
+     * The function calculates the transparency of the point, by calculating the transparency of each point on the way to
+     * the light source
+     *
+     * @param geoPoint The point on the geometry that we are currently calculating the color for.
+     * @param ls The light source
+     * @param l the direction of the light source
+     * @param n The normal vector of the point on the surface of the object.
+     * @return The transparency of the point.
+     */
     private Double3 transparency(GeoPoint geoPoint, LightSource ls, Vector l, Vector n) {
         Vector lightDirection = l.scale(-1);
         Ray lightRay = new Ray(geoPoint.point, lightDirection,n);

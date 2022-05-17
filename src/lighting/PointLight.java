@@ -6,9 +6,9 @@ import primitives.*;
  */
 public class PointLight extends Light implements LightSource{
     private final Point position;
-    private double kC = 1d;
-    private double kL = 0d;
-    private double kQ = 0d;
+    private double kC = 1d; //constant attenuation factor
+    private double kL = 0d; //linear attenuation factor
+    private double kQ = 0d; //quadratic attenuation factor
 
     /**
      * Constructs a pointlight with an intensity and a position

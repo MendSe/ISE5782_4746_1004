@@ -96,10 +96,12 @@ public class Polygon extends Geometry {
         if(intersections==null) return null;
 
         Point p0 = ray.getP0();
+        Vector v0 = ray.getDir();
+
         Point p1 = vertices.get(1);
         Point p2 = vertices.get(0);
 
-        Vector v0 = ray.getDir();
+
         Vector v1 = p1.subtract(p0);
         Vector v2 = p2.subtract(p0);
 

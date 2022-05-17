@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import geometries.*;
 import primitives.*;
 
+import java.util.List;
+
 /**
  * Testing Polygons
  *
@@ -80,6 +82,30 @@ public class PolygonTests {
     @Test
     public void testfindIntersection() {
 
+        Polygon polygon = new Polygon(new Point(-0.5, -0.5, 0), new Point(0, 1, 0), new Point(1, 0, 0));
+        String error = "ERROR: geometries.Polygon.findIntersections() -- bad result";
+
+
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Ray's inside
+        assertEquals(polygon.findIntersections(new Ray(new Point(0.25, 0.25, 1), new Vector(0.25, 0, -1))), List.of(new Point(0.5, 0.25, 0)), error);
+
+        // TC02: Ray's outside, against Vertex
+        assertNull(polygon.findIntersections(new Ray(new Point(0.25, 0.25, 1), new Vector(1.5, -0.5, -1))), error);
+
+        // TC03: Ray's outside, against Edge
+        assertNull(polygon.findIntersections(new Ray(new Point(0.25, 0.25, 1), new Vector(0.75, 0.75, -1))), error);
+
+
+        // =============== Boundary Values Tests ==================
+        // TC11: Ray intersects Vertex
+        assertNull(polygon.findIntersections(new Ray(new Point(0.25, 0.25, 1), new Vector(-0.25, 0.75, -1))), error);
+
+        // TC12: Ray intersects Edge
+        assertNull(polygon.findIntersections(new Ray(new Point(0.25, 0.25, 1), new Vector(0.25, 0.25, -1))), error);
+
+        // TC13: Ray intersects on Edge
+        assertNull(polygon.findIntersections(new Ray(new Point(0.25, 0.25, 1), new Vector(-1.25, -2.25, -1))), error);
 
     }
 }
