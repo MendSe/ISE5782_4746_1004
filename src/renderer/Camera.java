@@ -137,7 +137,7 @@ public class Camera {
      */
     private Color castRay(int j, int i) {
         Ray ray = this.constructRay(imw.getNx(), imw.getNy(), j, i);
-        return rtb.traceRay(ray);
+        return rtb.traceRay(ray,j,i);
     }
 
     /**

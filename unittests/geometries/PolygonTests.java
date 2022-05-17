@@ -31,7 +31,6 @@ public class PolygonTests {
         } catch (IllegalArgumentException e) {
             fail("Failed constructing a correct polygon");
         }
-
         // TC02: Wrong vertices order
         assertThrows(IllegalArgumentException.class, //
                 () -> new Polygon(new Point(0, 0, 1), new Point(0, 1, 0), new Point(1, 0, 0), new Point(-1, 1, 1)), //

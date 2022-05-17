@@ -56,7 +56,54 @@ public class RenderTests {
 		camera.printGrid(100, new Color(java.awt.Color.YELLOW));
 		camera.writeToImage();
 	}
+	@Test
+	public void basicRenderTwoColorTest2() {
+		Scene scene = new Scene.Builder("Test scene")//
+				.setAmbientLight(new AmbientLight(new Color(255, 191, 191), //
+						new Double3(1,1,1))) //
+				.setBackground("resources/Flag_of_Russia800_533.png",800,533)
+				.build();
 
+		scene.geometries.add(new Sphere(new Point(0, 0, -100), 50),
+				new Triangle(new Point(-100, 0, -100), new Point(0, 100, -100), new Point(-100, 100, -100)), // up
+				// left
+				new Triangle(new Point(-100, 0, -100), new Point(0, -100, -100), new Point(-100, -100, -100)), // down
+				// left
+				new Triangle(new Point(100, 0, -100), new Point(0, -100, -100), new Point(100, -100, -100))); // down
+		Camera camera = new Camera(new Point(0,0,0), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+				.setVPDistance(100) //
+				.setVPSize(500, 500) //
+				.setImageWriter(new ImageWriter("testbackground", 500, 500))
+				.setRayTracer(new RayTracerBasic(scene));
+
+		camera.renderImage();
+		camera.printGrid(100, new Color(java.awt.Color.YELLOW));
+		camera.writeToImage();
+	}
+	@Test
+	public void basicRenderTwoColorTest3() {
+		Scene scene = new Scene.Builder("Test scene")//
+				.setAmbientLight(new AmbientLight(new Color(255, 191, 191), //
+						new Double3(1,1,1))) //
+				.setBackground("resources/demon1024.png",1024,1024)
+				.build();
+
+		scene.geometries.add(new Sphere(new Point(0, 0, -100), 50),
+				new Triangle(new Point(-100, 0, -100), new Point(0, 100, -100), new Point(-100, 100, -100)), // up
+				// left
+				new Triangle(new Point(-100, 0, -100), new Point(0, -100, -100), new Point(-100, -100, -100)), // down
+				// left
+				new Triangle(new Point(100, 0, -100), new Point(0, -100, -100), new Point(100, -100, -100))); // down
+		Camera camera = new Camera(new Point(0,0,0), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+				.setVPDistance(100) //
+				.setVPSize(500, 500) //
+				.setImageWriter(new ImageWriter("testkimetsu", 1024, 1024))
+				.setRayTracer(new RayTracerBasic(scene));
+
+		camera.renderImage();
+		camera.printGrid(100, new Color(java.awt.Color.YELLOW));
+		camera.writeToImage();
+	}
 	/**
 	 * Test for XML based scene - for bonus
 	 */
@@ -75,69 +122,7 @@ public class RenderTests {
 		camera.printGrid(100, new Color(java.awt.Color.YELLOW));
 		camera.writeToImage();
 	}
-	public Scene xmlParse(){
-		Scene.Builder builder = new Scene.Builder("Test scene");//
-		Scene scene =null;
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		try {
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document doc = db.parse(new File(System.getProperty("user.dir") + "/xml/basicRenderTestTwoColors.xml")); //path of the document
-			doc.getDocumentElement().normalize(); //Normalizing the document helps generate correct results.
 
-			NodeList list = doc.getElementsByTagName("scene");	//Nodelist of the scene elements
-			Node node = list.item(0);
-			Element element = (Element) node;
-			//Element element =doc.getDocumentElement();
-
-			String[] current=element.getAttribute("background-color").split(" "); //color values stored in the array string "current"
-			builder.setBackground(new Color(Double.parseDouble(current[0]),Double.parseDouble(current[1]),Double.parseDouble(current[2])));
-
-			list=doc.getElementsByTagName("ambient-light");		//Nodelist of the ambient-light elements
-			node=list.item(0);
-			element=(Element)node;
-
-			current=element.getAttribute("color").split(" ");					  //color values stored in the array string "current"
-			builder.setAmbientLight(new AmbientLight(new Color(Double.parseDouble(current[0]),Double.parseDouble(current[1]),Double.parseDouble(current[2])),new Double3(1,1,1)));
-
-			scene=builder.build();								//build the scene
-
-			list=doc.getElementsByTagName("geometries");		//Nodelist of the geometries elements
-			node=list.item(0);
-			element=(Element)node;
-			NodeList children = element.getChildNodes();
-			for(int i=0;i<children.getLength();i++){			//for each geometrie in geometries
-				node=children.item(i);
-				if (node.getNodeType() != Node.ELEMENT_NODE) {	//if the node isn't what we are looking for
-					continue;
-				}
-				element=(Element) node;
-
-				switch (element.getNodeName()){
-					case "sphere":
-						current = element.getAttribute("center").split(" ");
-						double radius = Double.parseDouble(element.getAttribute("radius"));
-						scene.geometries.add(new Sphere(new Point(Double.parseDouble(current[0]), Double.parseDouble(current[1]), Double.parseDouble(current[2])), radius));
-						break;
-
-					case "triangle":
-						Point[] points =new Point[element.getAttributes().getLength()];
-						for(int j=0;j<points.length;j++) {
-							current = element.getAttribute("p"+j).split(" ");
-							points[j]=new Point(Double.parseDouble(current[0]), Double.parseDouble(current[1]), Double.parseDouble(current[2]));
-						}
-						scene.geometries.add(new Triangle(points[0],points[1],points[2]));
-						break;
-				}
-			}
-
-
-		}
-		catch (ParserConfigurationException | SAXException | IOException e) {
-			e.printStackTrace();
-		}
-		return scene;
-	}
-	// For stage 6 - please disregard in stage 5
 	/**
 	 * Produce a scene with basic 3D model - including individual lights of the
 	 * bodies and render it into a png image with a grid

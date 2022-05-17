@@ -2,6 +2,10 @@ package geometries;
 
 import primitives.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 /**
@@ -46,6 +50,43 @@ public class Cylinder extends Tube {
             return (point.subtract(p1)).normalize();
         }
     }
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        Plane up=new Plane(axisRay.getP0(),axisRay.getDir());
+        Plane down=new Plane(axisRay.getP0().add(axisRay.getDir().normalize().scale(height)),axisRay.getDir());
+        GeoPoint geoPoint1=baseIntersection(up,ray,up.getQ0());
+        GeoPoint geoPoint2=baseIntersection(down,ray,down.getQ0());
+        if (geoPoint1 != null && geoPoint2 != null) return List.of(geoPoint1,geoPoint2);
+         geoPoint1 = geoPoint1 != null ? geoPoint1 : geoPoint2;
+
+         List<GeoPoint> list =super.findGeoIntersectionsHelper(ray,maxDistance);
+        List<GeoPoint> list2 =new ArrayList<>();
+         if(list!=null) {
+             for (int i = 0; i < list.size(); i++) {
+                 if ((alignZero(axisRay.getDir().dotProduct(list.get(i).point.subtract(down.getQ0()))) < 0
+                         && alignZero(axisRay.getDir().dotProduct(list.get(i).point.subtract(up.getQ0()))) > 0))
+                  list2.add(list.get(i));
+             }
+         }
+         if (list2.isEmpty())return null;
+         return geoPoint1 !=null ? List.of(geoPoint1,list2.get(0)) : list2;
+
+    }
+
+    /**
+     * Help function for findintersection to find intersections with the two cylinders bases
+     * @param plane cylinder base
+     * @param ray   cylinder ray
+     * @param center    cylinder center of base
+     * @return
+     */
+    private GeoPoint baseIntersection(Plane plane, Ray ray, Point center) {
+         List<GeoPoint> lst = plane.findGeoIntersections(ray); //intersection Points with Plane
+         if (lst == null) return null;
+         Point p = lst.get(0).point;
+         double radius2 = this.radius * this.radius;
+         return alignZero(p.distanceSquared(center) - radius2) < 0 ? new GeoPoint(this, p) : null;
+         }
 
     @Override
     public String toString() {

@@ -11,9 +11,12 @@ import primitives.Double3;
 import primitives.Point;
 import lighting.*;
 
+import java.awt.Color.*;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,6 +31,8 @@ public class Scene {
 
     public String name;//Name of the scene
     public Color background = Color.BLACK;// Color of the background of the scene
+    public BufferedImage backgroundImg; //Image for the background
+    public String backgroundFileName;   //Name of the background image
     public AmbientLight ambientLight = new AmbientLight(); //Ambient light of the scene
     public Geometries geometries = new Geometries(); //Geometric figure depicted in the scene
     public List<LightSource> lights = new LinkedList<>();//List of the light source in the scene
@@ -41,7 +46,19 @@ public class Scene {
         this.name = name;
     }
 
-
+    /**
+     * getter for the color of the pixel in the background image (if there is one ,else return the background color)
+     * @param x coordinate
+     * @param y coordinate
+     * @return
+     */
+    public Color getBackgroundColor(int x , int y){
+        if (backgroundFileName==null){
+            return background;
+        }
+        int rgb = backgroundImg.getRGB(x,y);
+        return new Color(new java.awt.Color(rgb));
+    }
     /**
      * Sets the ambient light of the scene.
      *
@@ -68,7 +85,7 @@ public class Scene {
         }
 
         /**
-         * setter for background
+         * setter for background with a color
          *
          * @param color Color
          * @return the scene builder
@@ -78,6 +95,37 @@ public class Scene {
             return this;
         }
 
+        /**
+         * setter for background with an image
+         * @param file image file
+         * @param width resolution x
+         * @param height resolution y
+         * @return the scene builder
+         */
+        public Builder setBackground(String file,int width,int height) {
+           try {
+
+               scene.backgroundFileName = file;
+               File input_file = new File(file);
+
+               // image file path create an object of
+               // BufferedImage type and pass as parameter the
+               // width,  height and image int
+               // type. TYPE_INT_ARGB means that we are
+               // representing the Alpha , Red, Green and Blue
+               // component of the image pixel using 8 bit
+               // integer value.
+
+               scene.backgroundImg = new BufferedImage(
+                       width, height, BufferedImage.TYPE_INT_ARGB);
+
+               // Reading input file
+               scene.backgroundImg = ImageIO.read(input_file);
+           }catch(IOException e){
+               scene.backgroundFileName=null;
+           }
+            return this;
+        }
         /**
          * setter for ambient light
          *
@@ -111,6 +159,11 @@ public class Scene {
             return scene;
         }
     } // class Builder
+
+    /**
+     * Help function to read a scene from an xml file
+     * @return scene
+     */
     public Scene xmlParse(){
         Scene.Builder builder = new Scene.Builder("Test scene");//
         Scene scene =null;
