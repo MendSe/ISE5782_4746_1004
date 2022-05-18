@@ -37,7 +37,7 @@ public class SpotLight extends PointLight {
     public Color getIntensity(Point p) {
         double dl = Util.alignZero(getL(p).dotProduct(this.direction));
         if (dl <= 0) return Color.BLACK;
-        if(this.narrowBeam != 1)  dl = Math.pow(dl, this.narrowBeam);
+        if (this.narrowBeam != 1) dl = Math.pow(dl, this.narrowBeam);
         return super.getIntensity(p).scale(dl);
     }
 }

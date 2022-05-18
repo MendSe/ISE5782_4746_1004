@@ -1,20 +1,21 @@
 package lighting;
+
 import primitives.*;
 
 /**
  * Light with a position.
  */
-public class PointLight extends Light implements LightSource{
+public class PointLight extends Light implements LightSource {
     private final Point position;
     private double kC = 1d;
     private double kL = 0d;
     private double kQ = 0d;
 
     /**
-     * Constructs a pointlight with an intensity and a position
+     * Constructs a point light with an intensity and a position
      *
      * @param intensity intensity of the pointlight
-     * @param position position of the pointlight
+     * @param position  position of the pointlight
      */
     public PointLight(Color intensity, Point position) {
         super(intensity);

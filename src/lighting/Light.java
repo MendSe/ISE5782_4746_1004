@@ -1,10 +1,11 @@
 package lighting;
+
 import primitives.*;
 
 public abstract class Light {
     protected final Color intensity;
-    protected Light(Color color)
-    {
+
+    protected Light(Color color) {
         this.intensity = color;
     }
 
@@ -13,5 +14,7 @@ public abstract class Light {
      *
      * @return The intensity of the light source.
      */
-    public Color getIntensity(){ return intensity;}
+    public Color getIntensity() {
+        return intensity;
+    }
 }

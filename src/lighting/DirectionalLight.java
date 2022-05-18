@@ -1,4 +1,5 @@
 package lighting;
+
 import primitives.*;
 
 /**
@@ -13,7 +14,7 @@ public class DirectionalLight extends Light implements LightSource {
      * @param intensity The intensity of the light
      * @param direction The direction of the light
      */
-    public DirectionalLight(Color intensity,Vector direction) {
+    public DirectionalLight(Color intensity, Vector direction) {
         super(intensity);
         this.direction = direction.normalize();
     }
@@ -24,13 +25,12 @@ public class DirectionalLight extends Light implements LightSource {
     }
 
     @Override
-    public Vector getL(Point p){
+    public Vector getL(Point p) {
         return direction;
     }
 
     @Override
-    public double getDistance(Point point)
-    {
+    public double getDistance(Point point) {
         return Double.POSITIVE_INFINITY;
     }
 

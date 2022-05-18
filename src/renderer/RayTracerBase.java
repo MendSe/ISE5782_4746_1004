@@ -1,4 +1,5 @@
 package renderer;
+
 import scene.*;
 import primitives.*;
 
@@ -11,17 +12,18 @@ public abstract class RayTracerBase {
 
     /**
      * Constructor of the class
+     *
      * @param sce scene params
      */
-    public RayTracerBase(Scene sce)
-    {
+    public RayTracerBase(Scene sce) {
         scene = sce;
     }
 
     /**
      * Abstract function that helps us to create a color from a ray
+     *
      * @param ray ray params
      * @return a color from the ray
      */
-    public abstract Color traceRay(Ray ray,int j,int i);
+    public abstract Color traceRay(Ray ray, int j, int i);
 }

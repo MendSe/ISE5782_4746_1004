@@ -29,11 +29,11 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
     @Override
-    public Color traceRay(Ray ray,int j,int i) {
+    public Color traceRay(Ray ray, int j, int i) {
         // List<GeoPoint> inters = scene.geometries.findGeoIntersections(ray);
         //return inters == null ? scene.background : calcColor(ray.findClosestGeoPoint(inters), ray);
         GeoPoint gp = findClosestIntersection(ray);
-        return gp != null ? calcColor(gp, ray) : scene.getBackgroundColor(j,i);
+        return gp != null ? calcColor(gp, ray) : scene.getBackgroundColor(j, i);
     }
 
     private Color calcColor(GeoPoint gp, Ray ray) {
@@ -94,7 +94,7 @@ public class RayTracerBasic extends RayTracerBase {
             Vector l = lightSource.getL(geoPoint.point);
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) {
-                Double3 ktr  = transparency(geoPoint,lightSource,l,n);
+                Double3 ktr = transparency(geoPoint, lightSource, l, n);
                 Double3 x = ktr.product(k);
                 if (!x.lowerThan(MIN_CALC_COLOR_K)) {
                     Color intensity = lightSource.getIntensity(geoPoint.point).scale(ktr);
@@ -150,11 +150,11 @@ public class RayTracerBasic extends RayTracerBase {
      */
     private boolean unshaded(LightSource light, GeoPoint gp, Vector l, Vector n, double nv) {
         Vector lightDirection = l.scale(-1);
-        Ray lightRay = new Ray(gp.point, lightDirection,n);
+        Ray lightRay = new Ray(gp.point, lightDirection, n);
         List<GeoPoint> intersections = this.scene.geometries.findGeoIntersections(lightRay, light.getDistance(gp.point));
-        if(intersections!=null){
-            for(GeoPoint geo : intersections){
-                if(geo.geometry.getMaterial().kT == Double3.ZERO)
+        if (intersections != null) {
+            for (GeoPoint geo : intersections) {
+                if (geo.geometry.getMaterial().kT == Double3.ZERO)
                     return false;
             }
         }
@@ -178,16 +178,16 @@ public class RayTracerBasic extends RayTracerBase {
 
     private Double3 transparency(GeoPoint geoPoint, LightSource ls, Vector l, Vector n) {
         Vector lightDirection = l.scale(-1);
-        Ray lightRay = new Ray(geoPoint.point, lightDirection,n);
+        Ray lightRay = new Ray(geoPoint.point, lightDirection, n);
         double lightDistance = ls.getDistance(geoPoint.point);
         List<GeoPoint> intersections = this.scene.geometries.findGeoIntersections(lightRay);
-        if(intersections ==null) return new Double3(1d);
+        if (intersections == null) return new Double3(1d);
 
-        Double3 ktr =new Double3(1d);
-        for(GeoPoint gp :intersections){
-            if(alignZero(gp.point.distance(geoPoint.point)-lightDistance)<=0){
+        Double3 ktr = new Double3(1d);
+        for (GeoPoint gp : intersections) {
+            if (alignZero(gp.point.distance(geoPoint.point) - lightDistance) <= 0) {
                 ktr = ktr.product(gp.geometry.getMaterial().kT);
-                if(ktr.lowerThan(MIN_CALC_COLOR_K)) return Double3.ZERO;
+                if (ktr.lowerThan(MIN_CALC_COLOR_K)) return Double3.ZERO;
             }
         }
 

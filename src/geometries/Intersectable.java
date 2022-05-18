@@ -13,7 +13,7 @@ public abstract class Intersectable {
     /**
      * A pair of point and its geometry
      */
-    public static class GeoPoint{
+    public static class GeoPoint {
         public Geometry geometry;
         public Point point;
 
@@ -21,18 +21,17 @@ public abstract class Intersectable {
          * Constructor of the GeoPoint class
          *
          * @param geometry the geometry used
-         * @param point a point in the geometry used
+         * @param point    a point in the geometry used
          */
-        public GeoPoint(Geometry geometry,Point point) {
+        public GeoPoint(Geometry geometry, Point point) {
             this.geometry = geometry;
             this.point = point;
         }
 
         @Override
-        public boolean equals(Object o)
-        {
-            if(this == o) return true;
-            if(!(o instanceof GeoPoint geoPoint)) return false;
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof GeoPoint geoPoint)) return false;
             return geometry == geoPoint.geometry && point.equals(geoPoint.point);
         }
 
@@ -47,6 +46,7 @@ public abstract class Intersectable {
 
     /**
      * function to calculate the intersection points between a ray and the geometric object
+     *
      * @param ray the ray which intersect the object
      * @return list of intersection points
      */
@@ -62,18 +62,17 @@ public abstract class Intersectable {
      * @param ray The ray to intersect with the object
      * @return A list of GeoPoints.
      */
-    public List<GeoPoint> findGeoIntersections(Ray ray)
-    {
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
         return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
     }
 
     /**
      * "Finds the intersections of a ray with the Earth's surface, up to a maximum distance."
-     *
+     * <p>
      * The function is declared as `public final` and `static`. The `final` keyword means that the function cannot be
      * overridden by a subclass. The `static` keyword means that the function is a class method, not an instance method
      *
-     * @param ray The ray to intersect with the GeoJsonFeature.
+     * @param ray         The ray to intersect with the GeoJsonFeature.
      * @param maxDistance The maximum distance from the ray origin to the intersection point.
      * @return A list of GeoPoints.
      */
@@ -84,7 +83,7 @@ public abstract class Intersectable {
     /**
      * Find the intersection points of the given ray with this GeoShape, up to the given maximum distance
      *
-     * @param ray The ray to intersect with the object.
+     * @param ray         The ray to intersect with the object.
      * @param maxDistance The maximum distance from the ray origin to the intersection point.
      * @return A list of GeoPoints.
      */

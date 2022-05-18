@@ -89,7 +89,7 @@ public class Tube extends Geometry {
         if (alignZero(x2 - maxDistance) > 0) x2 = -1;
 
         if (x1 > 0 && x2 > 0)
-            return List.of( new GeoPoint(this, ray.getPoint(x1)), new GeoPoint(this, ray.getPoint(x2)));
+            return List.of(new GeoPoint(this, ray.getPoint(x1)), new GeoPoint(this, ray.getPoint(x2)));
         if (x1 > 0) return List.of(new GeoPoint(this, ray.getPoint(x1)));
         if (x2 > 0) return List.of(new GeoPoint(this, ray.getPoint(x2)));
 

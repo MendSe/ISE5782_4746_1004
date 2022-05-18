@@ -48,17 +48,19 @@ public class Scene {
 
     /**
      * getter for the color of the pixel in the background image (if there is one ,else return the background color)
+     *
      * @param x coordinate
      * @param y coordinate
      * @return
      */
-    public Color getBackgroundColor(int x , int y){
-        if (backgroundFileName==null){
+    public Color getBackgroundColor(int x, int y) {
+        if (backgroundFileName == null) {
             return background;
         }
-        int rgb = backgroundImg.getRGB(x,y);
+        int rgb = backgroundImg.getRGB(x, y);
         return new Color(new java.awt.Color(rgb));
     }
+
     /**
      * Sets the ambient light of the scene.
      *
@@ -69,6 +71,7 @@ public class Scene {
         this.ambientLight = ambientLight;
         return this;
     }
+
     /**
      * class Builder from Builder design pattern responsible for initializing a scene
      */
@@ -97,35 +100,37 @@ public class Scene {
 
         /**
          * setter for background with an image
-         * @param file image file
-         * @param width resolution x
+         *
+         * @param file   image file
+         * @param width  resolution x
          * @param height resolution y
          * @return the scene builder
          */
-        public Builder setBackground(String file,int width,int height) {
-           try {
+        public Builder setBackground(String file, int width, int height) {
+            try {
 
-               scene.backgroundFileName = file;
-               File input_file = new File(file);
+                scene.backgroundFileName = file;
+                File input_file = new File(file);
 
-               // image file path create an object of
-               // BufferedImage type and pass as parameter the
-               // width,  height and image int
-               // type. TYPE_INT_ARGB means that we are
-               // representing the Alpha , Red, Green and Blue
-               // component of the image pixel using 8 bit
-               // integer value.
+                // image file path create an object of
+                // BufferedImage type and pass as parameter the
+                // width,  height and image int
+                // type. TYPE_INT_ARGB means that we are
+                // representing the Alpha , Red, Green and Blue
+                // component of the image pixel using 8 bit
+                // integer value.
 
-               scene.backgroundImg = new BufferedImage(
-                       width, height, BufferedImage.TYPE_INT_ARGB);
+                scene.backgroundImg = new BufferedImage(
+                        width, height, BufferedImage.TYPE_INT_ARGB);
 
-               // Reading input file
-               scene.backgroundImg = ImageIO.read(input_file);
-           }catch(IOException e){
-               scene.backgroundFileName=null;
-           }
+                // Reading input file
+                scene.backgroundImg = ImageIO.read(input_file);
+            } catch (IOException e) {
+                scene.backgroundFileName = null;
+            }
             return this;
         }
+
         /**
          * setter for ambient light
          *
@@ -148,6 +153,7 @@ public class Scene {
             scene.lights = lights;
             return this;
         }
+
         /**
          * build and return the scene
          *
@@ -162,44 +168,45 @@ public class Scene {
 
     /**
      * Help function to read a scene from an xml file
+     *
      * @return scene
      */
-    public Scene xmlParse(){
+    public Scene xmlParse() {
         Scene.Builder builder = new Scene.Builder("Test scene");//
-        Scene scene =null;
+        Scene scene = null;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(new File(System.getProperty("user.dir") + "/xml/basicRenderTestTwoColors.xml")); //path of the document
             doc.getDocumentElement().normalize(); //Normalizing the document helps generate correct results.
 
-            NodeList list = doc.getElementsByTagName("scene");	//Node list of the scene elements
+            NodeList list = doc.getElementsByTagName("scene");    //Node list of the scene elements
             Node node = list.item(0);
             Element element = (Element) node;
             //Element element =doc.getDocumentElement();
 
-            String[] current=element.getAttribute("background-color").split(" "); //color values stored in the array string "current"
-            builder.setBackground(new Color(Double.parseDouble(current[0]),Double.parseDouble(current[1]),Double.parseDouble(current[2])));
+            String[] current = element.getAttribute("background-color").split(" "); //color values stored in the array string "current"
+            builder.setBackground(new Color(Double.parseDouble(current[0]), Double.parseDouble(current[1]), Double.parseDouble(current[2])));
 
-            list=doc.getElementsByTagName("ambient-light");		//Node list of the ambient-light elements
-            node=list.item(0);
-            element=(Element)node;
+            list = doc.getElementsByTagName("ambient-light");        //Node list of the ambient-light elements
+            node = list.item(0);
+            element = (Element) node;
 
-            current=element.getAttribute("color").split(" ");					  //color values stored in the array string "current"
-            builder.setAmbientLight(new AmbientLight(new Color(Double.parseDouble(current[0]),Double.parseDouble(current[1]),Double.parseDouble(current[2])),new Double3(1,1,1)));
+            current = element.getAttribute("color").split(" ");                      //color values stored in the array string "current"
+            builder.setAmbientLight(new AmbientLight(new Color(Double.parseDouble(current[0]), Double.parseDouble(current[1]), Double.parseDouble(current[2])), new Double3(1, 1, 1)));
 
-            scene=builder.build();								//build the scene
+            scene = builder.build();                                //build the scene
 
-            list=doc.getElementsByTagName("geometries");		//Node list of the geometries elements
-            node=list.item(0);
-            element=(Element)node;
+            list = doc.getElementsByTagName("geometries");        //Node list of the geometries elements
+            node = list.item(0);
+            element = (Element) node;
             NodeList children = element.getChildNodes();
-            for(int i=0;i<children.getLength();i++){			//for each geometry in geometries
-                node=children.item(i);
-                if (node.getNodeType() != Node.ELEMENT_NODE) {	//if the node isn't what we are looking for
+            for (int i = 0; i < children.getLength(); i++) {            //for each geometry in geometries
+                node = children.item(i);
+                if (node.getNodeType() != Node.ELEMENT_NODE) {    //if the node isn't what we are looking for
                     continue;
                 }
-                element=(Element) node;
+                element = (Element) node;
 
                 switch (element.getNodeName()) {
                     case "sphere" -> {
@@ -220,8 +227,7 @@ public class Scene {
             }
 
 
-        }
-        catch (ParserConfigurationException | SAXException | IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
         return scene;

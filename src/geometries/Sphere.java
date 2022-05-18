@@ -45,12 +45,12 @@ public class Sphere extends Geometry {
     }
 
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray,double maxDistance) {
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         Vector u;
         try { //when P0 and the center are the same point
             u = this.center.subtract(ray.getP0());
         } catch (IllegalArgumentException ex) {
-            return  List.of(new GeoPoint(this, ray.getPoint(this.radius)));
+            return List.of(new GeoPoint(this, ray.getPoint(this.radius)));
         }
 
         double tm = u.dotProduct(ray.getDir());
@@ -62,10 +62,10 @@ public class Sphere extends Geometry {
         double t2 = alignZero(tm + th);// double t2 = alignZero(tm + th2);
         if (t2 <= 0) return null;
 
-        double t1 = alignZero(tm -th);
-        if(alignZero(t1-maxDistance)>0 || alignZero(t2-maxDistance)>0) return null;
+        double t1 = alignZero(tm - th);
+        if (alignZero(t1 - maxDistance) > 0 || alignZero(t2 - maxDistance) > 0) return null;
 
-        return t1 <= 0 ? List.of(new GeoPoint(this, ray.getPoint(t2))) : List.of(new GeoPoint(this, ray.getPoint(t1)),new GeoPoint(this, ray.getPoint(t2)));
+        return t1 <= 0 ? List.of(new GeoPoint(this, ray.getPoint(t2))) : List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
     }
 
     @Override
