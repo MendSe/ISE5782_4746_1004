@@ -9,7 +9,6 @@ public class SpotLight extends PointLight {
     private final Vector direction;
     private int narrowBeam = 1;
 
-
     /**
      * Constructs a spotlight with intensity, position and direction.
      *

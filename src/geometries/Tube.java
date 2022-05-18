@@ -43,7 +43,6 @@ public class Tube extends Geometry {
         this.radius = radius;
     }
 
-
     @Override
     protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         Point p0 = ray.getP0();

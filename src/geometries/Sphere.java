@@ -63,9 +63,13 @@ public class Sphere extends Geometry {
         if (t2 <= 0) return null;
 
         double t1 = alignZero(tm - th);
-        if (alignZero(t1 - maxDistance) > 0 || alignZero(t2 - maxDistance) > 0) return null;
+        if (alignZero(t1 - maxDistance) > 0) return null;
 
-        return t1 <= 0 ? List.of(new GeoPoint(this, ray.getPoint(t2))) : List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
+        if (alignZero(t2 - maxDistance) <= 0) {
+            var p2 = new GeoPoint(this, ray.getPoint(t2));
+            return t1 <= 0 ? List.of(p2) : List.of(new GeoPoint(this, ray.getPoint(t1)), p2);
+        } else
+            return t1 <= 0 ? null : List.of(new GeoPoint(this, ray.getPoint(t1)));
     }
 
     @Override

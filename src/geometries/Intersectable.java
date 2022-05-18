@@ -87,8 +87,7 @@ public abstract class Intersectable {
      * @param maxDistance The maximum distance from the ray origin to the intersection point.
      * @return A list of GeoPoints.
      */
-    protected abstract List<GeoPoint>
-    findGeoIntersectionsHelper(Ray ray, double maxDistance);
+    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
 
 }
