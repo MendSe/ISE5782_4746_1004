@@ -14,8 +14,8 @@ public class PointLight extends Light implements LightSource {
     /**
      * Constructs a point light with an intensity and a position
      *
-     * @param intensity intensity of the pointlight
-     * @param position  position of the pointlight
+     * @param intensity intensity of the point light
+     * @param position  position of the point light
      */
     public PointLight(Color intensity, Point position) {
         super(intensity);

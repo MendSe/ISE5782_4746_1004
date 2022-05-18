@@ -30,8 +30,6 @@ public class RayTracerBasic extends RayTracerBase {
 
     @Override
     public Color traceRay(Ray ray, int j, int i) {
-        // List<GeoPoint> inters = scene.geometries.findGeoIntersections(ray);
-        //return inters == null ? scene.background : calcColor(ray.findClosestGeoPoint(inters), ray);
         GeoPoint gp = findClosestIntersection(ray);
         return gp != null ? calcColor(gp, ray) : scene.getBackgroundColor(j, i);
     }
@@ -58,10 +56,10 @@ public class RayTracerBasic extends RayTracerBase {
      * This is recursive function that calculates also
      * the reflection and refraction.
      *
-     * @param p  the intersection point with geometry
-     * @param ray the ray that caused the intersection
+     * @param p    the intersection point with geometry
+     * @param ray  the ray that caused the intersection
      * @param MCCL the recursion level
-     * @param iK the ratio og the current ray's color to the color of the previous ray
+     * @param iK   the ratio og the current ray's color to the color of the previous ray
      * @return the color on the intersection point
      */
     private Color calcColor(GeoPoint p, Ray ray, int MCCL, Double3 iK) {
@@ -72,10 +70,10 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * It calculates the color of the point by calculating the color of the reflected and refracted rays
      *
-     * @param gp The point on the geometry that the ray intersected with.
-     * @param ray the ray that hit the geometry
+     * @param gp    The point on the geometry that the ray intersected with.
+     * @param ray   the ray that hit the geometry
      * @param level the recursion level.
-     * @param k the color of the light that is reflected from the current point.
+     * @param k     the color of the light that is reflected from the current point.
      * @return The color of the point.
      */
     private Color calcGlobalEffects(GeoPoint gp, Ray ray, int level, Double3 k) {
@@ -190,9 +188,9 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
     /**
-     *  Construct a reflected ray from a point, a normal vector, and an incoming ray
+     * Construct a reflected ray from a point, a normal vector, and an incoming ray
      *
-     * @param n The normal vector of the surface at the point of intersection.
+     * @param n     The normal vector of the surface at the point of intersection.
      * @param point The point of intersection
      * @param inRay The ray that hit the object
      * @return A ray that is reflected off the surface of the object.
@@ -204,7 +202,7 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * Construct a refracted ray from the intersection point, the incoming ray, and the normal vector.
      *
-     * @param n the normal vector of the surface
+     * @param n     the normal vector of the surface
      * @param point The point of intersection between the ray and the object.
      * @param inRay the ray that hit the object
      * @return A new ray with the same origin as the point of intersection, the same direction as the incoming ray, and the
@@ -231,9 +229,9 @@ public class RayTracerBasic extends RayTracerBase {
      * the light source
      *
      * @param geoPoint The point on the geometry that we are currently calculating the color for.
-     * @param ls The light source
-     * @param l the direction of the light source
-     * @param n The normal vector of the point on the surface of the object.
+     * @param ls       The light source
+     * @param l        the direction of the light source
+     * @param n        The normal vector of the point on the surface of the object.
      * @return The transparency of the point.
      */
     private Double3 transparency(GeoPoint geoPoint, LightSource ls, Vector l, Vector n) {

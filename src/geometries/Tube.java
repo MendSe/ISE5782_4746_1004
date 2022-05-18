@@ -77,7 +77,7 @@ public class Tube extends Geometry {
 
         //solving equation: ax^2 + bx + c = 0
         double discriminator = alignZero(b * b - 4 * a * c); //discriminator: b^2 - 4ac
-        if (discriminator <= 0) return null; //there are no intersections because Ray is parall
+        if (discriminator <= 0) return null; //there are no intersections because Ray is parallel
 
         //the solutions for the equation: (-b +- discriminator) / 2a
         double sqrtDiscriminator = Math.sqrt(discriminator);

@@ -112,14 +112,6 @@ public class Scene {
                 scene.backgroundFileName = file;
                 File input_file = new File(file);
 
-                // image file path create an object of
-                // BufferedImage type and pass as parameter the
-                // width,  height and image int
-                // type. TYPE_INT_ARGB means that we are
-                // representing the Alpha , Red, Green and Blue
-                // component of the image pixel using 8 bit
-                // integer value.
-
                 scene.backgroundImg = new BufferedImage(
                         width, height, BufferedImage.TYPE_INT_ARGB);
 
@@ -167,7 +159,7 @@ public class Scene {
     } // class Builder
 
     /**
-     * Help function to read a scene from an xml file
+     * Help function to read a scene from a xml file
      *
      * @return scene
      */

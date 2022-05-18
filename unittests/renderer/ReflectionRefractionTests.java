@@ -143,31 +143,31 @@ public class ReflectionRefractionTests {
                 new Cylinder(new Ray(new Point(-40, 0, 5), new Vector(0, 1, 0)), 5d, 50).setEmission(new Color(BLACK))//
                         .setMaterial(new Material().setKd(0.2).setKs(0.25).setShininess(30)),
 
-                new Polygon(new Point(-50, 0, 0), new Point(100, 0, 0), new Point(100, 100, 0), new Point(-50, 100, 0)).setEmission(new Color(BLACK))    //fond
+                new Polygon(new Point(-50, 0, 0), new Point(100, 0, 0), new Point(100, 100, 0), new Point(-50, 100, 0)).setEmission(new Color(BLACK))    //ground
                         .setMaterial(new Material().setKd(0.5).setKs(0.25).setShininess(20)),
 
-                new Polygon(new Point(-43, 0, 0), new Point(43, 0, 0), new Point(43, 50, 0), new Point(-43, 50, 0)).setEmission(new Color(10, 30, 0))    //sous les roues
+                new Polygon(new Point(-43, 0, 0), new Point(43, 0, 0), new Point(43, 50, 0), new Point(-43, 50, 0)).setEmission(new Color(10, 30, 0))    //under wheels
                         .setMaterial(new Material().setKd(0.5).setKs(0.25).setShininess(60)),
-                new Polygon(new Point(-50, 0, 10), new Point(50, 0, 10), new Point(50, 50, 10), new Point(-50, 50, 10)).setEmission(new Color(10, 30, 0))//sur les roues
+                new Polygon(new Point(-50, 0, 10), new Point(50, 0, 10), new Point(50, 50, 10), new Point(-50, 50, 10)).setEmission(new Color(10, 30, 0))//on wheels
                         .setMaterial(new Material().setKd(0.5).setKs(0.25).setShininess(60)),
-                new Polygon(new Point(-43, 0, 0), new Point(-50, 0, 10), new Point(-50, 50, 10), new Point(-43, 50, 0)).setEmission(new Color(BLACK))//gauche
+                new Polygon(new Point(-43, 0, 0), new Point(-50, 0, 10), new Point(-50, 50, 10), new Point(-43, 50, 0)).setEmission(new Color(BLACK))//left to wheels
                         .setMaterial(new Material().setKd(0.05).setKs(0.25).setShininess(30)),
-                new Polygon(new Point(43, 0, 0), new Point(43, 50, 0), new Point(50, 50, 10), new Point(50, 0, 10)).setEmission(new Color(BLACK))//droite
+                new Polygon(new Point(43, 0, 0), new Point(43, 50, 0), new Point(50, 50, 10), new Point(50, 0, 10)).setEmission(new Color(BLACK))//right to wheels
                         .setMaterial(new Material().setKd(0.05).setKs(0.25).setShininess(30)),
-                new Polygon(new Point(-50, 0, 20), new Point(50, 0, 20), new Point(50, 50, 20), new Point(-50, 50, 20)).setEmission(new Color(10, 30, 0))// au dessus
+                new Polygon(new Point(-50, 0, 20), new Point(50, 0, 20), new Point(50, 50, 20), new Point(-50, 50, 20)).setEmission(new Color(10, 30, 0))// above wheels
                         .setMaterial(new Material().setKd(0.5).setKs(0.25).setShininess(60)),
-                new Polygon(new Point(-50, 0, 10), new Point(-50, 0, 20), new Point(50, 0, 20), new Point(50, 0, 10)).setEmission(new Color(10, 30, 0))//devant
+                new Polygon(new Point(-50, 0, 10), new Point(-50, 0, 20), new Point(50, 0, 20), new Point(50, 0, 10)).setEmission(new Color(10, 30, 0))//in front
                         .setMaterial(new Material()
                                 .setKd(0.5)
                                 .setKs(0.25)
                                 .setShininess(30)),
-                new Polygon(new Point(-50, 50, 10), new Point(-50, 50, 20), new Point(50, 50, 20), new Point(50, 50, 10)).setEmission(new Color(10, 30, 0))//derriere
+                new Polygon(new Point(-50, 50, 10), new Point(-50, 50, 20), new Point(50, 50, 20), new Point(50, 50, 10)).setEmission(new Color(10, 30, 0))//behind
                         .setMaterial(new Material().setKd(0.5).setKs(0.25).setShininess(60)),
-                new Polygon(new Point(-50, 0, 10), new Point(-50, 0, 20), new Point(-50, 50, 20), new Point(-50, 50, 10)).setEmission(new Color(10, 30, 0))//a gauche
+                new Polygon(new Point(-50, 0, 10), new Point(-50, 0, 20), new Point(-50, 50, 20), new Point(-50, 50, 10)).setEmission(new Color(10, 30, 0))//left side
                         .setMaterial(new Material().setKd(0.5).setKs(0.25).setShininess(60)),
-                new Polygon(new Point(50, 0, 10), new Point(50, 0, 20), new Point(50, 50, 20), new Point(50, 50, 10)).setEmission(new Color(10, 30, 0))//a droite
+                new Polygon(new Point(50, 0, 10), new Point(50, 0, 20), new Point(50, 50, 20), new Point(50, 50, 10)).setEmission(new Color(10, 30, 0))//right side
                         .setMaterial(new Material().setKd(0.5).setKs(0.25).setShininess(60)),
-                new Polygon(new Point(40, 10, 35), new Point(40, 40, 35), new Point(10, 45, 35), new Point(-30, 35, 35), new Point(-30, 15, 35), new Point(10, 5, 35)).setEmission(new Color(10, 30, 0))//a droite
+                new Polygon(new Point(40, 10, 35), new Point(40, 40, 35), new Point(10, 45, 35), new Point(-30, 35, 35), new Point(-30, 15, 35), new Point(10, 5, 35)).setEmission(new Color(10, 30, 0))//6 vertices polygon
                         .setMaterial(new Material().setKd(0.5).setKs(0.25).setShininess(60)),
                 new Polygon(new Point(40, 10, 20), new Point(40, 10, 35), new Point(40, 40, 35), new Point(40, 40, 20)).setEmission(new Color(10, 30, 0))//1
                         .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)),
@@ -182,21 +182,21 @@ public class ReflectionRefractionTests {
                 new Polygon(new Point(10, 5, 20), new Point(10, 5, 35), new Point(40, 10, 35), new Point(40, 10, 20)).setEmission(new Color(10, 30, 0))//6
                         .setMaterial(new Material().setKd(0.5).setKs(0.25).setShininess(60)),
 
-                new Cylinder(new Ray(new Point(-30, 25, 27.5), new Vector(-1, 0, 0)), 5d, 30).setEmission(new Color(10, 30, 0))//
+                new Cylinder(new Ray(new Point(-30, 25, 27.5), new Vector(-1, 0, 0)), 5d, 30).setEmission(new Color(10, 30, 0))// big canon
                         .setMaterial(new Material().setKd(0.2).setKs(0.25).setShininess(30).setKt(0.4)),
-                new Cylinder(new Ray(new Point(-60, 25, 27.5), new Vector(-1, 0, 0)), 4d, 25).setEmission(new Color(10, 30, 0))//
+                new Cylinder(new Ray(new Point(-60, 25, 27.5), new Vector(-1, 0, 0)), 4d, 25).setEmission(new Color(10, 30, 0))// 2nd canon
                         .setMaterial(new Material().setKd(0.2).setKs(0.25).setShininess(30).setKt(0.4)),
 
-                new Cylinder(new Ray(new Point(-75, 25, 27.5), new Vector(-1, 0, 0)), 2d, 20).setEmission(new Color(50, 50, 10))//
+                new Cylinder(new Ray(new Point(-75, 25, 27.5), new Vector(-1, 0, 0)), 2d, 20).setEmission(new Color(50, 50, 10))//  rocket
                         .setMaterial(new Material().setKd(0.4).setKs(0.25).setShininess(30)),
-                new Sphere(new Point(-95, 25, 27.5), 2d).setEmission(new Color(50, 50, 10))//
+                new Sphere(new Point(-95, 25, 27.5), 2d).setEmission(new Color(50, 50, 10))// rocket end
                         .setMaterial(new Material().setKd(0.5).setKs(0.25).setShininess(20)),
 
-                new Polygon(new Point(-60, 100, 0), new Point(120, 100, 0), new Point(120, 100, 23.3), new Point(-60, 100, 23.3)).setEmission(new Color(RED))
+                new Polygon(new Point(-60, 100, 0), new Point(120, 100, 0), new Point(120, 100, 23.3), new Point(-60, 100, 23.3)).setEmission(new Color(RED)) //flag
                         .setMaterial(new Material().setKd(0.4).setShininess(30)),
-                new Polygon(new Point(-60, 100, 23.3), new Point(120, 100, 23.3), new Point(120, 100, 46.6), new Point(-60, 100, 46.6)).setEmission(new Color(BLUE))
+                new Polygon(new Point(-60, 100, 23.3), new Point(120, 100, 23.3), new Point(120, 100, 46.6), new Point(-60, 100, 46.6)).setEmission(new Color(BLUE)) //flag
                         .setMaterial(new Material().setKd(0.4).setShininess(30)),
-                new Polygon(new Point(-60, 100, 46.6), new Point(120, 100, 46.6), new Point(120, 100, 70), new Point(-60, 100, 70)).setEmission(new Color(WHITE))
+                new Polygon(new Point(-60, 100, 46.6), new Point(120, 100, 46.6), new Point(120, 100, 70), new Point(-60, 100, 70)).setEmission(new Color(WHITE)) // flag
                         .setMaterial(new Material().setKd(0.4).setShininess(30))
 
         );

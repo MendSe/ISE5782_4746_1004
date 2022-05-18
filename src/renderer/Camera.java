@@ -161,7 +161,7 @@ public class Camera {
      * Write the current image to the image file
      */
     public void writeToImage() {
-        if (imw == null) throw new MissingResourceException("Missing ressource", Point.class.getName(), "");
+        if (imw == null) throw new MissingResourceException("Missing resource", Point.class.getName(), "");
         imw.writeToImage();
     }
 
