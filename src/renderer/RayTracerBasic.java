@@ -5,6 +5,7 @@ import scene.Scene;
 import primitives.*;
 import geometries.Intersectable.GeoPoint;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -248,6 +249,14 @@ public class RayTracerBasic extends RayTracerBase {
         }
 
         return ktr;
+    }
+
+    public Color AverageColor(LinkedList<Ray> rays,int j,int i){
+        Color color=Color.BLACK;
+        for(Ray ray:rays){
+            color=color.add(traceRay(ray,j,i));
+        }
+        return color.reduce(rays.size());
     }
 }
 

@@ -15,6 +15,24 @@ public class Point {
         return this.xyz.d1;
     }
 
+    /**
+     * getter of coordinate y
+     *
+     * @return coordinate y value
+     */
+    public double getY() {
+        return this.xyz.d2;
+    }
+
+    /**
+     * getter of coordinate z
+     *
+     * @return coordinate z value
+     */
+    public double getZ() {
+        return this.xyz.d3;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -51,7 +51,7 @@ public class Scene {
      *
      * @param x coordinate
      * @param y coordinate
-     * @return
+     * @return if there is a file return the color of the pixel (x,y) else return background color
      */
     public Color getBackgroundColor(int x, int y) {
         if (backgroundFileName == null) {

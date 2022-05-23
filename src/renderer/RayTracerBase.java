@@ -3,6 +3,8 @@ package renderer;
 import scene.*;
 import primitives.*;
 
+import java.util.LinkedList;
+
 /**
  * Abstract class of Ray tracer
  */
@@ -26,4 +28,6 @@ public abstract class RayTracerBase {
      * @return a color from the ray
      */
     public abstract Color traceRay(Ray ray, int j, int i);
+
+    public abstract Color AverageColor(LinkedList<Ray> rays,int j,int i) ;
 }

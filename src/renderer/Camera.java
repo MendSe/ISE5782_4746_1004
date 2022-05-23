@@ -2,6 +2,7 @@ package renderer;
 
 import primitives.*;
 
+import java.util.LinkedList;
 import java.util.MissingResourceException;
 
 import static primitives.Util.isZero;
@@ -97,7 +98,7 @@ public class Camera {
      * @param i  the index of the pixel in the y-axis
      * @return a ray from the camera going through the center of the pixel
      */
-    public Ray constructRay(int nX, int nY, int j, int i) {
+    public LinkedList<Ray> constructRay(int nX, int nY, int j, int i) {
         Point pC = p0.add(vTo.scale(distance));
         double rY = height / nY;
         double rX = width / nX;
@@ -108,7 +109,24 @@ public class Camera {
         Point pIJ = pC;
         if (!isZero(xJ)) pIJ = pIJ.add(vRight.scale(xJ));
         if (!isZero(yI)) pIJ = pIJ.add(vUp.scale(yI));
-        return new Ray(p0, pIJ.subtract(p0));
+        LinkedList<Ray> rays=new LinkedList<>();
+        Point helpP=new Point((pIJ.getX()-4/9d),(pIJ.getY()-4/9d),pIJ.getZ());
+        Point gridPoint;
+        for(int k=0;k<8;k++){
+            for (int l=0;l<8;l++){
+            gridPoint =new Point(helpP.getX()+l/9d, helpP.getY()+k/9d,helpP.getZ() );
+            rays.add(new Ray(p0,gridPoint.subtract((p0))));
+            }
+        }
+      /*  Point helpP=new Point((pIJ.getX()-8/17d),(pIJ.getY()-8/17d),pIJ.getZ());
+        Point gridPoint;
+        for(int k=0;k<16;k++){
+            for (int l=0;l<16;l++){
+                gridPoint =new Point(helpP.getX()+l/17d, helpP.getY()+k/17d,helpP.getZ() );
+                rays.add(new Ray(p0,gridPoint.subtract((p0))));
+            }
+        }*/
+        return rays;
     }
 
     /**
@@ -136,8 +154,9 @@ public class Camera {
      * @return the color of the ray
      */
     private Color castRay(int j, int i) {
-        Ray ray = this.constructRay(imw.getNx(), imw.getNy(), j, i);
-        return rtb.traceRay(ray, j, i);
+        LinkedList<Ray> rays = this.constructRay(imw.getNx(), imw.getNy(), j, i);
+        return rtb.AverageColor(rays,j,i);
+        //return rtb.traceRay(ray, j, i);
     }
 
     /**
