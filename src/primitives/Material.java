@@ -4,12 +4,26 @@ package primitives;
  * Material details for geometries.
  */
 public class Material {
-
-    public Double3 kD = Double3.ZERO; //diffuse reflection coefficient
-    public Double3 kS = Double3.ZERO; // specular reflection coefficient
-    public Double3 kT = Double3.ZERO; // transparency coefficient
-    public Double3 kR = Double3.ZERO; // reflection coefficient
-    public int nShininess = 0; // shininess coefficient of the material
+    /**
+     * diffuse reflection coefficient
+     */
+    public Double3 kD = Double3.ZERO;
+    /**
+     * specular reflection coefficient
+     */
+    public Double3 kS = Double3.ZERO;
+    /**
+     * transparency coefficient
+     */
+    public Double3 kT = Double3.ZERO;
+    /**
+     * reflection coefficient
+     */
+    public Double3 kR = Double3.ZERO;
+    /**
+     * shininess coefficient of the material
+     */
+    public int nShininess = 0;
 
     /**
      * Set the transparency coefficient of the material

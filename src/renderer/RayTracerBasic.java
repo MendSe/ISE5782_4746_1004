@@ -251,6 +251,13 @@ public class RayTracerBasic extends RayTracerBase {
         return ktr;
     }
 
+    /**
+     * calculate the average Color of different rays by using the function traceRay
+     * @param rays list of rays
+     * @param j    x coordinate
+     * @param i    y coordinate
+     * @return     average color
+     */
     public Color AverageColor(LinkedList<Ray> rays,int j,int i){
         Color color=Color.BLACK;
         for(Ray ray:rays){

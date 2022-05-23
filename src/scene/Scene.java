@@ -11,7 +11,6 @@ import primitives.Double3;
 import primitives.Point;
 import lighting.*;
 
-import java.awt.Color.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,14 +27,34 @@ import java.util.MissingResourceException;
  * Scene class responsible for the background, the ambient light and the geometries of the environment
  */
 public class Scene {
-
-    public String name;//Name of the scene
-    public Color background = Color.BLACK;// Color of the background of the scene
-    public BufferedImage backgroundImg; //Image for the background
-    public String backgroundFileName;   //Name of the background image
-    public AmbientLight ambientLight = new AmbientLight(); //Ambient light of the scene
-    public Geometries geometries = new Geometries(); //Geometric figure depicted in the scene
-    public List<LightSource> lights = new LinkedList<>();//List of the light source in the scene
+    /**
+     * Name of the scene
+     */
+    public String name;
+    /**
+     * Color of the background of the scene
+     */
+    public Color background = Color.BLACK;
+    /**
+     * Image for the background
+     */
+    public BufferedImage backgroundImg;
+    /**
+     * Name of the background image
+     */
+    public String backgroundFileName;
+    /**
+     * Ambient light of the scene
+     */
+    public AmbientLight ambientLight = new AmbientLight();
+    /**
+     * Geometric figure depicted in the scene
+     */
+    public Geometries geometries = new Geometries();
+    /**
+     * List of the light source in the scene
+     */
+    public List<LightSource> lights = new LinkedList<>();
 
     /**
      * constructor

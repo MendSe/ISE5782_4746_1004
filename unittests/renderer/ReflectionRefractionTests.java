@@ -202,6 +202,18 @@ public class ReflectionRefractionTests {
         );
         scene.lights.add(new SpotLight(new Color(400, 400, 400), new Point(-200, -100, 30), new Vector(1, 0.5, 0)) //
                 .setKl(0.00004).setKq(0.000005));
+        scene.lights.add(new SpotLight(new Color(30, 150, 30), new Point(0, 0, 70), new Vector(0, 0, -1)) //
+                .setKl(0.00004).setKq(0.000005));
+        scene.lights.add(new SpotLight(new Color(5000, 50, 0), new Point(-30.2, 25,27.5), new Vector(-1, 0, 0)) //
+                .setKl(0.004).setKq(0.01));
+        scene.lights.add(new SpotLight(new Color(5000, 50, 0), new Point(-60.2, 25,27.5), new Vector(-1, 0, 0)) //
+                .setKl(0.04).setKq(0.01));
+        scene.lights.add(new SpotLight(new Color(5000, 50, 0), new Point(-64, 25,27.5), new Vector(1, 0, 0)) //
+                .setKl(0.4).setKq(0.05));
+        scene.lights.add(new SpotLight(new Color(5000, 50, 0), new Point(-34, 25,27.5), new Vector(1, 0, 0)) //
+                .setKl(0.4).setKq(0.05));
+        // scene.lights.add(new PointLight(new Color(800, 50, 0), new Point(-60, 25, 27.5)) //
+        //       .setKl(0.00004).setKq(0.000005));
 
 
         ImageWriter imageWriter = new ImageWriter("PersonalTest", 800, 800);

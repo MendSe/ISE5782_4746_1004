@@ -110,22 +110,14 @@ public class Camera {
         if (!isZero(xJ)) pIJ = pIJ.add(vRight.scale(xJ));
         if (!isZero(yI)) pIJ = pIJ.add(vUp.scale(yI));
         LinkedList<Ray> rays=new LinkedList<>();
-        Point helpP=new Point((pIJ.getX()-4/9d),(pIJ.getY()-4/9d),pIJ.getZ());
-        Point gridPoint;
+        Point helpP=new Point((pIJ.getX()-4/9d),(pIJ.getY()-4/9d),pIJ.getZ());  //first point of the 9x9 grid
+        Point gridPoint;                                                        //current point on the grid
         for(int k=0;k<8;k++){
             for (int l=0;l<8;l++){
             gridPoint =new Point(helpP.getX()+l/9d, helpP.getY()+k/9d,helpP.getZ() );
             rays.add(new Ray(p0,gridPoint.subtract((p0))));
             }
         }
-      /*  Point helpP=new Point((pIJ.getX()-8/17d),(pIJ.getY()-8/17d),pIJ.getZ());
-        Point gridPoint;
-        for(int k=0;k<16;k++){
-            for (int l=0;l<16;l++){
-                gridPoint =new Point(helpP.getX()+l/17d, helpP.getY()+k/17d,helpP.getZ() );
-                rays.add(new Ray(p0,gridPoint.subtract((p0))));
-            }
-        }*/
         return rays;
     }
 
