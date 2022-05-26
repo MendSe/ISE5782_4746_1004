@@ -112,8 +112,8 @@ public class Camera {
         LinkedList<Ray> rays=new LinkedList<>();
         Point helpP=new Point((pIJ.getX()-4/9d),(pIJ.getY()-4/9d),pIJ.getZ());  //first point of the 9x9 grid
         Point gridPoint;                                                        //current point on the grid
-        for(int k=0;k<8;k++){
-            for (int l=0;l<8;l++){
+        for(int k=0;k<9;k++){
+            for (int l=0;l<9;l++){
             gridPoint =new Point(helpP.getX()+l/9d, helpP.getY()+k/9d,helpP.getZ() );
             rays.add(new Ray(p0,gridPoint.subtract((p0))));
             }
