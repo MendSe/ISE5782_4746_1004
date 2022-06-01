@@ -196,7 +196,7 @@ public class ReflectionRefractionTests {
                         .setMaterial(new Material().setKd(0.4).setShininess(30)),
                 new Polygon(new Point(-60, 100, 23.3), new Point(120, 100, 23.3), new Point(120, 100, 46.6), new Point(-60, 100, 46.6)).setEmission(new Color(BLUE)) //flag
                         .setMaterial(new Material().setKd(0.4).setShininess(30)),
-                new Polygon(new Point(-60, 100, 46.6), new Point(120, 100, 46.6), new Point(120, 100, 70), new Point(-60, 100, 70)).setEmission(new Color(WHITE)) // flag
+                new Polygon(new Point(-60, 100, 46.6), new Point(120, 100, 46.6), new Point(120, 100, 70), new Point(-60, 100, 70)).setEmission(new Color(RED)) // flag
                         .setMaterial(new Material().setKd(0.4).setShininess(30))
 
         );

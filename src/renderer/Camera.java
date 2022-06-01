@@ -90,7 +90,7 @@ public class Camera {
     }
 
     /**
-     * Construct a ray through a pixel on the view plane
+     * Construct a list of ray through a pixel on the view plane
      *
      * @param nX number of pixel in the x-axis
      * @param nY number of pixels in the y-axis

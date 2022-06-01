@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.Arrays;
+import java.util.function.Function;
 /**
  * Point class represents a point with 3 coordinates
  */
@@ -109,4 +111,37 @@ public class Point {
         return Math.sqrt(distanceSquared(point2));
     }
 
+    public Point getCenter(Point b){
+        double x =(this.getX() + b.getX())/2;
+        double y = (this.getY()+b.getY())/2;
+        double z = (this.getZ()+b.getZ())/2;
+
+        return new Point(x,y,z);
+    }
+
+    public double get(Axis axis){
+        return switch(axis){
+            case X -> xyz.d1;
+            case Y-> xyz.d2;
+            case Z -> xyz.d3;
+        };
+    }
+
+    public static double getMin(Axis axis,Point... points){
+        if(points.length == 0) return Double.NaN;
+
+        return Arrays.stream(points)
+                .map(point -> point.get(axis))
+                .min(Double::compare)
+                .get();
+    }
+
+    public static double getMax(Axis axis,Point... points){
+        if(points.length == 0) return Double.NaN;
+
+        return Arrays.stream(points)
+                .map(point -> point.get(axis))
+                .max(Double::compare)
+                .get();
+    }
 }
