@@ -4,20 +4,27 @@ import primitives.*;
 
 import java.util.*;
 
+/**
+ * Class which creates a BVHNode hierarchy to use BVH
+ */
 public class BVH extends Intersectable {
 
     private final Intersectable root;
 
     /**
-     * Constructs the BVH from a given intersectables.
+     * Constructs the BVH from a given intersectable.
      */
     public BVH(Intersectable... intersectables) {
         root = generateRoot(Arrays.asList(intersectables), Axis.X);
     }
 
+
     /**
+     * It splits the list of intersectable in half, and recursively generates the left and right children of the root node
      *
-     *
+     * @param intersectables The list of intersectables to be put into the BVH
+     * @param axis The axis to split the intersectables on.
+     * @return The root of the BVH tree.
      */
     private static Intersectable generateRoot(List<Intersectable> intersectables, Axis axis) {
         if (intersectables.size() == 1) {
@@ -47,6 +54,12 @@ public class BVH extends Intersectable {
                 generateRoot(right, nextAxis));
     }
 
+    /**
+     * It returns a comparator that compares two objects by their center's position along a given axis
+     *
+     * @param axis The axis to sort by.
+     * @return A comparator that compares two Intersectable objects by their center points along a given axis.
+     */
     static Comparator<Intersectable> getComparatorByAxis(Axis axis) {
         return (bb1, bb2) -> {
             Point center1 = bb1.getBoundingBoxCenter();

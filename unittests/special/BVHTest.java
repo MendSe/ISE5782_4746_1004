@@ -163,7 +163,8 @@ public class BVHTest {
         ImageWriter imageWriter = new ImageWriter("PersonalTestBVH", 800, 800);
         camera.setImageWriter(imageWriter) //
                 .setRayTracer(new RayTracerBasic(scene))
-                .setMultithreading(3)//
+                .setMultithreading(3)
+                .setDebugPrint(0.1)//
                 .renderImage();
         camera.writeToImage();
     }
@@ -274,7 +275,9 @@ public class BVHTest {
 
         ImageWriter imageWriter = new ImageWriter("PersonalTestAuto", 800, 800);
         camera.setImageWriter(imageWriter) //
-                .setRayTracer(new RayTracerBasic(scene)) //
+                .setRayTracer(new RayTracerBasic(scene))
+                .setMultithreading(3)
+                .setDebugPrint(0.1)//
                 .renderImage();//
         camera.writeToImage();
     }

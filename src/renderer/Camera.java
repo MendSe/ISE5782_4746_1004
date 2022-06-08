@@ -210,12 +210,23 @@ public class Camera {
         imw.writeToImage();
     }
 
+    /**
+     * This function set the number of thread that'll be used in the multithreading
+     *
+     * @param numT number of threads
+     * @return the camera object itself
+     */
     public Camera setMultithreading(int numT) {
-        numofthread = numT;
+        this.numofthread = numT;
         return this;
-
     }
 
+    /**
+     * Set the interval at which the camera will print debug information to the console.
+     *
+     * @param interval The interval in seconds between each debug print.
+     * @return The camera object itself.
+     */
     public Camera setDebugPrint(double interval) {
         this.printInterval = interval;
         return this;
