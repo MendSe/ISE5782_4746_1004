@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- *
+ *Class BVHNode which contain 2 intersectable objects, BVHNode helps to create the BVH hierarchy
  */
 public class BVHNode extends  Intersectable{
 

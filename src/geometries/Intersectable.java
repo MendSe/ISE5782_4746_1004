@@ -89,8 +89,18 @@ public abstract class Intersectable {
      */
     protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
+    /**
+     * Returns the bounding box of the object.
+     *
+     * @return A BoundingBox object.
+     */
     public abstract BoundingBox getBoundingBox();
 
+    /**
+     * If the bounding box is null, return null. Otherwise, return the center of the bounding box.
+     *
+     * @return The center of the bounding box.
+     */
     protected Point getBoundingBoxCenter() {
         BoundingBox bb = getBoundingBox();
         if (bb == null) {

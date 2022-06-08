@@ -58,6 +58,11 @@ public class Geometries extends Intersectable {
         return box;
     }
 
+    /**
+     * Build a bounding box that surrounds all the bounding boxes of the intersectable objects in the list.
+     *
+     * @return A BoundingBox that surrounds all the BoundingBoxes of the Intersectables in the list.
+     */
     private BoundingBox buildBoundingBox() {
         return BoundingBox.surround(
                 intersectableList.stream()
