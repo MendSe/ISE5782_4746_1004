@@ -1,7 +1,6 @@
 package renderer;
 
 import primitives.*;
-import multithreading.ThreadPool;
 
 import java.util.LinkedList;
 import java.util.MissingResourceException;
@@ -25,7 +24,8 @@ public class Camera {
     private ImageWriter imw;
     private RayTracerBase rtb;
     private double aAGrid = 9;
-    private ThreadPool<Pixel> threadPool;
+    private int numofthread;
+    private double printInterval;
     private Pixel pixel;
 
 
@@ -146,21 +146,30 @@ public class Camera {
         if (imw == null) throw new MissingResourceException("Missing resource", ImageWriter.class.getName(), "");
         if (rtb == null) throw new MissingResourceException("Missing resource", RayTracerBase.class.getName(), "");
 
-        if(threadPool!=null){
-            this.pixel = new Pixel();
-            pixel.initialize(0,0,0);
-            this.threadPool.execute();
-            threadPool.join();
-            return;
-        }
-
         int nX = imw.getNx();
         int nY = imw.getNy();
-        for (int i = 0; i < nY; i++)
-            for (int j = 0; j < nX; j++) {
-                Color pixelColor = this.castRay(j, i);
-                imw.writePixel(j, i, pixelColor);
+        if (numofthread == 0) {
+            //rendering image without using of threads (by-default)
+            for (int i = 0; i < nY; i++)
+                for (int j = 0; j < nX; j++) {
+                    Color pixelColor = this.castRay(j, i);
+                    this.imw.writePixel(j, i, pixelColor);
+                }
+        } else {
+            //rendering image using threads
+            Pixel.initialize(nY, nX, printInterval);
+            while (numofthread-- > 0) {
+                new Thread(() -> {
+                    for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone()) {
+                        Color pixelColor = castRay(pixel.col, pixel.row);
+                        imw.writePixel(pixel.col, pixel.row, pixelColor);
+                    }
+
+                }).start();
+
             }
+            Pixel.waitToFinish();
+        }
     }
 
     /**
@@ -202,47 +211,15 @@ public class Camera {
     }
 
     public Camera setMultithreading(int numT) {
-        if (numT < 0)
-            throw new IllegalArgumentException("The number of thread can't be negative");
-
-        if (numT < 2) {
-            this.threadPool = null;
-            return this;
-        }
-
-        threadPool = new ThreadPool<Pixel>()
-                .setGetter(this::getNextPixel)
-                .setTarget(this::renderMulti);
-        threadPool.setNumThreads(numT);
-
+        numofthread = numT;
         return this;
 
     }
 
-    private synchronized Pixel getNextPixel() {
-        int nX = imw.getNx();
-        int nY = imw.getNy();
-
-        if (pixel.col >= nX) {
-            if (++pixel.row >= nY)
-                return null;
-            pixel.col = 0;
-        }
-
-        Pixel result = new Pixel();
-        result.col = pixel.col++;
-        result.row = pixel.row++;
-        return result;
+    public Camera setDebugPrint(double interval) {
+        this.printInterval = interval;
+        return this;
     }
-
-    private boolean renderMulti(Pixel pixel){
-        if(pixel == null) return false;
-
-        castRay(pixel.col,pixel.row);
-        return true;
-
-    }
-
 
 
 }
