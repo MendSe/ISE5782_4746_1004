@@ -1,6 +1,7 @@
 package renderer;
 
 import primitives.*;
+import multithreading.ThreadPool;
 
 import java.util.LinkedList;
 import java.util.MissingResourceException;
@@ -23,7 +24,10 @@ public class Camera {
 
     private ImageWriter imw;
     private RayTracerBase rtb;
-    private double aAGrid=9;
+    private double aAGrid = 9;
+    private ThreadPool<Pixel> threadPool;
+    private Pixel pixel;
+
 
     /**
      * Constructor that initializes the parameters of the camera object
@@ -92,13 +96,15 @@ public class Camera {
 
     /**
      * setter for the size of the antialiasing grid
+     *
      * @param grid
      * @return
      */
-    public Camera setAntialiasingGrid(double grid){
-        aAGrid=grid;
+    public Camera setAntialiasingGrid(double grid) {
+        aAGrid = grid;
         return this;
     }
+
     /**
      * Construct a list of ray through a pixel on the view plane
      *
@@ -119,14 +125,14 @@ public class Camera {
         Point pIJ = pC;
         if (!isZero(xJ)) pIJ = pIJ.add(vRight.scale(xJ));
         if (!isZero(yI)) pIJ = pIJ.add(vUp.scale(yI));
-        LinkedList<Ray> rays=new LinkedList<>();
-        double firstPHelp=((int)(aAGrid/2))/aAGrid;
-        Point helpP=new Point((pIJ.getX()-(firstPHelp )),(pIJ.getY()-(firstPHelp)),pIJ.getZ());  //first point of the 9x9 grid
+        LinkedList<Ray> rays = new LinkedList<>();
+        double firstPHelp = ((int) (aAGrid / 2)) / aAGrid;
+        Point helpP = new Point((pIJ.getX() - (firstPHelp)), (pIJ.getY() - (firstPHelp)), pIJ.getZ());  //first point of the 9x9 grid
         Point gridPoint;                                                        //current point on the grid
-        for(int k=0;k<aAGrid;k++){
-            for (int l=0;l<aAGrid;l++){
-            gridPoint =new Point(helpP.getX()+(l/aAGrid), helpP.getY()+(k/aAGrid),helpP.getZ() );
-            rays.add(new Ray(p0,gridPoint.subtract((p0))));
+        for (int k = 0; k < aAGrid; k++) {
+            for (int l = 0; l < aAGrid; l++) {
+                gridPoint = new Point(helpP.getX() + (l / aAGrid), helpP.getY() + (k / aAGrid), helpP.getZ());
+                rays.add(new Ray(p0, gridPoint.subtract((p0))));
             }
         }
         return rays;
@@ -158,7 +164,7 @@ public class Camera {
      */
     private Color castRay(int j, int i) {
         LinkedList<Ray> rays = this.constructRay(imw.getNx(), imw.getNy(), j, i);
-        return rtb.AverageColor(rays,j,i);
+        return rtb.AverageColor(rays, j, i);
         //return rtb.traceRay(ray, j, i);
     }
 
@@ -186,6 +192,49 @@ public class Camera {
         if (imw == null) throw new MissingResourceException("Missing resource", Point.class.getName(), "");
         imw.writeToImage();
     }
+
+    public Camera setMultithreading(int numT) {
+        if (numT < 0)
+            throw new IllegalArgumentException("The number of thread can't be negative");
+
+        if (numT < 2) {
+            this.threadPool = null;
+            return this;
+        }
+
+        threadPool = new ThreadPool<Pixel>()
+                .setGetter(this::getNextPixel)
+                .setTarget(this::renderMulti);
+        threadPool.setNumThreads(numT);
+
+        return this;
+
+    }
+
+    private synchronized Pixel getNextPixel() {
+        int nX = imw.getNx();
+        int nY = imw.getNy();
+
+        if (pixel.col >= nX) {
+            if (++pixel.row >= nY)
+                return null;
+            pixel.col = 0;
+        }
+
+        Pixel result = new Pixel();
+        result.col = pixel.col++;
+        result.row = pixel.row++;
+        return result;
+    }
+
+    private boolean renderMulti(Pixel pixel){
+        if(pixel == null) return false;
+
+        castRay(pixel.col,pixel.row);
+        return true;
+
+    }
+
 
 
 }
