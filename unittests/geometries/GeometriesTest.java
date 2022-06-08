@@ -32,8 +32,8 @@ public class GeometriesTest {
         assertNull(emptycoll.findIntersections(new Ray(new Point(0, 2, 0), new Vector(-5, 0, 0))), "Bad number of intersections when No intersections");
 
         //TC:04 only one object intersected
-        result = collection.findIntersections(new Ray(new Point(-1, -1, 0), new Vector(5, 0, 0)));
-        assertEquals(1, result.size(), "Wrong number of intersections");
+        result = collection.findIntersections(new Ray(new Point(2, 2, 2), new Vector(0, 0, -1)));
+        assertEquals(2, result.size(), "Wrong number of intersections");
 
         //TC:05 all objects intersected
         result = collection.findIntersections(new Ray(new Point(0, 2.5, 0), new Vector(5, 0, 0)));

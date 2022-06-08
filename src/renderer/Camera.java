@@ -23,6 +23,7 @@ public class Camera {
 
     private ImageWriter imw;
     private RayTracerBase rtb;
+    private double aAGrid=9;
 
     /**
      * Constructor that initializes the parameters of the camera object
@@ -32,7 +33,7 @@ public class Camera {
      * @param up direction vector
      * @throws IllegalArgumentException if the "to" and "up" vectors are not perpendicular
      */
-    Camera(Point p, Vector to, Vector up) {
+    public Camera(Point p, Vector to, Vector up) {
         if (!isZero(to.dotProduct(up))) //checks if the vectors are perpendicular
             throw new IllegalArgumentException("The vector are not perpendicular");
 
@@ -90,6 +91,15 @@ public class Camera {
     }
 
     /**
+     * setter for the size of the antialiasing grid
+     * @param grid
+     * @return
+     */
+    public Camera setAntialiasingGrid(double grid){
+        aAGrid=grid;
+        return this;
+    }
+    /**
      * Construct a list of ray through a pixel on the view plane
      *
      * @param nX number of pixel in the x-axis
@@ -110,11 +120,12 @@ public class Camera {
         if (!isZero(xJ)) pIJ = pIJ.add(vRight.scale(xJ));
         if (!isZero(yI)) pIJ = pIJ.add(vUp.scale(yI));
         LinkedList<Ray> rays=new LinkedList<>();
-        Point helpP=new Point((pIJ.getX()-4/9d),(pIJ.getY()-4/9d),pIJ.getZ());  //first point of the 9x9 grid
+        double firstPHelp=((int)(aAGrid/2))/aAGrid;
+        Point helpP=new Point((pIJ.getX()-(firstPHelp )),(pIJ.getY()-(firstPHelp)),pIJ.getZ());  //first point of the 9x9 grid
         Point gridPoint;                                                        //current point on the grid
-        for(int k=0;k<9;k++){
-            for (int l=0;l<9;l++){
-            gridPoint =new Point(helpP.getX()+l/9d, helpP.getY()+k/9d,helpP.getZ() );
+        for(int k=0;k<aAGrid;k++){
+            for (int l=0;l<aAGrid;l++){
+            gridPoint =new Point(helpP.getX()+(l/aAGrid), helpP.getY()+(k/aAGrid),helpP.getZ() );
             rays.add(new Ray(p0,gridPoint.subtract((p0))));
             }
         }
@@ -157,7 +168,7 @@ public class Camera {
      * @param interval the interval between grid line
      * @param color    the color of the grid line
      */
-    void printGrid(int interval, Color color) {
+    public void printGrid(int interval, Color color) {
         if (this.imw == null)
             throw new MissingResourceException("Missing resource", "ImageWriter", " ");
         int nX = imw.getNx();

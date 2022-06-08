@@ -110,6 +110,7 @@ public class Tube extends Geometry {
         return (point.subtract(p1)).normalize();
     }
 
+
     @Override
     public String toString() {
         return "Tube{" +

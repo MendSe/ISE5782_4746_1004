@@ -122,4 +122,13 @@ public class Polygon extends Geometry {
 
         return intersections;
     }
+
+    @Override
+    protected BoundingBox calculateBoundingBox() {
+        Point[] verticesArr = vertices.toArray(Point[]::new);
+        //min and max of every axis
+        return new BoundingBox(
+                new Point(Point.getMin(Axis.X, verticesArr), Point.getMin(Axis.Y, verticesArr), Point.getMin(Axis.Z, verticesArr)),
+                new Point(Point.getMax(Axis.X, verticesArr), Point.getMax(Axis.Y, verticesArr), Point.getMax(Axis.Z, verticesArr)));
+    }
 }

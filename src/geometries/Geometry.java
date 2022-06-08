@@ -9,6 +9,7 @@ public abstract class Geometry extends Intersectable {
 
     protected Color emission = Color.BLACK;
     private Material material = new Material();
+    protected BoundingBox box;
 
     /**
      * Function of that calculates the normal of the used object at a point on the object
@@ -59,5 +60,14 @@ public abstract class Geometry extends Intersectable {
         return this;
     }
 
+    protected BoundingBox calculateBoundingBox(){return null;}
 
+    @Override
+    public BoundingBox getBoundingBox() {
+        if (box != null) {
+            return box;
+        }
+        box = calculateBoundingBox();
+        return box;
+    }
 }

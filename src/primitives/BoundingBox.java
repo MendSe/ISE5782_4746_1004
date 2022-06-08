@@ -8,12 +8,12 @@ public class BoundingBox {
     private Point min;
     private Point max;
 
-    public BoundingBox(Point min, Point max) {
-        if (min.getX() > max.getX() || min.getY() > max.getY() || min.getZ() > max.getZ())
+    public BoundingBox(Point mini, Point maxi) {
+        if (mini.getX() > maxi.getX() || mini.getY() > maxi.getY() || mini.getZ() > maxi.getZ())
             throw new IllegalStateException("Min is greater than max");
 
-        this.min = min;
-        this.max = max;
+        min = mini;
+        max = maxi;
     }
 
     public Point getMin() {
@@ -48,7 +48,7 @@ public class BoundingBox {
 
     private MinMax calculateMM(double aMin, double aMax, double origin, double dir) {
         MinMax mm = new MinMax();
-        double a = 1 / origin;
+        double a = 1 / dir;
 
         if (a >= 0) {
             mm.min = (aMin - origin) * a;

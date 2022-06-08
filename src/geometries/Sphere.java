@@ -78,6 +78,13 @@ public class Sphere extends Geometry {
     }
 
     @Override
+    protected BoundingBox calculateBoundingBox() {
+        return new BoundingBox(
+                new Point(center.getX() - radius, center.getY() - radius, center.getZ() - radius),
+                new Point(center.getX() + radius, center.getY() + radius, center.getZ() + radius));
+    }
+
+    @Override
     public String toString() {
         return "Sphere{" +
                 "center=" + center +

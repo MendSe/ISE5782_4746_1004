@@ -5,6 +5,7 @@ import primitives.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.abs;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
@@ -87,6 +88,25 @@ public class Cylinder extends Tube {
         double radius2 = this.radius * this.radius;
         return alignZero(p.distanceSquared(center) - radius2) < 0 ? new GeoPoint(this, p) : null;
     }
+
+    @Override
+    protected BoundingBox calculateBoundingBox() {
+
+        Vector dir = axisRay.getDir();
+        double x=dir.getX();
+        double y=dir.getY();
+        double z=dir.getZ();
+        double sX = abs(x * height + 2 * radius * Math.sqrt(1 - x * x)) / 2;
+        double sY = abs(y * height + 2 * radius * Math.sqrt(1 - y * y)) / 2;
+        double sZ = abs(z * height + 2 * radius * Math.sqrt(1 - z * z)) / 2;
+
+        Point center = axisRay.getPoint(height / 2);
+
+        return new BoundingBox(
+                new Point(center.getX() - sX, center.getY() - sY, center.getZ() - sZ),
+                new Point(center.getX() + sX, center.getY() + sY, center.getZ() + sZ));
+    }
+
 
     @Override
     public String toString() {

@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Geometries extends Intersectable {
     private final List<Intersectable> intersectableList = new LinkedList<>();
+    private BoundingBox box;
 
     /**
      * Constructor which receives a intersectableList of geometric objects and create an LinkedList of Intersectable interface with it
@@ -27,10 +28,18 @@ public class Geometries extends Intersectable {
      */
     public void add(Intersectable... geometries) {
         if (geometries.length != 0) this.intersectableList.addAll(List.of(geometries));
+        box=buildBoundingBox();
     }
+
 
     @Override
     protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+
+        BoundingBox bb = getBoundingBox();
+        if (bb != null && !bb.intersecting(ray)) {
+            return null;
+        }
+
         List<GeoPoint> intersections = null;
         for (Intersectable item : intersectableList) {
             List<GeoPoint> current = item.findGeoIntersections(ray, maxDistance);
@@ -43,6 +52,18 @@ public class Geometries extends Intersectable {
         }
 
         return intersections;
+    }
+    @Override
+    public BoundingBox getBoundingBox(){
+        return box;
+    }
+
+    private BoundingBox buildBoundingBox() {
+        return BoundingBox.surround(
+                intersectableList.stream()
+                        .map(Intersectable::getBoundingBox)
+                        .toArray(BoundingBox[]::new)
+        );
     }
 
 }

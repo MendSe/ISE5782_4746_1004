@@ -89,5 +89,15 @@ public abstract class Intersectable {
      */
     protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
+    public abstract BoundingBox getBoundingBox();
+
+    protected Point getBoundingBoxCenter() {
+        BoundingBox bb = getBoundingBox();
+        if (bb == null) {
+            return null;
+        }
+
+        return bb.getCenter();
+    }
 
 }
