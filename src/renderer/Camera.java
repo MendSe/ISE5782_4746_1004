@@ -146,6 +146,14 @@ public class Camera {
         if (imw == null) throw new MissingResourceException("Missing resource", ImageWriter.class.getName(), "");
         if (rtb == null) throw new MissingResourceException("Missing resource", RayTracerBase.class.getName(), "");
 
+        if(threadPool!=null){
+            this.pixel = new Pixel();
+            pixel.initialize(0,0,0);
+            this.threadPool.execute();
+            threadPool.join();
+            return;
+        }
+
         int nX = imw.getNx();
         int nY = imw.getNy();
         for (int i = 0; i < nY; i++)
