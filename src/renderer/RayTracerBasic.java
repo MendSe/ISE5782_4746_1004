@@ -259,7 +259,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @param i    y coordinate
      * @return average color
      */
-    public Color AverageColor(LinkedList<Ray> rays, int j, int i) {
+    public Color averageColor(List<Ray> rays, int j, int i) {
         Color color = Color.BLACK;
         for (Ray ray : rays) {
             color = color.add(traceRay(ray, j, i));

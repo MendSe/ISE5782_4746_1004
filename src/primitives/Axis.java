@@ -29,24 +29,6 @@ public enum Axis {
         this.index = index;
     }
 
-    /**
-     * This function returns the index of the current node.
-     *
-     * @return The index of the current node.
-     */
-    public int getIndex() {
-        return this.index;
-    }
-
-    /**
-     * Given an index, return the corresponding Axis.
-     *
-     * @param idx The index of the axis.
-     * @return The value of the key.
-     */
-    public static Axis atIndex(int idx){
-        return map.get(idx);
-    }
 
     /**
      * Return the next axis in the enum, wrapping around to the first axis if necessary.

@@ -13,7 +13,7 @@ public class Geometries extends Intersectable {
     private BoundingBox box;
 
     /**
-     * Constructor which receives a intersectableList of geometric objects and create an LinkedList of Intersectable interface with it
+     * Constructor which receives a intersectableList of geometric objects and create an LinkedList of Intersectable
      *
      * @param geometries geometric object
      */

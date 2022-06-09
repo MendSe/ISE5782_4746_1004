@@ -45,7 +45,6 @@ class Pixel {
         pixels = 0;
         printInterval = (int) (interval * 1000);
         print = printInterval != 0;
-        last =-1l;
     }
 
     /**

@@ -3,6 +3,7 @@ package renderer;
 import primitives.*;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.MissingResourceException;
 
 import static primitives.Util.isZero;
@@ -24,7 +25,7 @@ public class Camera {
     private ImageWriter imw;
     private RayTracerBase rtb;
     private double aAGrid = 9;
-    private int numofthread;
+    private int numofthreads=0;
     private double printInterval;
     private Pixel pixel;
 
@@ -114,7 +115,7 @@ public class Camera {
      * @param i  the index of the pixel in the y-axis
      * @return a ray from the camera going through the center of the pixel
      */
-    public LinkedList<Ray> constructRay(int nX, int nY, int j, int i) {
+    public List<Ray> constructRay(int nX, int nY, int j, int i) {
         Point pC = p0.add(vTo.scale(distance));
         double rY = height / nY;
         double rX = width / nX;
@@ -141,6 +142,7 @@ public class Camera {
     /**
      * This function helps us to render the image.
      * It first checks if there are not any missing resource then for each pixel it calls the castRay function to have a color
+     * This function can be used with multiple threads if var numofthreads is not equal 0
      */
     public void renderImage() {
         if (imw == null) throw new MissingResourceException("Missing resource", ImageWriter.class.getName(), "");
@@ -148,8 +150,8 @@ public class Camera {
 
         int nX = imw.getNx();
         int nY = imw.getNy();
-        if (numofthread == 0) {
-            //rendering image without using of threads (by-default)
+        if (numofthreads == 0) {
+            //rendering image without using of threads
             for (int i = 0; i < nY; i++)
                 for (int j = 0; j < nX; j++) {
                     Color pixelColor = this.castRay(j, i);
@@ -158,15 +160,14 @@ public class Camera {
         } else {
             //rendering image using threads
             Pixel.initialize(nY, nX, printInterval);
-            while (numofthread-- > 0) {
+            while (numofthreads-- > 0) {
                 new Thread(() -> {
-                    for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone()) {
+                    for (Pixel pixel = new Pixel(); pixel.nextPixel();Pixel.pixelDone()) {
                         Color pixelColor = castRay(pixel.col, pixel.row);
                         imw.writePixel(pixel.col, pixel.row, pixelColor);
                     }
 
                 }).start();
-
             }
             Pixel.waitToFinish();
         }
@@ -180,9 +181,8 @@ public class Camera {
      * @return the color of the ray
      */
     private Color castRay(int j, int i) {
-        LinkedList<Ray> rays = this.constructRay(imw.getNx(), imw.getNy(), j, i);
-        return rtb.AverageColor(rays, j, i);
-        //return rtb.traceRay(ray, j, i);
+        List<Ray> rays = this.constructRay(imw.getNx(), imw.getNy(), j, i);
+        return rtb.averageColor(rays, j, i);
     }
 
     /**
@@ -217,7 +217,7 @@ public class Camera {
      * @return the camera object itself
      */
     public Camera setMultithreading(int numT) {
-        this.numofthread = numT;
+        this.numofthreads = numT;
         return this;
     }
 

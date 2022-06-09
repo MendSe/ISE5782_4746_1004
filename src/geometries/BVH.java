@@ -61,13 +61,13 @@ public class BVH extends Intersectable {
      * @return A comparator that compares two Intersectable objects by their center points along a given axis.
      */
     static Comparator<Intersectable> getComparatorByAxis(Axis axis) {
-        return (bb1, bb2) -> {
-            Point center1 = bb1.getBoundingBoxCenter();
+        return (box1, box2) -> {
+            Point center1 = box1.getBoundingBoxCenter();
             if (center1 == null) {
                 return 0;
             }
 
-            Point center2 = bb2.getBoundingBoxCenter();
+            Point center2 = box2.getBoundingBoxCenter();
             if (center2 == null) {
                 return 0;
             }

@@ -558,6 +558,7 @@ public class TeapotTest {
 
     /**
      * Produce a scene with a 3D model and render it into a png image
+     * With automatic BVH
      */
     @Test
     public void teapotBVH() {
@@ -1569,6 +1570,11 @@ public class TeapotTest {
         camera.printGrid(50, new Color(YELLOW));
         camera.writeToImage();
     }
+
+    /**
+     * Produce a scene with a 3D model and render it into a png image
+     * Without BVH
+     */
     @Test
     public void teapot() {
         scene.geometries.add( //

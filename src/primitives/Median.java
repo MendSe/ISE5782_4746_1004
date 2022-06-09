@@ -17,13 +17,13 @@ public class Median<T> {
     }
 
     /**
-     * It takes a list, a left index, a right index, and a k value, and returns the kth smallest element in the list
+     * It takes a list, a left index, a right index, and a k value, and returns the smallest element in the list
      *
      * @param list the list of elements to be sorted
      * @param left the leftmost index of the list
      * @param right the last index of the list
      * @param k the index of the element we want to find
-     * @return The kth smallest element in the list.
+     * @return The smallest element in the list.
      */
     public T select(List<T> list, int left, int right, int k) {
         while (left < right) {

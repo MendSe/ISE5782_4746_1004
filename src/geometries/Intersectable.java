@@ -102,12 +102,12 @@ public abstract class Intersectable {
      * @return The center of the bounding box.
      */
     protected Point getBoundingBoxCenter() {
-        BoundingBox bb = getBoundingBox();
-        if (bb == null) {
+        BoundingBox box = getBoundingBox();
+        if (box == null) {
             return null;
         }
 
-        return bb.getCenter();
+        return box.getCenter();
     }
 
 }

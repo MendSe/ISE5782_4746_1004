@@ -11,7 +11,7 @@ public class BoundingBox {
     private Point max;
 
     /**
-     * Constructor that creates an axis from 2 points
+     * Constructor that creates a Bounding Box from 2 points
      *
      * @param mini min point
      * @param maxi max point
@@ -60,11 +60,10 @@ public class BoundingBox {
     }
 
     /**
-     * If the ray intersects the box, then the minimum of the ray's t-values for the x, y, and z axes must be less than or
-     * equal to the maximum of the ray's t-values for the x, y, and z axes
+     * Checks if the ray intersect the Bonding Box
      *
      * @param ray The ray to check for intersection with the bounding box.
-     * @return The method is returning a boolean value.
+     * @return  a boolean value.
      */
     public boolean intersecting(Ray ray) {
         Point p0 = ray.getP0();

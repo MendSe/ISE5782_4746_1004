@@ -4,6 +4,7 @@ import scene.*;
 import primitives.*;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Abstract class of Ray tracer
@@ -29,5 +30,5 @@ public abstract class RayTracerBase {
      */
     public abstract Color traceRay(Ray ray, int j, int i);
 
-    public abstract Color AverageColor(LinkedList<Ray> rays,int j,int i) ;
+    public abstract Color averageColor(List<Ray> rays, int j, int i) ;
 }

@@ -60,6 +60,10 @@ public abstract class Geometry extends Intersectable {
         return this;
     }
 
+    /**
+     * function which calculate the Bounding Box of the geometry that call it
+     * @return the calcultated Bounding Box
+     */
     protected BoundingBox calculateBoundingBox(){return null;}
 
     @Override

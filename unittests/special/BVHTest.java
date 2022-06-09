@@ -12,8 +12,13 @@ import scene.Scene;
 
 import static java.awt.Color.*;
 
+/**
+ * Class BVHTest for the manual and automatic hierarchy of BVH
+ */
 public class BVHTest {
-
+    /**
+     * Manual Hierarchy of Bonding Box with multithreading
+     */
     @Test
     public void PersonalTestManual() {
         Camera camera = new Camera(new Point(-650, -400, 150), new Vector(6, 4, -1), new Vector(6, 4, 52)) //
@@ -168,6 +173,10 @@ public class BVHTest {
                 .renderImage();
         camera.writeToImage();
     }
+
+    /**
+     * Automatic hierarchy of BVH with multithreading
+     */
     @Test
     public void PersonalTestAuto() {
         Camera camera = new Camera(new Point(-650, -400, 150), new Vector(6, 4, -1), new Vector(6, 4, 52)) //
@@ -275,9 +284,7 @@ public class BVHTest {
 
         ImageWriter imageWriter = new ImageWriter("PersonalTestAuto", 800, 800);
         camera.setImageWriter(imageWriter) //
-                .setRayTracer(new RayTracerBasic(scene))
-                .setMultithreading(3)
-                .setDebugPrint(0.1)//
+                .setRayTracer(new RayTracerBasic(scene)) //
                 .renderImage();//
         camera.writeToImage();
     }
