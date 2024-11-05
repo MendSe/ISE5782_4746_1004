@@ -9,3 +9,11 @@ This project is a 3D rendering engine built in Java that simulates ray tracing f
 - **Lighting and Shading**: Supports multiple light sources (ambient, directional, point, and spotlight) to simulate realistic lighting. Materials can be customized with properties like shininess, reflection, and transparency.
 - **Multithreading**: Enables multithreaded rendering for performance optimization, making the engine capable of handling complex scenes efficiently.
 - **Sample Rendered Scene**: Includes a 3D-rendered tank scene, showcasing the capabilities of the engine in rendering objects with proper lighting and shading.
+
+![PersonalTestBVH](https://github.com/user-attachments/assets/afd39931-4c75-4e92-8820-75ab315efcd9)
+
+
+![shadowTrianglesSphere](https://github.com/user-attachments/assets/954f4f93-ab4b-4c6c-a9d7-b88511d3608e)
+
+
+![teapotBVH](https://github.com/user-attachments/assets/8cb2a360-14d6-427c-be63-fe2ce9b0b1c3)
